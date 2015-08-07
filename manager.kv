@@ -1,0 +1,416 @@
+#:kivy 1.8.0
+
+<ViscosityPopup>:
+    id: popup
+    title: "Calculate"
+    size_hint: .6, .6
+
+    Button:
+        id: btnpop
+        text: 'Viscosity : + result'
+        on_press: popup.dismiss()
+    
+<ConductivityPopup>:
+    id: popup
+    title: "Calculate"
+    size_hint: .6, .6
+    
+    Button:
+        id: btnpop
+        text: 'Conductivity : + result'
+        on_press: popup.dismiss()
+        
+<FlowPopup>:
+    id: popup
+    title: "Calculate"
+    size_hint: .6, .6
+    
+    Button:
+        id: btnpop
+        text: 'Flow : + result'
+        on_press: popup.dismiss()
+
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            text: 'Injection'
+            on_press: root.manager.current = 'injection'
+
+        Button:
+            text: 'Viscosity'
+            on_press: root.manager.current = 'viscosity'
+
+        Button:
+            text: 'Conductivity'
+            on_press: root.manager.current = 'conductivity'
+
+        Button:
+            text: 'Flow'
+            on_press: root.manager.current = 'flow'
+
+        Button:
+            text: 'About'
+            on_press: root.manager.current = 'about'
+
+<InjectionScreen>:
+    GridLayout:
+        cols: 2 
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "Capillary Length :"
+            height: 0.5
+            size_hint_x: 0.5
+
+        TextInput:        
+            id: capillary
+            height: 0.5
+            text: "100.0"
+            pos_hint: {'right': 0.5}
+
+        Label:
+            text: "Length to window :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            id: towindow
+            height: 0.5
+            text: "100.0"
+            pos_hint: {'right': 0.5}
+
+        Label:
+            text: "Inside diameter :"
+            height: 0.5
+            size_hint_x: 0.5
+    
+        TextInput:
+            height: 0.5
+            text: "50.0"
+            pos_hint: {'right': 0.5}
+            id: Idiameter
+    
+        Label:
+            text: "Pressure :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            text: "30.0"
+            pos_hint: {'right': 0.5}
+            id: Pressure
+        
+        Label:        
+            text: "Time :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            text: "10.0"
+            pos_hint: {'right': 0.5}
+            id: Time
+
+        Label:
+            text: "Viscosity :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            text: "1.0"
+            pos_hint: {'right': 0.5}
+            id: Viscosity
+    
+        Label:
+            text: "Concentration :"
+            height: 0.5
+            size_hint_x: 0.5
+    
+        TextInput:
+            height: 0.5
+            text: "1.0"
+            pos_hint: {'right': 0.5}
+            id: Concentration
+            
+        Label:
+            text: "Molecular weight :"
+            height: 0.5    
+            size_hint_x: 0.5
+                    
+        TextInput:
+            height: 0.5
+            text: "1 000.0"
+            pos_hint: {'right': 0.5}
+            id: Molweight
+            
+        Button:
+            pos_hint: {'center_x': 0.2}
+            text: "Calculate"
+            on_release: root.show_injection_results()
+            
+        Button:
+            id: Resetbtn
+            pos_hint: {'center_x': 0.2}
+            text: "Reset"
+            on_press: capillary.text="100.0"
+            on_press: towindow.text="100.0"
+            on_press: Idiameter.text="50.0"
+            on_press: Pressure.text="30.0"
+            on_press: Time.text="10.0"
+            on_press: Viscosity.text="1.0"
+            on_press: Concentration.text="1.0"
+            on_press: Molweight.text="1 000.0"
+
+        Button:
+            text: 'Back to menu'
+            on_press: root.manager.current = 'menu'
+
+<ViscosityScreen>:
+    fullscreen: True
+    GridLayout:
+        id: gl
+        cols: 2 
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "Capillary Length :"
+            id: ko
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:        
+            height: 0.5
+            text: "100.0"
+            pos_hint: {'right': 0.5}
+            id: capillary
+
+        Label:
+            text: "Length to window :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            text: "100.0"
+            pos_hint: {'right': 0.5}
+            id: towindow
+        
+        Label:
+            text: "Inside diameter :"
+            height: 0.5
+            size_hint_x: 0.5
+    
+        TextInput:
+            height: 0.5
+            text: "50.0"
+            pos_hint: {'right': 0.5}
+            id: Idiameter
+    
+        Label:
+            text: "Pressure :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            text: "30.0"
+            pos_hint: {'right': 0.5}
+            id: Pressure
+        
+        Label:        
+            text: "Time :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            text: "10.0"
+            pos_hint: {'right': 0.5}
+            id: Time
+            
+        Button:
+            pos_hint: {'center_x': 0.2}
+            text: 'Calculate'
+            on_release: root.show_viscosity_results()
+ 
+        Button:
+            id: Resetbtn
+            pos_hint: {'center_x': 0.2}
+            text: "Reset"
+            on_press: capillary.text="100.0"
+            on_press: towindow.text="100.0"
+            on_press: Idiameter.text="50.0"
+            on_press: Pressure.text="30.0"
+            on_press: Time.text="10.0"
+
+        Button:
+            text: 'Back to menu'
+            on_press: root.manager.current = 'menu'
+          
+<ConductivityScreen>:
+    fullscreen: True
+    GridLayout:
+        id: gl
+        cols: 2 
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "Capillary Length :"
+            id: ko
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:        
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: capillary
+
+        Label:
+            text: "Length to window :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: towindow
+        
+        Label:
+            text: "Inside diameter :"
+            height: 0.5
+            size_hint_x: 0.5
+    
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: Idiameter
+    
+        Label:
+            text: "Pressure :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: Pressure
+        
+        Label:        
+            text: "Time :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: Time
+            
+        Button:
+            pos_hint: {'center_x': 0.2}
+            text: 'Calculate'
+            on_release: root.show_conductivity_results()
+ 
+        Button:
+            id: Resetbtn
+            pos_hint: {'center_x': 0.2}
+            text: "Reset"
+            on_press: capillary.text="100.0"
+            on_press: towindow.text="100.0"
+            on_press: Idiameter.text="50.0"
+            on_press: Pressure.text="30.0"
+            on_press: Time.text="10.0"
+
+        Button:
+            text: 'Back to menu'
+            on_press: root.manager.current = 'menu'
+
+<FlowScreen>:
+    fullscreen: True
+    GridLayout:
+        id: gl
+        cols: 2 
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "Capillary Length :"
+            id: ko
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:        
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: capillary
+
+        Label:
+            text: "Length to window :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: towindow
+        
+        Label:
+            text: "Inside diameter :"
+            height: 0.5
+            size_hint_x: 0.5
+    
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: Idiameter
+    
+        Label:
+            text: "Pressure :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: Pressure
+        
+        Label:        
+            text: "Time :"
+            height: 0.5
+            size_hint_x: 0.5
+        
+        TextInput:
+            height: 0.5
+            pos_hint: {'right': 0.5}
+            id: Time
+            
+        Button:
+            pos_hint: {'center_x': 0.2}
+            text: 'Calculate'
+            on_release: root.show_flow_results()
+ 
+        Button:
+            id: Resetbtn
+            pos_hint: {'center_x': 0.2}
+            text: "Reset"
+            on_press: capillary.text="100.0"
+            on_press: towindow.text="100.0"
+            on_press: Idiameter.text="50.0"
+            on_press: Pressure.text="30.0"
+            on_press: Time.text="10.0"
+
+        Button:
+            text: 'Back to menu'
+            on_press: root.manager.current = 'menu'
+
+<AboutScreen>:
+    BoxLayout:
+        Button:
+            text: 'Back to menu'
+            on_press: root.manager.current = 'menu'
