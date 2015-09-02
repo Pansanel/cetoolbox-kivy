@@ -53,8 +53,8 @@ class FlowPopup(Popup):
 class InjectionScreen(Screen):
     def show_injection_results(self):
         data = {}
-        data['injection'] = self.ids.capillary.text
-        data['volume'] = self.ids.towindow.text
+        data['injection'] = self.ids.Capillary.text
+        data['volume'] = self.ids.Towindow.text
         injection_popup = InjectionPopup()
         injection_popup.show_popup(data)
 

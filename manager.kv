@@ -56,6 +56,15 @@
             text: 'About'
             on_press: root.manager.current = 'about'
 
+<CalculateButton@Button>:
+    text: "Calculate"
+    on_release: root.on_release 
+
+<MenuButton@Button>:
+    text: 'Back to menu'
+    on_press: root.on_press
+
+
 <InjectionScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -72,7 +81,7 @@
                 size_hint_x: 0.5
 
             TextInput:        
-                id: capillary
+                id: Capillary
                 height: 0.5
                 text: "100.0"
                 pos_hint: {'right': 0.5}
@@ -83,7 +92,7 @@
                 size_hint_x: 0.5
             
             TextInput:
-                id: towindow
+                id: Towindow
                 height: 0.5
                 text: "100.0"
                 pos_hint: {'right': 0.5}
@@ -160,15 +169,14 @@
             padding: 10
             spacing: 10    
 
-            Button:
-                text: "Calculate"
+            CalculateButton:
                 on_release: root.show_injection_results()
                 
             Button:
                 id: Resetbtn
                 text: "Reset"
-                on_press: capillary.text="100.0"
-                on_press: towindow.text="100.0"
+                on_press: Capillary.text="100.0"
+                on_press: Towindow.text="100.0"
                 on_press: Idiameter.text="50.0"
                 on_press: Pressure.text="30.0"
                 on_press: Time.text="10.0"
@@ -176,8 +184,7 @@
                 on_press: Concentration.text="1.0"
                 on_press: Molweight.text="1 000.0"
 
-            Button:
-                text: 'Back to menu'
+            MenuButton:
                 on_press: root.manager.current = 'menu'
 
 <ViscosityScreen>:
