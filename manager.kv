@@ -1,5 +1,14 @@
 #:kivy 1.8.0
 
+<CalculateButton@Button>:
+    text: "Calculate"
+    on_release: root.on_release 
+
+<MenuButton@Button>:
+    text: 'Back to menu'
+    on_press: root.on_press
+
+
 <ViscosityPopup>:
     id: popup
     title: "Calculate"
@@ -55,14 +64,6 @@
         Button:
             text: 'About'
             on_press: root.manager.current = 'about'
-
-<CalculateButton@Button>:
-    text: "Calculate"
-    on_release: root.on_release 
-
-<MenuButton@Button>:
-    text: 'Back to menu'
-    on_press: root.on_press
 
 
 <InjectionScreen>:
@@ -190,242 +191,267 @@
 <ViscosityScreen>:
     fullscreen: True
     
-    GridLayout:
-        id: gl
-        cols: 2 
-        padding: 10
-        spacing: 10
+    BoxLayout:
+        orientation: 'vertical'
+        
+        GridLayout:
+            size_hint: 1., 0.9
+            id: gl
+            cols: 2 
+            padding: 10
+            spacing: 10
 
-        Label:
-            text: "Capillary Length :"
-            id: ko
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:        
-            height: 0.5
-            text: "100.0"
-            pos_hint: {'right': 0.5}
-            id: capillary
-
-        Label:
-            text: "Length to window :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            text: "100.0"
-            pos_hint: {'right': 0.5}
-            id: towindow
-        
-        Label:
-            text: "Inside diameter :"
-            height: 0.5
-            size_hint_x: 0.5
-    
-        TextInput:
-            height: 0.5
-            text: "50.0"
-            pos_hint: {'right': 0.5}
-            id: Idiameter
-    
-        Label:
-            text: "Pressure :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            text: "30.0"
-            pos_hint: {'right': 0.5}
-            id: Pressure
-        
-        Label:        
-            text: "Time :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            text: "10.0"
-            pos_hint: {'right': 0.5}
-            id: Time
+            Label:
+                text: "Capillary Length :"
+                id: ko
+                height: 0.5
+                size_hint_x: 0.5
             
-        Button:
-            pos_hint: {'center_x': 0.2}
-            text: 'Calculate'
-            on_release: root.show_viscosity_results()
- 
-        Button:
-            id: Resetbtn
-            pos_hint: {'center_x': 0.2}
-            text: "Reset"
-            on_press: capillary.text="100.0"
-            on_press: towindow.text="100.0"
-            on_press: Idiameter.text="50.0"
-            on_press: Pressure.text="30.0"
-            on_press: Time.text="10.0"
+            TextInput:        
+                height: 0.5
+                text: "100.0"
+                pos_hint: {'right': 0.5}
+                id: Capillary
 
-        Button:
-            text: 'Back to menu'
-            on_press: root.manager.current = 'menu'
+            Label:
+                text: "Length to window :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                text: "100.0"
+                pos_hint: {'right': 0.5}
+                id: Towindow
+            
+            Label:
+                text: "Inside diameter :"
+                height: 0.5
+                size_hint_x: 0.5
+        
+            TextInput:
+                height: 0.5
+                text: "50.0"
+                pos_hint: {'right': 0.5}
+                id: Idiameter
+        
+            Label:
+                text: "Pressure :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                text: "30.0"
+                pos_hint: {'right': 0.5}
+                id: Pressure
+            
+            Label:        
+                text: "Time :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                text: "10.0"
+                pos_hint: {'right': 0.5}
+                id: Time
+        
+        GridLayout:
+            size_hint: 1., 0.1
+            id: gl
+            cols: 3 
+            padding: 10
+            spacing: 10
+            
+            CalculateButton:
+                on_release: root.show_viscosity_results()
+
+            Button:
+                id: Resetbtn
+                text: "Reset"
+                on_press: Capillary.text="100.0"
+                on_press: Towindow.text="100.0"
+                on_press: Idiameter.text="50.0"
+                on_press: Pressure.text="30.0"
+                on_press: Time.text="10.0"
+
+            MenuButton:
+                on_press: root.manager.current = 'menu'
           
 <ConductivityScreen>:
     fullscreen: True
-    GridLayout:
-        id: gl
-        cols: 2 
-        padding: 10
-        spacing: 10
-
-        Label:
-            text: "Capillary Length :"
-            id: ko
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:        
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: capillary
-
-        Label:
-            text: "Length to window :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: towindow
-        
-        Label:
-            text: "Inside diameter :"
-            height: 0.5
-            size_hint_x: 0.5
     
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: Idiameter
+    BoxLayout:
+        orientation: 'vertical'
+        
     
-        Label:
-            text: "Pressure :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: Pressure
-        
-        Label:        
-            text: "Time :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: Time
+        GridLayout:
+            size_hint: 1., 0.9
+            id: gl
+            cols: 2 
+            padding: 10
+            spacing: 10
+
+            Label:
+                text: "Capillary Length :"
+                id: ko
+                height: 0.5
+                size_hint_x: 0.5
             
-        Button:
-            pos_hint: {'center_x': 0.2}
-            text: 'Calculate'
-            on_release: root.show_conductivity_results()
- 
-        Button:
-            id: Resetbtn
-            pos_hint: {'center_x': 0.2}
-            text: "Reset"
-            on_press: capillary.text="100.0"
-            on_press: towindow.text="100.0"
-            on_press: Idiameter.text="50.0"
-            on_press: Pressure.text="30.0"
-            on_press: Time.text="10.0"
+            TextInput:        
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Capillary
 
-        Button:
-            text: 'Back to menu'
-            on_press: root.manager.current = 'menu'
+            Label:
+                text: "Length to window :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Towindow
+            
+            Label:
+                text: "Inside diameter :"
+                height: 0.5
+                size_hint_x: 0.5
+        
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Idiameter
+        
+            Label:
+                text: "Pressure :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Pressure
+            
+            Label:        
+                text: "Time :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Time
+        
+        GridLayout:
+            size_hint: 1., 0.1
+            id: gl
+            cols: 3 
+            padding: 10
+            spacing: 10
+        
+            CalculateButton:
+                on_release: root.show_conductivity_results()
+     
+            Button:
+                id: Resetbtn
+                text: "Reset"
+                on_press: Capillary.text="100.0"
+                on_press: Towindow.text="100.0"
+                on_press: Idiameter.text="50.0"
+                on_press: Pressure.text="30.0"
+                on_press: Time.text="10.0"
+
+            MenuButton:
+                on_press: root.manager.current = 'menu'
 
 <FlowScreen>:
     fullscreen: True
-    GridLayout:
-        id: gl
-        cols: 2 
-        padding: 10
-        spacing: 10
-
-        Label:
-            text: "Capillary Length :"
-            id: ko
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:        
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: capillary
-
-        Label:
-            text: "Length to window :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: towindow
-        
-        Label:
-            text: "Inside diameter :"
-            height: 0.5
-            size_hint_x: 0.5
     
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: Idiameter
+     
+    BoxLayout:
+        orientation: 'vertical'
     
-        Label:
-            text: "Pressure :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: Pressure
-        
-        Label:        
-            text: "Time :"
-            height: 0.5
-            size_hint_x: 0.5
-        
-        TextInput:
-            height: 0.5
-            pos_hint: {'right': 0.5}
-            id: Time
+        GridLayout:
+            size_hint: 1., 0.9
+            id: gl
+            cols: 2 
+            padding: 10
+            spacing: 10
+
+            Label:
+                text: "Capillary Length :"
+                id: ko
+                height: 0.5
+                size_hint_x: 0.5
             
-        Button:
-            pos_hint: {'center_x': 0.2}
-            text: 'Calculate'
-            on_release: root.show_flow_results()
- 
-        Button:
-            id: Resetbtn
-            pos_hint: {'center_x': 0.2}
-            text: "Reset"
-            on_press: capillary.text="100.0"
-            on_press: towindow.text="100.0"
-            on_press: Idiameter.text="50.0"
-            on_press: Pressure.text="30.0"
-            on_press: Time.text="10.0"
+            TextInput:        
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Capillary
 
-        Button:
-            text: 'Back to menu'
-            on_press: root.manager.current = 'menu'
+            Label:
+                text: "Length to window :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Towindow
+            
+            Label:
+                text: "Inside diameter :"
+                height: 0.5
+                size_hint_x: 0.5
+        
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Idiameter
+        
+            Label:
+                text: "Pressure :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Pressure
+            
+            Label:        
+                text: "Time :"
+                height: 0.5
+                size_hint_x: 0.5
+            
+            TextInput:
+                height: 0.5
+                pos_hint: {'right': 0.5}
+                id: Time
+        
+        GridLayout:
+            size_hint: 1., 0.1
+            id: gl
+            cols: 3 
+            padding: 10
+            spacing: 10
+            
+            CalculateButton:
+                on_release: root.show_flow_results()
+     
+            Button:
+                id: Resetbtn
+                text: "Reset"
+                on_press: Capillary.text="100.0"
+                on_press: Towindow.text="100.0"
+                on_press: Idiameter.text="50.0"
+                on_press: Pressure.text="30.0"
+                on_press: Time.text="10.0"
+
+            MenuButton:
+                on_press: root.manager.current = 'menu'
 
 <AboutScreen>:
     BoxLayout:
