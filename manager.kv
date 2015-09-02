@@ -8,6 +8,18 @@
     text: 'Back to menu'
     on_press: root.on_press
 
+<DownMenuLayout@GridLayout>:
+    size_hint_y: 0.1
+    id: gl
+    cols: 3 
+    padding: 10
+    spacing: 10
+    
+<TopScreenLayout@GridLayout>:
+    size_hint_y: 0.9
+    cols: 2 
+    padding: 10
+    spacing: 10
 
 <ViscosityPopup>:
     id: popup
@@ -70,11 +82,7 @@
     BoxLayout:
         orientation: 'vertical'
     
-        GridLayout:
-            size_hint: 1., 0.9
-            cols: 2 
-            padding: 10
-            spacing: 10
+        TopScreenLayout:
 
             Label:
                 text: "Capillary Length :"
@@ -164,11 +172,7 @@
                 pos_hint: {'right': 0.5}
                 id: Molweight
 
-        GridLayout:
-            size_hint: 1., 0.1
-            cols: 3 
-            padding: 10
-            spacing: 10    
+        DownMenuLayout:  
 
             CalculateButton:
                 on_release: root.show_injection_results()
@@ -184,9 +188,10 @@
                 on_press: Viscosity.text="1.0"
                 on_press: Concentration.text="1.0"
                 on_press: Molweight.text="1 000.0"
-
+            
             MenuButton:
                 on_press: root.manager.current = 'menu'
+
 
 <ViscosityScreen>:
     fullscreen: True
@@ -194,12 +199,7 @@
     BoxLayout:
         orientation: 'vertical'
         
-        GridLayout:
-            size_hint: 1., 0.9
-            id: gl
-            cols: 2 
-            padding: 10
-            spacing: 10
+        TopScreenLayout:
 
             Label:
                 text: "Capillary Length :"
@@ -257,12 +257,7 @@
                 pos_hint: {'right': 0.5}
                 id: Time
         
-        GridLayout:
-            size_hint: 1., 0.1
-            id: gl
-            cols: 3 
-            padding: 10
-            spacing: 10
+        DownMenuLayout:  
             
             CalculateButton:
                 on_release: root.show_viscosity_results()
@@ -278,6 +273,7 @@
 
             MenuButton:
                 on_press: root.manager.current = 'menu'
+            
           
 <ConductivityScreen>:
     fullscreen: True
@@ -285,13 +281,7 @@
     BoxLayout:
         orientation: 'vertical'
         
-    
-        GridLayout:
-            size_hint: 1., 0.9
-            id: gl
-            cols: 2 
-            padding: 10
-            spacing: 10
+        TopScreenLayout:
 
             Label:
                 text: "Capillary Length :"
@@ -344,12 +334,7 @@
                 pos_hint: {'right': 0.5}
                 id: Time
         
-        GridLayout:
-            size_hint: 1., 0.1
-            id: gl
-            cols: 3 
-            padding: 10
-            spacing: 10
+        DownMenuLayout:
         
             CalculateButton:
                 on_release: root.show_conductivity_results()
@@ -373,12 +358,7 @@
     BoxLayout:
         orientation: 'vertical'
     
-        GridLayout:
-            size_hint: 1., 0.9
-            id: gl
-            cols: 2 
-            padding: 10
-            spacing: 10
+        TopScreenLayout:
 
             Label:
                 text: "Capillary Length :"
@@ -431,12 +411,7 @@
                 pos_hint: {'right': 0.5}
                 id: Time
         
-        GridLayout:
-            size_hint: 1., 0.1
-            id: gl
-            cols: 3 
-            padding: 10
-            spacing: 10
+        DownMenuLayout:
             
             CalculateButton:
                 on_release: root.show_flow_results()
