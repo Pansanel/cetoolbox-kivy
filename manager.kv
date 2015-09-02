@@ -5,7 +5,7 @@
     on_release: root.on_release 
 
 <MenuButton@Button>:
-    text: 'Back to menu'
+    text: 'Menu'
     on_press: root.on_press
 
 <DownMenuLayout@GridLayout>:
@@ -14,10 +14,14 @@
     cols: 3 
     padding: 10
     spacing: 10
+
+<ScrollViewTop@ScrollView>:
+    size_hint_y: 0.9
     
 <TopScreenLayout@GridLayout>:
-    size_hint_y: 0.9
-    cols: 2 
+    size_hint_y: None
+    height: sp(350)
+    cols: 2
     padding: 10
     spacing: 10
 
@@ -81,96 +85,97 @@
 <InjectionScreen>:
     BoxLayout:
         orientation: 'vertical'
-    
-        TopScreenLayout:
-
-            Label:
-                text: "Capillary Length :"
-                height: 0.5
-                size_hint_x: 0.5
-
-            TextInput:        
-                id: Capillary
-                height: 0.5
-                text: "100.0"
-                pos_hint: {'right': 0.5}
-
-            Label:
-                text: "Length to window :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                id: Towindow
-                height: 0.5
-                text: "100.0"
-                pos_hint: {'right': 0.5}
-
-            Label:
-                text: "Inside diameter :"
-                height: 0.5
-                size_hint_x: 0.5
         
-            TextInput:
-                height: 0.5
-                text: "50.0"
-                pos_hint: {'right': 0.5}
-                id: Idiameter
-        
-            Label:
-                text: "Pressure :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                text: "30.0"
-                pos_hint: {'right': 0.5}
-                id: Pressure
-            
-            Label:        
-                text: "Time :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                text: "10.0"
-                pos_hint: {'right': 0.5}
-                id: Time
+        ScrollViewTop:
+            TopScreenLayout:
 
-            Label:
-                text: "Viscosity :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                text: "1.0"
-                pos_hint: {'right': 0.5}
-                id: Viscosity
-        
-            Label:
-                text: "Concentration :"
-                height: 0.5
-                size_hint_x: 0.5
-        
-            TextInput:
-                height: 0.5
-                text: "1.0"
-                pos_hint: {'right': 0.5}
-                id: Concentration
+                Label:
+                    text: "Capillary Length :"
+                    height: 0.5
+                    size_hint_x: 0.5
+
+                TextInput:        
+                    id: Capillary
+                    height: 0.5
+                    text: "100.0"
+                    pos_hint: {'right': 0.5}
+
+                Label:
+                    text: "Length to window :"
+                    height: 0.5
+                    size_hint_x: 0.5
                 
-            Label:
-                text: "Molecular weight :"
-                height: 0.5    
-                size_hint_x: 0.5
-                        
-            TextInput:
-                height: 0.5
-                text: "1 000.0"
-                pos_hint: {'right': 0.5}
-                id: Molweight
+                TextInput:
+                    id: Towindow
+                    height: 0.5
+                    text: "100.0"
+                    pos_hint: {'right': 0.5}
+
+                Label:
+                    text: "Inside diameter :"
+                    height: 0.5
+                    size_hint_x: 0.5
+            
+                TextInput:
+                    height: 0.5
+                    text: "50.0"
+                    pos_hint: {'right': 0.5}
+                    id: Idiameter
+            
+                Label:
+                    text: "Pressure :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    text: "30.0"
+                    pos_hint: {'right': 0.5}
+                    id: Pressure
+                
+                Label:        
+                    text: "Time :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    text: "10.0"
+                    pos_hint: {'right': 0.5}
+                    id: Time
+
+                Label:
+                    text: "Viscosity :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    text: "1.0"
+                    pos_hint: {'right': 0.5}
+                    id: Viscosity
+            
+                Label:
+                    text: "Concentration :"
+                    height: 0.5
+                    size_hint_x: 0.5
+            
+                TextInput:
+                    height: 0.5
+                    text: "1.0"
+                    pos_hint: {'right': 0.5}
+                    id: Concentration
+                    
+                Label:
+                    text: "Molecular weight :"
+                    height: 0.5    
+                    size_hint_x: 0.5
+                            
+                TextInput:
+                    height: 0.5
+                    text: "1 000.0"
+                    pos_hint: {'right': 0.5}
+                    id: Molweight
 
         DownMenuLayout:  
 
@@ -199,63 +204,64 @@
     BoxLayout:
         orientation: 'vertical'
         
-        TopScreenLayout:
+        ScrollViewTop:
+            TopScreenLayout:
 
-            Label:
-                text: "Capillary Length :"
-                id: ko
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:        
-                height: 0.5
-                text: "100.0"
-                pos_hint: {'right': 0.5}
-                id: Capillary
+                Label:
+                    text: "Capillary Length :"
+                    id: ko
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:        
+                    height: 0.5
+                    text: "100.0"
+                    pos_hint: {'right': 0.5}
+                    id: Capillary
 
-            Label:
-                text: "Length to window :"
-                height: 0.5
-                size_hint_x: 0.5
+                Label:
+                    text: "Length to window :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    text: "100.0"
+                    pos_hint: {'right': 0.5}
+                    id: Towindow
+                
+                Label:
+                    text: "Inside diameter :"
+                    height: 0.5
+                    size_hint_x: 0.5
             
-            TextInput:
-                height: 0.5
-                text: "100.0"
-                pos_hint: {'right': 0.5}
-                id: Towindow
+                TextInput:
+                    height: 0.5
+                    text: "50.0"
+                    pos_hint: {'right': 0.5}
+                    id: Idiameter
             
-            Label:
-                text: "Inside diameter :"
-                height: 0.5
-                size_hint_x: 0.5
-        
-            TextInput:
-                height: 0.5
-                text: "50.0"
-                pos_hint: {'right': 0.5}
-                id: Idiameter
-        
-            Label:
-                text: "Pressure :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                text: "30.0"
-                pos_hint: {'right': 0.5}
-                id: Pressure
-            
-            Label:        
-                text: "Time :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                text: "10.0"
-                pos_hint: {'right': 0.5}
-                id: Time
+                Label:
+                    text: "Pressure :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    text: "30.0"
+                    pos_hint: {'right': 0.5}
+                    id: Pressure
+                
+                Label:        
+                    text: "Time :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    text: "10.0"
+                    pos_hint: {'right': 0.5}
+                    id: Time
         
         DownMenuLayout:  
             
@@ -281,58 +287,59 @@
     BoxLayout:
         orientation: 'vertical'
         
-        TopScreenLayout:
+        ScrollViewTop:
+            TopScreenLayout:
 
-            Label:
-                text: "Capillary Length :"
-                id: ko
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:        
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Capillary
+                Label:
+                    text: "Capillary Length :"
+                    id: ko
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:        
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Capillary
 
-            Label:
-                text: "Length to window :"
-                height: 0.5
-                size_hint_x: 0.5
+                Label:
+                    text: "Length to window :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Towindow
+                
+                Label:
+                    text: "Inside diameter :"
+                    height: 0.5
+                    size_hint_x: 0.5
             
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Towindow
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Idiameter
             
-            Label:
-                text: "Inside diameter :"
-                height: 0.5
-                size_hint_x: 0.5
-        
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Idiameter
-        
-            Label:
-                text: "Pressure :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Pressure
-            
-            Label:        
-                text: "Time :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Time
+                Label:
+                    text: "Pressure :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Pressure
+                
+                Label:        
+                    text: "Time :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Time
         
         DownMenuLayout:
         
@@ -357,59 +364,59 @@
      
     BoxLayout:
         orientation: 'vertical'
-    
-        TopScreenLayout:
+        ScrollViewTop:
+            TopScreenLayout:
 
-            Label:
-                text: "Capillary Length :"
-                id: ko
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:        
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Capillary
+                Label:
+                    text: "Capillary Length :"
+                    id: ko
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:        
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Capillary
 
-            Label:
-                text: "Length to window :"
-                height: 0.5
-                size_hint_x: 0.5
+                Label:
+                    text: "Length to window :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Towindow
+                
+                Label:
+                    text: "Inside diameter :"
+                    height: 0.5
+                    size_hint_x: 0.5
             
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Towindow
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Idiameter
             
-            Label:
-                text: "Inside diameter :"
-                height: 0.5
-                size_hint_x: 0.5
-        
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Idiameter
-        
-            Label:
-                text: "Pressure :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Pressure
-            
-            Label:        
-                text: "Time :"
-                height: 0.5
-                size_hint_x: 0.5
-            
-            TextInput:
-                height: 0.5
-                pos_hint: {'right': 0.5}
-                id: Time
+                Label:
+                    text: "Pressure :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Pressure
+                
+                Label:        
+                    text: "Time :"
+                    height: 0.5
+                    size_hint_x: 0.5
+                
+                TextInput:
+                    height: 0.5
+                    pos_hint: {'right': 0.5}
+                    id: Time
         
         DownMenuLayout:
             
