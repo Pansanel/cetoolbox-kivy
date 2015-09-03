@@ -52,6 +52,7 @@ class FlowPopup(Popup):
     pass
 
 class InjectionScreen(Screen):
+    
     def show_injection_results(self):
         data = {}
         data['injection'] = self.ids.Capillary.text
@@ -78,6 +79,8 @@ class AboutScreen(Screen):
     pass
 
 class ManagerApp(App):
+    title = "CEToolBox"
+    
     def build(self):
         sm = ScreenManager()
         sm.add_widget(MenuScreen(name='menu'))
