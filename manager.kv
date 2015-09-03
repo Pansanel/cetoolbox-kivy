@@ -25,12 +25,19 @@
     width: '60sp'
     size_hint_y: None
     
+<SpinnerUnit@Spinner>:
+    text: "Unit1"
+    font_size: '15sp'
+    height: '30sp'
+    width: '30sp'
+    values: ["Unit1", "Unit2", "Unit3"]
+
 <TopScreenLayout@GridLayout>:
     size_hint_y: None
     size_hint_x: None
     height: '350sp'
-    width: '250sp'
-    cols: 2
+    width: '350sp'
+    cols: 3
     padding: 10
     spacing: 10
 
@@ -117,6 +124,8 @@
                 CEToolBoxTextInput:        
                     id: Capillary
                     text: "100.0"
+                
+                SpinnerUnit:
 
                 CEToolBoxLabel:
                     text: "Length to window :"
@@ -124,13 +133,17 @@
                 CEToolBoxTextInput:
                     id: Towindow
                     text: "100.0"
-
+                
+                SpinnerUnit:
+                
                 CEToolBoxLabel:
                     text: "Inside diameter :"
             
                 CEToolBoxTextInput:
                     id: Idiameter
                     text: "50.0"
+                
+                SpinnerUnit:
             
                 CEToolBoxLabel:
                     text: "Pressure :"
@@ -139,12 +152,16 @@
                     id: Pressure
                     text: "30.0"
                 
+                SpinnerUnit:
+                
                 CEToolBoxLabel:        
                     text: "Time :"
                 
                 CEToolBoxTextInput:
                     id: Time
                     text: "10.0"
+                
+                SpinnerUnit:
 
                 CEToolBoxLabel:
                     text: "Viscosity :"
@@ -152,13 +169,17 @@
                 CEToolBoxTextInput:
                     id: Viscosity
                     text: "1.0"
-
+                
+                SpinnerUnit:
+                
                 CEToolBoxLabel:
                     text: "Concentration :"
             
                 CEToolBoxTextInput:
                     id: Concentration
                     text: "1.0"
+                    
+                SpinnerUnit:
 
                 CEToolBoxLabel:
                     text: "Molecular weight :"
@@ -166,6 +187,8 @@
                 CEToolBoxTextInput:
                     id: Molweight
                     text: "1 000.0"
+                    
+                SpinnerUnit:
 
         ScrollView:
             size_hint_y: 0.1
