@@ -1,6 +1,5 @@
 #:kivy 1.8.0
 
-
 <CEToolBoxButton@Button>:
     font_size: '15sp'
     height: '18sp'
@@ -42,8 +41,10 @@
     spacing: 10
 
 <DownMenuLayout@GridLayout>:
-    size_hint_y: 1.
-    height: '20sp'
+    size_hint_y: None
+    size_hint_x: None
+    height: '30sp'
+    width: '350sp'
     id: gl
     cols: 3 
     padding: 10
@@ -115,7 +116,7 @@
         orientation: 'vertical'
         
         ScrollView:
-            size_hint_y: 0.9
+            size_hint_y: 0.85
             TopScreenLayout:
 
                 CEToolBoxLabel:
@@ -191,7 +192,7 @@
                 SpinnerUnit:
 
         ScrollView:
-            size_hint_y: 0.1
+            size_hint_y: 0.15
             DownMenuLayout:  
 
                 CalculateButton:
