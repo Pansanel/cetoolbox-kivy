@@ -27,7 +27,24 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.storage.jsonstore import JsonStore
 
-
+def create_store():
+    store = JsonStore('values.json')
+    if not store.exists('Capillary'):
+        store.put('Capillary', value=100.00, unit="Unit1")
+    if not store.exists('Towindow'):
+        store.put('Towindow', value=100.00, unit="Unit1")
+    if not store.exists('Idiameter'):
+        store.put('Idiameter', value=50.00, unit="Unit1")
+    if not store.exists('Pressure'):
+        store.put('Pressure', value=50.00, unit="Unit1")
+    if not store.exists('Time'):
+        store.put('Time', value=50.00, unit="Unit1")
+    if not store.exists('Viscosity'):
+        store.put('Viscosity', value=1.0, unit="Unit1")
+    if not store.exists('Concentration'):
+        store.put('Concentration', value=1.0, unit="Unit1")
+    if not store.exists('Molweight'):
+        store.put('Molweight', value=1000.0, unit="Unit1")
 
 
 class MenuScreen(Screen):
@@ -58,10 +75,19 @@ class InjectionScreen(Screen):
     def on_pre_enter(self):
         store = JsonStore('values.json')
         self.ids.Capillary.text = str(store.get('Capillary')["value"])
-        
+        self.ids.Towindow.text = str(store.get('Towindow')["value"])
+        self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
+        self.ids.Pressure.text = str(store.get('Pressure')["value"])
+        self.ids.Time.text = str(store.get('Time')["value"])
+        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
+        self.ids.Concentration.text = str(store.get('Concentration')["value"])
+        self.ids.Molweight.text = str(store.get('Molweight')["value"])
     
     def show_injection_results(self):
         store = JsonStore('values.json')
+        store.put('Capillary', value=float(self.ids.Capillary.text),
+                  unit="Unit1")
+        
         data = {}
         data['injection'] = self.ids.Capillary.text
         data['volume'] = self.ids.Towindow.text
@@ -88,10 +114,7 @@ class AboutScreen(Screen):
 
 class ManagerApp(App):
     title = "CEToolBox"
-    
-    store = JsonStore('values.json')
-    store.put('Capillary', value=100.00, unit="Unit1")
-
+    create_store()
     
     def build(self):
         sm = ScreenManager()
