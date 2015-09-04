@@ -14,7 +14,7 @@
 # limitations under the License
 
 import kivy
-kivy.require('1.8.0')
+kivy.require('1.9.0')
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -25,6 +25,8 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.storage.jsonstore import JsonStore
+
 
 
 
@@ -53,7 +55,13 @@ class FlowPopup(Popup):
 
 class InjectionScreen(Screen):
     
+    def on_pre_enter(self):
+        store = JsonStore('values.json')
+        self.ids.Capillary.text = str(store.get('Capillary')["value"])
+        
+    
     def show_injection_results(self):
+        store = JsonStore('values.json')
         data = {}
         data['injection'] = self.ids.Capillary.text
         data['volume'] = self.ids.Towindow.text
@@ -80,6 +88,10 @@ class AboutScreen(Screen):
 
 class ManagerApp(App):
     title = "CEToolBox"
+    
+    store = JsonStore('values.json')
+    store.put('Capillary', value=100.00, unit="Unit1")
+
     
     def build(self):
         sm = ScreenManager()

@@ -1,4 +1,4 @@
-#:kivy 1.8.0
+#:kivy 1.9.0
 
 <CEToolBoxButton@Button>:
     font_size: '15sp'
@@ -112,6 +112,8 @@
 
 
 <InjectionScreen>:
+    fullscreen: True
+
     BoxLayout:
         orientation: 'vertical'
         
@@ -124,7 +126,6 @@
 
                 CEToolBoxTextInput:        
                     id: Capillary
-                    text: "100.0"
                 
                 SpinnerUnit:
 
