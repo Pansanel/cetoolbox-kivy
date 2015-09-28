@@ -21,6 +21,7 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
@@ -93,6 +94,8 @@ class InjectionScreen(Screen):
         data['volume'] = self.ids.Towindow.text
         injection_popup = InjectionPopup()
         injection_popup.show_popup(data)
+    
+        
 
 class ViscosityScreen(Screen):
     def show_viscosity_results(self):
@@ -111,6 +114,43 @@ class FlowScreen(Screen):
 
 class AboutScreen(Screen):
     pass
+
+
+class TopScreenLayout(GridLayout):
+    
+    def change_height(self, height_par):
+        if height_par > self.minimum_height:
+            self.height = height_par
+        else:
+            self.height = self.minimum_height
+        print(self.height, self.minimum_height)
+            
+    def change_width(self, wid):
+        #~ temporary because of a bug ???
+        self.minimum_width = 350
+        
+        if wid > self.minimum_width:
+            self.width = wid
+        else:
+            self.width = self.minimum_width
+
+            
+class ScrollViewSpe(ScrollView):
+        
+    def change_child_height(self, height_par):
+        for child in self.children:
+            child.change_height(height_par)
+        return height_par
+
+    def change_child_width(self, wid):
+        for child in self.children:
+            child.change_width(wid)
+        return wid
+        
+    def test_width(self, wid):
+        print(wid)
+        return wid
+
 
 class ManagerApp(App):
     title = "CEToolBox"
