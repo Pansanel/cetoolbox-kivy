@@ -119,14 +119,17 @@ class AboutScreen(Screen):
 class TopScreenLayout(GridLayout):
     
     def change_height(self, height_par):
+        #~ reset because of a bug in kivy
+        #~ need to depend of the number of row 
+        self.minimum_height = 350
+        
         if height_par > self.minimum_height:
             self.height = height_par
         else:
             self.height = self.minimum_height
-        print(self.height, self.minimum_height)
             
     def change_width(self, wid):
-        #~ temporary because of a bug ???
+        #~ reset because of a bug in kivy
         self.minimum_width = 350
         
         if wid > self.minimum_width:
