@@ -29,6 +29,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.storage.jsonstore import JsonStore
 
 def create_store():
+    """ function to create a file with default value of each var"""
+    
     store = JsonStore('values.json')
     if not store.exists('Capillary'):
         store.put('Capillary', value=100.00, unit="Unit1")
@@ -74,6 +76,10 @@ class FlowPopup(Popup):
 class InjectionScreen(Screen):
     
     def on_pre_enter(self):
+        """special function lauch at the clic of the button to go
+        on the injectionscreen 
+        this value comes from the json file where we keep it
+        """
         store = JsonStore('values.json')
         self.ids.Capillary.text = str(store.get('Capillary')["value"])
         self.ids.Towindow.text = str(store.get('Towindow')["value"])
@@ -85,6 +91,8 @@ class InjectionScreen(Screen):
         self.ids.Molweight.text = str(store.get('Molweight')["value"])
     
     def show_injection_results(self):
+        """ lauch when clicked on result
+        the new Capillary value is save (it's just an exemple)"""
         store = JsonStore('values.json')
         store.put('Capillary', value=float(self.ids.Capillary.text),
                   unit="Unit1")
@@ -117,6 +125,8 @@ class AboutScreen(Screen):
 
 
 class TopScreenLayout(GridLayout):
+    """ set the size of the layout from minimals values and the size
+    of the scrollviewspe parrent."""
     
     def change_height(self, height_par):
         #~ reset because of a bug in kivy
@@ -138,10 +148,11 @@ class TopScreenLayout(GridLayout):
             self.width = self.minimum_width
 
 class DownMenuLayout(GridLayout):
+    """ set the size of the layout from minimals values and the size
+    of the scrollviewspe parrent."""
 
     def change_height(self, height_par):
-        #~ reset because of a bug in kivy
-        #~ need to depend of the number of row 
+        #~ reset because of a bug in kivy 
         self.minimum_height = 30
         
         if height_par > self.minimum_height:
@@ -160,6 +171,9 @@ class DownMenuLayout(GridLayout):
     
             
 class ScrollViewSpe(ScrollView):
+    """ Special class made to give it's own value at his layout child
+    See the kv file for an exemple of use """s
+    
         
     def change_child_height(self, height_par):
         for child in self.children:
@@ -169,10 +183,6 @@ class ScrollViewSpe(ScrollView):
     def change_child_width(self, wid):
         for child in self.children:
             child.change_width(wid)
-        return wid
-        
-    def test_width(self, wid):
-        print(wid)
         return wid
 
 
