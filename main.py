@@ -28,6 +28,9 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.storage.jsonstore import JsonStore
 
+__version__ = '0.0.1'
+
+
 def create_store():
     """ function to create a file with default value of each var"""
     
@@ -172,7 +175,7 @@ class DownMenuLayout(GridLayout):
             
 class ScrollViewSpe(ScrollView):
     """ Special class made to give it's own value at his layout child
-    See the kv file for an exemple of use """s
+    See the kv file for an exemple of use """
     
         
     def change_child_height(self, height_par):
