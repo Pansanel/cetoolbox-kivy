@@ -27,14 +27,18 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.storage.jsonstore import JsonStore
+from os.path import join
 
 __version__ = '0.0.1'
 
 
+def get_store():
+    store = JsonStore('cetoolboxdata.json')
+    return store
+
 def create_store():
     """ function to create a file with default value of each var"""
-    
-    store = JsonStore('values.json')
+    store = get_store()
     if not store.exists('Capillary'):
         store.put('Capillary', value=100.00, unit="Unit1")
     if not store.exists('Towindow'):
@@ -60,7 +64,9 @@ class ViscosityPopup(Popup):
     pass
 
 class InjectionPopup():
+    
     def show_popup(self, data):
+        
         box = BoxLayout(orientation='vertical')
         box.add_widget(Label(text='Hydrodynamic injection: %s' % data['injection']))
         box.add_widget(Label(text='Capillary volume: %s' % data['volume']))
@@ -83,7 +89,7 @@ class InjectionScreen(Screen):
         on the injectionscreen 
         this value comes from the json file where we keep it
         """
-        store = JsonStore('values.json')
+        store = get_store()
         self.ids.Capillary.text = str(store.get('Capillary')["value"])
         self.ids.Towindow.text = str(store.get('Towindow')["value"])
         self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
@@ -93,13 +99,14 @@ class InjectionScreen(Screen):
         self.ids.Concentration.text = str(store.get('Concentration')["value"])
         self.ids.Molweight.text = str(store.get('Molweight')["value"])
     
+    
     def show_injection_results(self):
         """ lauch when clicked on result
         the new Capillary value is save (it's just an exemple)"""
-        store = JsonStore('values.json')
+        store = get_store()
+        #save but delete why ?
         store.put('Capillary', value=float(self.ids.Capillary.text),
                   unit="Unit1")
-        
         data = {}
         data['injection'] = self.ids.Capillary.text
         data['volume'] = self.ids.Towindow.text
@@ -171,6 +178,18 @@ class DownMenuLayout(GridLayout):
             self.width = wid
         else:
             self.width = self.minimum_width
+
+class DownMenuClose(DownMenuLayout):
+    
+    def change_width(self, wid):
+        #~ reset because of a bug in kivy
+        self.minimum_width = 100
+        
+        if wid > self.minimum_width:
+            self.width = wid
+        else:
+            self.width = self.minimum_width
+    
     
             
 class ScrollViewSpe(ScrollView):

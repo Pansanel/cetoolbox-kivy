@@ -51,6 +51,18 @@
     padding: 10
     spacing: 10
 
+<DownMenuClose>:
+    size_hint_y: None
+    size_hint_x: None
+    minimum_height: '30sp'
+    minimum_width: '100sp'
+    id: mc
+    cols: 1
+    padding: 10
+    spacing: 10
+    
+
+
 <ScrollViewTop@ScrollView>:
     size_hint_y: 1.
     size_hint_x: 1.
@@ -61,14 +73,35 @@
 
 <ViscosityPopup>:
     id: popup
-    title: "Calculate"
-    size_hint: .6, .6
+    title: "Viscosity Details"
 
-    Button:
-        id: btnpop
-        text: 'Viscosity : + result'
-        on_press: popup.dismiss()
-    
+    BoxLayout:
+        orientation: 'vertical'
+        
+        ScrollViewSpe:
+            size_hint_y: 0.85
+            
+            TopScreenLayout:
+                CEToolBoxLabel:
+                    text: "Capillary Length :"
+
+                CEToolBoxTextInput:        
+                    id: Capillary
+                
+                CEToolBoxLabel:
+                    markup: True
+                    text: "[color=#424242]Capillary Length :[\color]"
+
+        ScrollViewSpe:
+            size_hint_y: 0.15
+        
+            DownMenuClose:
+                Button:
+                    id: btnpop
+                    text: 'Close'
+                    on_press: popup.dismiss()
+
+            
 <ConductivityPopup>:
     id: popup
     title: "Calculate"

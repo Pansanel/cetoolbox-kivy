@@ -6,3 +6,4 @@ buildozer.spec
 .buildozer
 values.json
 kivyinstall
+cetoolboxdata.json
