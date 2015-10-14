@@ -280,61 +280,56 @@ class AboutScreen(Screen):
     pass
 
 
-class TopScreenLayout(GridLayout):
-    """ set the size of the layout from minimals values and the size
-    of the scrollviewspe parrent."""
+class CEToolBoxLayout(GridLayout):
+    
+    def set_min_height(self):
+        self.minimum_height = 350
+    
+    def set_min_width(self):
+        self.minimum_width = 350
     
     def change_height(self, height_par):
         #~ reset because of a bug in kivy
         #~ need to depend of the number of row 
-        self.minimum_height = 350
+        self.set_min_height()
         
         if height_par > self.minimum_height:
             self.height = height_par
         else:
             self.height = self.minimum_height
-            
-    def change_width(self, wid):
-        #~ reset because of a bug in kivy
-        self.minimum_width = 350
-        
-        if wid > self.minimum_width:
-            self.width = wid
-        else:
-            self.width = self.minimum_width
-
-class DownMenuLayout(GridLayout):
-    """ set the size of the layout from minimals values and the size
-    of the scrollviewspe parrent."""
-
-    def change_height(self, height_par):
-        #~ reset because of a bug in kivy 
-        self.minimum_height = 30
-        
-        if height_par > self.minimum_height:
-            self.height = height_par
-        else:
-            self.height = self.minimum_height
-            
-    def change_width(self, wid):
-        #~ reset because of a bug in kivy
-        self.minimum_width = 350
-        
-        if wid > self.minimum_width:
-            self.width = wid
-        else:
-            self.width = self.minimum_width
-
-class DownMenuClose(DownMenuLayout):
     
     def change_width(self, wid):
         #~ reset because of a bug in kivy
-        self.minimum_width = 100
+        self.set_min_width()
         
         if wid > self.minimum_width:
             self.width = wid
         else:
             self.width = self.minimum_width
+    
+    
+class TopScreenLayout(CEToolBoxLayout):
+    """ set the size of the layout from minimals values and the size
+    of the scrollviewspe parrent."""
+    def set_min_height(self):
+        self.minimum_height = 40 *self.rows + 10 
+        
+    
+class DownMenuLayout(CEToolBoxLayout):
+    """ set the size of the layout from minimals values and the size
+    of the scrollviewspe parrent."""
+    
+    def set_min_height(self):
+        self.minimum_height = 30 
+    
+class DownMenuClose(CEToolBoxLayout):
+    
+    def set_min_height(self):
+        self.minimum_height = 30
+    
+    def set_min_width(self):
+        self.minimum_width = 100
+    
     
     
             
