@@ -71,8 +71,6 @@
     padding: 10
     spacing: 10
     
-
-
 <ScrollViewTop@ScrollView>:
     size_hint_y: 1.
     size_hint_x: 1.
@@ -172,7 +170,7 @@
             TopScreenLayout:
                 
                 CEToolBoxLabel:
-                    text: "Capillary Length :"
+                    text: "Capillary Length"
 
                 CEToolBoxTextInput:        
                     id: Capillary
@@ -181,7 +179,7 @@
                     id: CapillaryUnit
 
                 CEToolBoxLabel:
-                    text: "Length to window :"
+                    text: "Length to window"
                 
                 CEToolBoxTextInput:
                     id: Towindow
@@ -190,7 +188,7 @@
                     id: TowindowUnit
                 
                 CEToolBoxLabel:
-                    text: "Inside diameter :"
+                    text: "Inside diameter"
             
                 CEToolBoxTextInput:
                     id: Idiameter
@@ -199,7 +197,7 @@
                     id: IdiameterUnit
             
                 CEToolBoxLabel:
-                    text: "Pressure :"
+                    text: "Pressure"
                 
                 CEToolBoxTextInput:
                     id: Pressure
@@ -209,7 +207,7 @@
                     values: ["mbar", "psi"]
                     
                 CEToolBoxLabel:        
-                    text: "Time :"
+                    text: "Time"
                 
                 CEToolBoxTextInput:
                     id: Time
@@ -218,7 +216,7 @@
                     id: TimeUnit
 
                 CEToolBoxLabel:
-                    text: "Viscosity :"
+                    text: "Viscosity"
             
                 CEToolBoxTextInput:
                     id: Viscosity
@@ -227,7 +225,7 @@
                     id: ViscosityUnit
                 
                 CEToolBoxLabel:
-                    text: "Concentration :"
+                    text: "Concentration"
             
                 CEToolBoxTextInput:
                     id: Concentration
@@ -237,7 +235,7 @@
                     values: ["g/L", "mmol/L"]
 
                 CEToolBoxLabel:
-                    text: "Molecular weight :"
+                    text: "Molecular weight"
                             
                 CEToolBoxTextInput:
                     id: Molweight
@@ -284,81 +282,84 @@
     BoxLayout:
         orientation: 'vertical'
         
-        ScrollViewTop:
+        ScrollViewSpe:
+            size_hint_y: 0.85
+
+            
             TopScreenLayout:
-
-                Label:
-                    text: "Capillary Length :"
-                    id: ko
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:        
-                    height: 0.5
-                    text: "100.0"
-                    pos_hint: {'right': 0.5}
+                CEToolBoxLabel:
+                    text: "Capillary Length"
+
+                CEToolBoxTextInput:        
                     id: Capillary
-
-                Label:
-                    text: "Length to window :"
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:
-                    height: 0.5
-                    text: "100.0"
-                    pos_hint: {'right': 0.5}
+                CEToolBoxUnitLabel:
+                    id: CapillaryUnit
+
+                CEToolBoxLabel:
+                    text: "Length to window"
+                
+                CEToolBoxTextInput:
                     id: Towindow
                 
-                Label:
-                    text: "Inside diameter :"
-                    height: 0.5
-                    size_hint_x: 0.5
-            
-                TextInput:
-                    height: 0.5
-                    text: "50.0"
-                    pos_hint: {'right': 0.5}
-                    id: Idiameter
-            
-                Label:
-                    text: "Pressure :"
-                    height: 0.5
-                    size_hint_x: 0.5
+                CEToolBoxUnitLabel:
+                    id: TowindowUnit
                 
-                TextInput:
-                    height: 0.5
-                    text: "30.0"
-                    pos_hint: {'right': 0.5}
+                CEToolBoxLabel:
+                    text: "Inside diameter"
+            
+                CEToolBoxTextInput:
+                    id: Idiameter
+                
+                CEToolBoxUnitLabel:
+                    id: IdiameterUnit
+            
+                CEToolBoxLabel:
+                    text: "Pressure"
+                
+                CEToolBoxTextInput:
                     id: Pressure
                 
-                Label:        
-                    text: "Time :"
-                    height: 0.5
-                    size_hint_x: 0.5
+                CEToolBoxSpinner:
+                    id: PressureUnit
+                    values: ["mbar", "psi"]
+                    
+                CEToolBoxLabel:        
+                    text: "Detection time"
                 
-                TextInput:
-                    height: 0.5
-                    text: "10.0"
-                    pos_hint: {'right': 0.5}
-                    id: Time
-        
-        DownMenuLayout:  
-            
-            CalculateButton:
-                on_release: root.show_viscosity_results()
+                CEToolBoxTextInput:
+                    id: Detectiontime
+                
+                CEToolBoxSpinner:
+                    id: DetectiontimeUnit
+                    values: ["s", "m"]
 
-            Button:
-                id: Resetbtn
-                text: "Reset"
-                on_press: Capillary.text="100.0"
-                on_press: Towindow.text="100.0"
-                on_press: Idiameter.text="50.0"
-                on_press: Pressure.text="30.0"
-                on_press: Time.text="10.0"
+    
+        ScrollViewSpe:
+            size_hint_y: 0.15
+                        
+            DownMenuLayout:  
 
-            MenuButton:
-                on_press: root.manager.current = 'menu'
+                CalculateButton:
+                    on_release: root.show_viscosity_results()
+                    
+                Button:
+                    id: Resetbtn
+                    text: "Reset"
+                    on_press: Capillary.text="100.0"
+                    on_press: CapillaryUnit.text="cm"
+                    on_press: Towindow.text="100.0"
+                    on_press: TowindowUnit.text="cm"
+                    on_press: Idiameter.text="50.0"
+                    on_press: IdiameterUnit.text="µm"
+                    on_press: Pressure.text="30.0"
+                    on_press: PressureUnit.text="mbar"
+                    on_press: Detectiontime.text="10.0"
+                    on_press: DetectiontimeUnit.text="m"
+                
+                MenuButton:
+                    on_press: root.manager.current = 'menu'
             
           
 <ConductivityScreen>:
@@ -367,77 +368,82 @@
     BoxLayout:
         orientation: 'vertical'
         
-        ScrollViewTop:
+        ScrollViewSpe:
+            size_hint_y: 0.85
+
+            
             TopScreenLayout:
-
-                Label:
-                    text: "Capillary Length :"
-                    id: ko
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:        
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
+                CEToolBoxLabel:
+                    text: "Capillary Length"
+
+                CEToolBoxTextInput:        
                     id: Capillary
-
-                Label:
-                    text: "Length to window :"
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
+                CEToolBoxUnitLabel:
+                    id: CapillaryUnit
+
+                CEToolBoxLabel:
+                    text: "Length to window"
+                
+                CEToolBoxTextInput:
                     id: Towindow
                 
-                Label:
-                    text: "Inside diameter :"
-                    height: 0.5
-                    size_hint_x: 0.5
+                CEToolBoxUnitLabel:
+                    id: TowindowUnit
+                
+                CEToolBoxLabel:
+                    text: "Inside diameter"
             
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
+                CEToolBoxTextInput:
                     id: Idiameter
-            
-                Label:
-                    text: "Pressure :"
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
-                    id: Pressure
+                CEToolBoxUnitLabel:
+                    id: IdiameterUnit
+				
+				CEToolBoxLabel:
+                    text: "Voltage"
+                 
+                CEToolBoxTextInput:
+                    id: Voltage
                 
-                Label:        
-                    text: "Time :"
-                    height: 0.5
-                    size_hint_x: 0.5
+                CEToolBoxUnitLabel:
+                    id: VoltageUnit
+                    
+                CEToolBoxLabel:
+                    text: "Electric current"
+                 
+                CEToolBoxTextInput:
+                    id: Electriccurrent
                 
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
-                    id: Time
-        
-        DownMenuLayout:
-        
-            CalculateButton:
-                on_release: root.show_conductivity_results()
-     
-            Button:
-                id: Resetbtn
-                text: "Reset"
-                on_press: Capillary.text="100.0"
-                on_press: Towindow.text="100.0"
-                on_press: Idiameter.text="50.0"
-                on_press: Pressure.text="30.0"
-                on_press: Time.text="10.0"
+                CEToolBoxUnitLabel:
+                    id: ElectriccurrentUnit
+                 
+    
+        ScrollViewSpe:
+            size_hint_y: 0.15
+                        
+            DownMenuLayout:  
 
-            MenuButton:
-                on_press: root.manager.current = 'menu'
-
+                CalculateButton:
+                    on_release: root.show_conductivity_results()
+                    
+                Button:
+                    id: Resetbtn
+                    text: "Reset"
+                    on_press: Capillary.text="100.0"
+                    on_press: CapillaryUnit.text="cm"
+                    on_press: Towindow.text="100.0"
+                    on_press: TowindowUnit.text="cm"
+                    on_press: Idiameter.text="50.0"
+                    on_press: IdiameterUnit.text="µm"
+                    on_press: Voltage.text="3.0"
+                    on_press: VoltageUnit.text="kV"
+                    on_press: Electriccurrent.text="10.0"
+                    on_press: ElectriccurrentUnit.text="µA"
+                
+                MenuButton:
+                    on_press: root.manager.current = 'menu'
 <FlowScreen>:
     fullscreen: True
     

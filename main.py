@@ -58,6 +58,12 @@ def create_store():
         store.put('Concentration', value=1.0, unit="g/L")
     if not store.exists('Molweight'):
         store.put('Molweight', value=1000.0, unit="g/mol")
+    if not store.exists('Detectiontime'):
+        store.put('Detectiontime', value=10.0, unit="m")
+    if not store.exists('Voltage'):
+        store.put('Voltage', value=3.0, unit="kV")
+    if not store.exists('Electriccurrent'):
+        store.put('Electriccurrent', value=10.0, unit="µA")
 
 class FloatInput(TextInput):
     pat = re.compile('[^0-9]')
@@ -154,12 +160,78 @@ class InjectionScreen(Screen):
         
 
 class ViscosityScreen(Screen):
+    
+    def on_pre_enter(self):
+        """special function lauch at the clic of the button to go
+        on the injectionscreen 
+        this value comes from the json file where we keep it
+        """
+        store = get_store()
+        self.ids.Capillary.text = str(store.get('Capillary')["value"])
+        self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
+        self.ids.Towindow.text = str(store.get('Towindow')["value"])
+        self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
+        self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
+        self.ids.IdiameterUnit.text = store.get('Idiameter')["unit"]
+        self.ids.Pressure.text = str(store.get('Pressure')["value"])
+        self.ids.PressureUnit.text = store.get('Pressure')["unit"]
+        self.ids.Detectiontime.text = str(store.get('Detectiontime')["value"])
+        self.ids.DetectiontimeUnit.text = store.get('Detectiontime')["unit"]
+    
+    
     def show_viscosity_results(self):
+        """ lauch when clicked on result"""
+        #save data
+        store = get_store()
+        store.put('Capillary', value=float(self.ids.Capillary.text),
+                  unit=self.ids.CapillaryUnit.text)
+        store.put('Towindow', value=float(self.ids.Towindow.text),
+                  unit=self.ids.TowindowUnit.text)
+        store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                  unit=self.ids.IdiameterUnit.text)
+        store.put('Pressure', value=float(self.ids.Pressure.text),
+                  unit=self.ids.PressureUnit.text)
+        store.put('Detectiontime', value=float(self.ids.Detectiontime.text),
+                  unit=self.ids.DetectiontimeUnit.text)
+        
         self._popup = ViscosityPopup()
         self._popup.open()
 
+
 class ConductivityScreen(Screen):
+    
+    def on_pre_enter(self):
+        """special function lauch at the clic of the button to go
+        on the injectionscreen 
+        this value comes from the json file where we keep it
+        """
+        store = get_store()
+        self.ids.Capillary.text = str(store.get('Capillary')["value"])
+        self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
+        self.ids.Towindow.text = str(store.get('Towindow')["value"])
+        self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
+        self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
+        self.ids.IdiameterUnit.text = store.get('Idiameter')["unit"]
+        self.ids.Voltage.text = str(store.get('Voltage')["value"])
+        self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
+        self.ids.Electriccurrent.text = str(store.get('Electriccurrent')["value"])
+        self.ids.ElectriccurrentUnit.text = store.get('Electriccurrent')["unit"]
+    
     def show_conductivity_results(self):
+        #save data
+        store = get_store()
+        store.put('Capillary', value=float(self.ids.Capillary.text),
+                  unit=self.ids.CapillaryUnit.text)
+        store.put('Towindow', value=float(self.ids.Towindow.text),
+                  unit=self.ids.TowindowUnit.text)
+        store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                  unit=self.ids.IdiameterUnit.text)
+        store.put('Voltage', value=float(self.ids.Voltage.text),
+                  unit=self.ids.VoltageUnit.text)
+        store.put('Electriccurrent', value=float(self.ids.Electriccurrent.text),
+                  unit=self.ids.ElectriccurrentUnit.text)
+        
+                
         self._popup = ConductivityPopup()
         self._popup.open()
 
