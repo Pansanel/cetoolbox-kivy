@@ -178,7 +178,6 @@
                     id: Capillary
                 
                 CEToolBoxUnitLabel:
-                    text: "cm"
                     id: CapillaryUnit
 
                 CEToolBoxLabel:
@@ -188,7 +187,6 @@
                     id: Towindow
                 
                 CEToolBoxUnitLabel:
-                    text: "cm"
                     id: TowindowUnit
                 
                 CEToolBoxLabel:
@@ -198,7 +196,6 @@
                     id: Idiameter
                 
                 CEToolBoxUnitLabel:
-                    text: "µm"
                     id: IdiameterUnit
             
                 CEToolBoxLabel:
@@ -209,7 +206,6 @@
                 
                 CEToolBoxSpinner:
                     id: PressureUnit
-                    text: "mbar"
                     values: ["mbar", "psi"]
                     
                 CEToolBoxLabel:        
@@ -219,7 +215,6 @@
                     id: Time
                 
                 CEToolBoxUnitLabel:
-                    text: "s"
                     id: TimeUnit
 
                 CEToolBoxLabel:
@@ -229,7 +224,6 @@
                     id: Viscosity
                 
                 CEToolBoxUnitLabel:
-                    text: "cp"
                     id: ViscosityUnit
                 
                 CEToolBoxLabel:
@@ -240,7 +234,6 @@
                     
                 CEToolBoxSpinner:
                     id: ConcentrationUnit
-                    text: "g/L"
                     values: ["g/L", "mmol/L"]
 
                 CEToolBoxLabel:
@@ -250,7 +243,6 @@
                     id: Molweight
                     
                 CEToolBoxUnitLabel:
-                    text: "g/mol"
                     id: MolweightUnit
     
         ScrollViewSpe:
@@ -265,13 +257,21 @@
                     id: Resetbtn
                     text: "Reset"
                     on_press: Capillary.text="100.0"
+                    on_press: CapillaryUnit.text="cm"
                     on_press: Towindow.text="100.0"
+                    on_press: TowindowUnit.text="cm"
                     on_press: Idiameter.text="50.0"
+                    on_press: IdiameterUnit.text="µm"
                     on_press: Pressure.text="30.0"
+                    on_press: PressureUnit.text="mbar"
                     on_press: Time.text="10.0"
+                    on_press: TimeUnit.text="s"
                     on_press: Viscosity.text="1.0"
+                    on_press: ViscosityUnit.text="cp"
                     on_press: Concentration.text="1.0"
-                    on_press: Molweight.text="1 000.0"
+                    on_press: ConcentrationUnit.text="g/L"
+                    on_press: Molweight.text="1000.0"
+                    on_press: MolweightUnit.text="g/mol"
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'

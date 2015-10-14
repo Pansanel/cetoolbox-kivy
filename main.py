@@ -43,21 +43,21 @@ def create_store():
     """ function to create a file with default value of each var"""
     store = get_store()
     if not store.exists('Capillary'):
-        store.put('Capillary', value=100.00, unit="Unit1")
+        store.put('Capillary', value=100.00, unit="cm")
     if not store.exists('Towindow'):
-        store.put('Towindow', value=100.00, unit="Unit1")
+        store.put('Towindow', value=100.00, unit="cm")
     if not store.exists('Idiameter'):
-        store.put('Idiameter', value=50.00, unit="Unit1")
+        store.put('Idiameter', value=50.00, unit="µm")
     if not store.exists('Pressure'):
-        store.put('Pressure', value=50.00, unit="Unit1")
+        store.put('Pressure', value=50.00, unit="mbar")
     if not store.exists('Time'):
-        store.put('Time', value=50.00, unit="Unit1")
+        store.put('Time', value=50.00, unit="s")
     if not store.exists('Viscosity'):
-        store.put('Viscosity', value=1.0, unit="Unit1")
+        store.put('Viscosity', value=1.0, unit="cp")
     if not store.exists('Concentration'):
-        store.put('Concentration', value=1.0, unit="Unit1")
+        store.put('Concentration', value=1.0, unit="g/L")
     if not store.exists('Molweight'):
-        store.put('Molweight', value=1000.0, unit="Unit1")
+        store.put('Molweight', value=1000.0, unit="g/mol")
 
 class FloatInput(TextInput):
     pat = re.compile('[^0-9]')
@@ -104,37 +104,44 @@ class InjectionScreen(Screen):
         """
         store = get_store()
         self.ids.Capillary.text = str(store.get('Capillary')["value"])
+        self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
         self.ids.Towindow.text = str(store.get('Towindow')["value"])
+        self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
         self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
+        self.ids.IdiameterUnit.text = store.get('Idiameter')["unit"]
         self.ids.Pressure.text = str(store.get('Pressure')["value"])
+        self.ids.PressureUnit.text = store.get('Pressure')["unit"]
         self.ids.Time.text = str(store.get('Time')["value"])
+        self.ids.TimeUnit.text = store.get('Time')["unit"]
         self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
+        self.ids.ViscosityUnit.text = store.get('Viscosity')["unit"]
         self.ids.Concentration.text = str(store.get('Concentration')["value"])
+        self.ids.ConcentrationUnit.text = store.get('Concentration')["unit"]
         self.ids.Molweight.text = str(store.get('Molweight')["value"])
+        self.ids.MolweightUnit.text = store.get('Molweight')["unit"]
     
     
     def show_injection_results(self):
-        """ lauch when clicked on result
-        the new Capillary value is save (it's just an exemple)"""
+        """ lauch when clicked on result"""
         #save data
         store = get_store()
         store.put('Capillary', value=float(self.ids.Capillary.text),
-                  unit="Unit1")
+                  unit=self.ids.CapillaryUnit.text)
         store.put('Towindow', value=float(self.ids.Towindow.text),
-                  unit="Unit1")
+                  unit=self.ids.TowindowUnit.text)
         store.put('Idiameter', value=float(self.ids.Idiameter.text),
-                  unit="Unit1")
+                  unit=self.ids.IdiameterUnit.text)
         store.put('Pressure', value=float(self.ids.Pressure.text),
-                  unit="Unit1")
+                  unit=self.ids.PressureUnit.text)
         store.put('Time', value=float(self.ids.Time.text),
-                  unit="Unit1")
+                  unit=self.ids.TimeUnit.text)
         store.put('Viscosity', value=float(self.ids.Viscosity.text),
-                  unit="Unit1")
+                  unit=self.ids.ViscosityUnit.text)
         store.put('Concentration', 
                   value=float(self.ids.Concentration.text), 
-                  unit="Unit1")
+                  unit=self.ids.ConcentrationUnit.text)
         store.put('Molweight', value=float(self.ids.Molweight.text),
-                  unit="Unit1")
+                  unit=self.ids.MolweightUnit.text)
                   
         
         #add data          
