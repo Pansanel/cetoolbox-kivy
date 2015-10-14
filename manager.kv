@@ -42,7 +42,6 @@
     width: '30sp'
     values: ["Unit1", "Unit2", "Unit3"]
 
-
 <TopScreenLayout>:
     size_hint_y: None
     size_hint_x: None
@@ -178,7 +177,9 @@
                 CEToolBoxTextInput:        
                     id: Capillary
                 
-                SpinnerUnit:
+                CEToolBoxUnitLabel:
+                    text: "cm"
+                    id: CapillaryUnit
 
                 CEToolBoxLabel:
                     text: "Length to window :"
@@ -186,7 +187,9 @@
                 CEToolBoxTextInput:
                     id: Towindow
                 
-                SpinnerUnit:
+                CEToolBoxUnitLabel:
+                    text: "cm"
+                    id: TowindowUnit
                 
                 CEToolBoxLabel:
                     text: "Inside diameter :"
@@ -194,7 +197,9 @@
                 CEToolBoxTextInput:
                     id: Idiameter
                 
-                SpinnerUnit:
+                CEToolBoxUnitLabel:
+                    text: "µm"
+                    id: IdiameterUnit
             
                 CEToolBoxLabel:
                     text: "Pressure :"
@@ -202,15 +207,20 @@
                 CEToolBoxTextInput:
                     id: Pressure
                 
-                SpinnerUnit:
-                
+                CEToolBoxSpinner:
+                    id: PressureUnit
+                    text: "mbar"
+                    values: ["mbar", "psi"]
+                    
                 CEToolBoxLabel:        
                     text: "Time :"
                 
                 CEToolBoxTextInput:
                     id: Time
                 
-                SpinnerUnit:
+                CEToolBoxUnitLabel:
+                    text: "s"
+                    id: TimeUnit
 
                 CEToolBoxLabel:
                     text: "Viscosity :"
@@ -218,7 +228,9 @@
                 CEToolBoxTextInput:
                     id: Viscosity
                 
-                SpinnerUnit:
+                CEToolBoxUnitLabel:
+                    text: "cp"
+                    id: ViscosityUnit
                 
                 CEToolBoxLabel:
                     text: "Concentration :"
@@ -226,7 +238,10 @@
                 CEToolBoxTextInput:
                     id: Concentration
                     
-                SpinnerUnit:
+                CEToolBoxSpinner:
+                    id: ConcentrationUnit
+                    text: "g/L"
+                    values: ["g/L", "mmol/L"]
 
                 CEToolBoxLabel:
                     text: "Molecular weight :"
@@ -234,7 +249,9 @@
                 CEToolBoxTextInput:
                     id: Molweight
                     
-                SpinnerUnit:
+                CEToolBoxUnitLabel:
+                    text: "g/mol"
+                    id: MolweightUnit
     
         ScrollViewSpe:
             size_hint_y: 0.15
