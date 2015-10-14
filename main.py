@@ -31,6 +31,7 @@ from os.path import join
 import re
 
 from store import get_store, create_store
+from capillary import Capillary
 
 
 __version__ = '0.0.2'
@@ -52,7 +53,13 @@ class MenuScreen(Screen):
     pass
 
 class ViscosityPopup(Popup):
-    pass
+    
+    def on_open(self):
+		store = get_store()
+		self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
+		self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
+		
+		
 
 class InjectionPopup():
     
@@ -97,6 +104,8 @@ class InjectionScreen(Screen):
         self.ids.ConcentrationUnit.text = store.get('Concentration')["unit"]
         self.ids.Molweight.text = str(store.get('Molweight')["value"])
         self.ids.MolweightUnit.text = store.get('Molweight')["unit"]
+        self.ids.Voltage.text = str(store.get('Voltage')["value"])
+        self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
     
     
     def show_injection_results(self):
@@ -120,6 +129,8 @@ class InjectionScreen(Screen):
                   unit=self.ids.ConcentrationUnit.text)
         store.put('Molweight', value=float(self.ids.Molweight.text),
                   unit=self.ids.MolweightUnit.text)
+        store.put('Voltage', value=float(self.ids.Voltage.text),
+                  unit=self.ids.VoltageUnit.text)
                   
         
         #add data          
@@ -165,6 +176,9 @@ class ViscosityScreen(Screen):
                   unit=self.ids.PressureUnit.text)
         store.put('Detectiontime', value=float(self.ids.Detectiontime.text),
                   unit=self.ids.DetectiontimeUnit.text)
+        
+        computation = Capillary()
+        computation.save_vicosity_result()
         
         self._popup = ViscosityPopup()
         self._popup.open()
@@ -240,7 +254,7 @@ class FlowScreen(Screen):
                   unit=self.ids.VoltageUnit.text)
         store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
                   unit=self.ids.ElectroosmosisUnit.text)
-        
+
         
         self._popup = FlowPopup()
         self._popup.open()

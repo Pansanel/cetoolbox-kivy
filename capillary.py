@@ -35,38 +35,61 @@ The following example permits to compute the volume of a capillary:
 
 import math
 
+from store import get_store
+from convertunits import (LengthUnits, PressureUnits, TimeUnits, 
+						  ConcentrationUnits, MolConcentrationUnits,
+						  MolWeightUnits, VoltUnits)
+
 class Capillary:
     '''Capillary class, see module documentation for more information.
     '''
-    def __init__(self, total_length = 100.0, to_window_length = 90.0,
-                 diameter = 30.0, pressure = 30.0, duration = 21.0,
-                 viscosity = 1.0, concentration = 21.0,
-                 voltage = 30000.0,
-                 electric_current = 4.0, detection_time = 3815.0,
-                 electro_osmosis_time = 100.0):
+    def __init__(self):
+        store = get_store()
         # The length of the capillary (centimeter)
-        self.total_length = total_length
+        self.total_length = LengthUnits.convert_unit(float(store.get('Capillary')["value"]), 
+                                                     store.get('Capillary')["unit"], 
+                                                     "cm")
         # The window length (centimeter)
-        self.to_window_length = to_window_length
+        self.to_window_length = LengthUnits.convert_unit(float(store.get('Towindow')["value"]),
+                                                         store.get('Towindow')["unit"], 
+                                                         "cm")
         # The capillary inside diameter (micrometer)
-        self.diameter = diameter
+        #PROBLEM WITH UNICODE NON ASCII 
+        self.diameter = LengthUnits.convert_unit(float(store.get('Idiameter')["value"]),
+                                                 store.get('Idiameter')["unit"], 
+                                                 "µm")
         # The pressure drop across the capillary (mbar)
-        self.pressure = pressure
+        self.pressure = PressureUnits.convert_unit(float(store.get('Pressure')["value"]),
+                                                   store.get('Pressure')["unit"], 
+                                                   "mbar")
         # The time the pressure is applied (second)
-        self.duration = duration
+        self.duration = TimeUnits.convert_unit(float(store.get('Time')["value"]),
+                                               store.get('Time')["unit"], 
+                                               "s")
         # The buffer viscosity (cp)
-        self.viscosity = viscosity
+        self.viscosity = float(store.get('Viscosity')["value"])
         # Analyte concentration (mol/l)
-        self.concentration = concentration
+        if store.get('Concentration')["unit"] == "mmol/L":
+            self.concentration = MolConcentrationUnits.convert_unit(float(store.get('Concentration')["value"]),
+                                                                    store.get('Concentration')["unit"], 
+                                                                    "mol/L")
+        else:
+            self.concentration = float(store.get('Concentration')["value"]) / \
+                                       float(store.get('Molweight')["value"])
         # The voltage applied to the capillary (volt)
-        self.voltage = voltage
+        self.voltage = VoltUnits.convert_unit(float(store.get('Voltage')["value"]),
+                                              store.get('Voltage')["unit"], 
+                                              "V")
         # The current applied to the capillary (microampere)
-        self.electric_current = electric_current
+        self.electric_current = float(store.get('Electriccurrent')["value"])
         # The detection time (s)
-        self.detectionTime = detection_time
+        self.detection_time = TimeUnits.convert_unit(float(store.get('Detectiontime')["value"]),
+                                                     store.get('Detectiontime')["unit"], 
+                                                     "s")
         # The electro-osmosis time (s)
-        self.electro_osmosis_time = electro_osmosis_time
-
+        self.electro_osmosis_time = TimeUnits.convert_unit(float(store.get('Electroosmosis')["value"]),
+                                                           store.get('Electroosmosis')["unit"], 
+                                                           "s")
 
     def delivered_volume(self):
         """Return the volume delivered during the injection
@@ -133,3 +156,16 @@ class Capillary:
         """
         flow_rate = (math.pi * self.diameter**2 * self.length_per_minute()) / 4
         return flow_rate
+
+    def save_vicosity_result(self):
+        """ compute and save the results for the vicosity screen """
+        store = get_store()
+        viscosity = self.compute_viscosity()
+        store.put('Viscosity', value=viscosity, unit="cp")
+		
+    def save_conductivy_result(self):
+        """ compute and save the result for the conductivy screen """  
+        store = get_store()
+        conductivity = self.compute_conductivity()
+        store.put('Conductivity', value=conductivity, unit="S/m")
+		

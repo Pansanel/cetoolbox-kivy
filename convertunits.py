@@ -90,11 +90,11 @@ class MolWeightUnits(BaseUnits):
         return float(val)
 
 class VoltUnits(BaseUnits):
-	
-	voltage = UnitManager()
+
+    voltage = UnitManager()
     voltage.add(SIFamily(base='V', name='Volt'))
 	 
-	@classmethod
+    @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
         val = cls.voltage.convert_to_unit(value, from_unit, to_unit)[0]
         return float(val)

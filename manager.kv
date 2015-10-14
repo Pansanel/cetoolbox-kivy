@@ -79,22 +79,21 @@
         orientation: 'vertical'
         
         ScrollViewSpe:
-            size_hint_y: 0.85
+            size_hint_y: 0.80
             
             TopScreenLayout:
                 rows: 1
                 CEToolBoxLabel:
-                    text: "Capillary Length :"
+                    text: "Viscosity :"
 
-                CEToolBoxTextInput:        
-                    id: Capillary
+                CEToolBoxLabel:        
+                    id: Viscosity
                 
                 CEToolBoxLabel:
-                    markup: True
-                    text: "[color=#424242]Capillary Length :[\color]"
+                    id: ViscosityUnit
 
         ScrollViewSpe:
-            size_hint_y: 0.15
+            size_hint_y: 0.20
         
             DownMenuClose:
                 Button:
@@ -235,6 +234,15 @@
                     
                 CEToolBoxUnitLabel:
                     id: MolweightUnit
+                
+                CEToolBoxLabel:
+                    text: "Voltage"
+                            
+                CEToolBoxTextInput:
+                    id: Voltage
+                
+                CEToolBoxUnitLabel:
+                    id: VoltageUnit
     
         ScrollViewSpe:
             size_hint_y: 0.15
@@ -263,6 +271,8 @@
                     on_press: ConcentrationUnit.text="g/L"
                     on_press: Molweight.text="1000.0"
                     on_press: MolweightUnit.text="g/mol"
+                    on_press: Voltage.text="3.0"
+                    on_press: VoltageUnit.text="kV"
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'
