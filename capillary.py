@@ -48,48 +48,48 @@ class Capillary:
         # The length of the capillary (centimeter)
         self.total_length = LengthUnits.convert_unit(float(store.get('Capillary')["value"]), 
                                                      store.get('Capillary')["unit"], 
-                                                     "cm")
+                                                     u"cm")
         # The window length (centimeter)
         self.to_window_length = LengthUnits.convert_unit(float(store.get('Towindow')["value"]),
                                                          store.get('Towindow')["unit"], 
-                                                         "cm")
+                                                         u"cm")
         # The capillary inside diameter (micrometer)
         #PROBLEM WITH UNICODE NON ASCII 
         self.diameter = LengthUnits.convert_unit(float(store.get('Idiameter')["value"]),
                                                  store.get('Idiameter')["unit"], 
-                                                 "µm")
+                                                 u"µm")
         # The pressure drop across the capillary (mbar)
         self.pressure = PressureUnits.convert_unit(float(store.get('Pressure')["value"]),
                                                    store.get('Pressure')["unit"], 
-                                                   "mbar")
+                                                   u"mbar")
         # The time the pressure is applied (second)
         self.duration = TimeUnits.convert_unit(float(store.get('Time')["value"]),
                                                store.get('Time')["unit"], 
-                                               "s")
+                                               u"s")
         # The buffer viscosity (cp)
         self.viscosity = float(store.get('Viscosity')["value"])
         # Analyte concentration (mol/l)
-        if store.get('Concentration')["unit"] == "mmol/L":
+        if store.get('Concentration')["unit"] == u"mmol/L":
             self.concentration = MolConcentrationUnits.convert_unit(float(store.get('Concentration')["value"]),
                                                                     store.get('Concentration')["unit"], 
-                                                                    "mol/L")
+                                                                    u"mol/L")
         else:
             self.concentration = float(store.get('Concentration')["value"]) / \
                                        float(store.get('Molweight')["value"])
         # The voltage applied to the capillary (volt)
         self.voltage = VoltUnits.convert_unit(float(store.get('Voltage')["value"]),
                                               store.get('Voltage')["unit"], 
-                                              "V")
+                                              u"V")
         # The current applied to the capillary (microampere)
         self.electric_current = float(store.get('Electriccurrent')["value"])
         # The detection time (s)
         self.detection_time = TimeUnits.convert_unit(float(store.get('Detectiontime')["value"]),
                                                      store.get('Detectiontime')["unit"], 
-                                                     "s")
+                                                     u"s")
         # The electro-osmosis time (s)
         self.electro_osmosis_time = TimeUnits.convert_unit(float(store.get('Electroosmosis')["value"]),
                                                            store.get('Electroosmosis')["unit"], 
-                                                           "s")
+                                                           u"s")
 
     def delivered_volume(self):
         """Return the volume delivered during the injection

@@ -93,7 +93,7 @@ class InjectionScreen(Screen):
         self.ids.Towindow.text = str(store.get('Towindow')["value"])
         self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
         self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
-        self.ids.IdiameterUnit.text = store.get('Idiameter')["unit"]
+        self.ids.IdiameterUnit.text = unicode(store.get('Idiameter')["unit"])
         self.ids.Pressure.text = str(store.get('Pressure')["value"])
         self.ids.PressureUnit.text = store.get('Pressure')["unit"]
         self.ids.Time.text = str(store.get('Time')["value"])
@@ -155,7 +155,7 @@ class ViscosityScreen(Screen):
         self.ids.Towindow.text = str(store.get('Towindow')["value"])
         self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
         self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
-        self.ids.IdiameterUnit.text = store.get('Idiameter')["unit"]
+        self.ids.IdiameterUnit.text = unicode(store.get('Idiameter')["unit"])
         self.ids.Pressure.text = str(store.get('Pressure')["value"])
         self.ids.PressureUnit.text = store.get('Pressure')["unit"]
         self.ids.Detectiontime.text = str(store.get('Detectiontime')["value"])
