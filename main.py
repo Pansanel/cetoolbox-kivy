@@ -27,7 +27,10 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.storage.jsonstore import JsonStore
+from kivy.uix.textinput import TextInput
 from os.path import join
+import re
+
 
 __version__ = '0.0.1'
 
@@ -55,6 +58,16 @@ def create_store():
         store.put('Concentration', value=1.0, unit="Unit1")
     if not store.exists('Molweight'):
         store.put('Molweight', value=1000.0, unit="Unit1")
+
+class FloatInput(TextInput):
+    pat = re.compile('[^0-9]')
+    def insert_text(self, substring, from_undo=False):
+        pat = self.pat
+        if '.' in self.text:
+            s = re.sub(pat, '', substring)
+        else:
+            s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
+        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
 
 class MenuScreen(Screen):
@@ -103,10 +116,28 @@ class InjectionScreen(Screen):
     def show_injection_results(self):
         """ lauch when clicked on result
         the new Capillary value is save (it's just an exemple)"""
+        #save data
         store = get_store()
-        #save but delete why ?
         store.put('Capillary', value=float(self.ids.Capillary.text),
                   unit="Unit1")
+        store.put('Towindow', value=float(self.ids.Towindow.text),
+                  unit="Unit1")
+        store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                  unit="Unit1")
+        store.put('Pressure', value=float(self.ids.Pressure.text),
+                  unit="Unit1")
+        store.put('Time', value=float(self.ids.Time.text),
+                  unit="Unit1")
+        store.put('Viscosity', value=float(self.ids.Viscosity.text),
+                  unit="Unit1")
+        store.put('Concentration', 
+                  value=float(self.ids.Concentration.text), 
+                  unit="Unit1")
+        store.put('Molweight', value=float(self.ids.Molweight.text),
+                  unit="Unit1")
+                  
+        
+        #add data          
         data = {}
         data['injection'] = self.ids.Capillary.text
         data['volume'] = self.ids.Towindow.text
