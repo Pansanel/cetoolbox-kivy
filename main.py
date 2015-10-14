@@ -64,6 +64,9 @@ def create_store():
         store.put('Voltage', value=3.0, unit="kV")
     if not store.exists('Electriccurrent'):
         store.put('Electriccurrent', value=10.0, unit="µA")
+    if not store.exists('Electroosmosis'):
+        store.put('Electroosmosis', value=1.0, unit="m")
+    
 
 class FloatInput(TextInput):
     pat = re.compile('[^0-9]')
@@ -236,7 +239,40 @@ class ConductivityScreen(Screen):
         self._popup.open()
 
 class FlowScreen(Screen):
+    
+    def on_pre_enter(self):
+        """special function lauch at the clic of the button to go
+        on the injectionscreen 
+        this value comes from the json file where we keep it
+        """
+        store = get_store()
+        self.ids.Capillary.text = str(store.get('Capillary')["value"])
+        self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
+        self.ids.Towindow.text = str(store.get('Towindow')["value"])
+        self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
+        self.ids.Idiameter.text = str(store.get('Idiameter')["value"])
+        self.ids.IdiameterUnit.text = store.get('Idiameter')["unit"]
+        self.ids.Voltage.text = str(store.get('Voltage')["value"])
+        self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
+        self.ids.Electroosmosis.text = str(store.get('Electroosmosis')["value"])
+        self.ids.ElectroosmosisUnit.text = store.get('Electroosmosis')["unit"]
+    
+    
     def show_flow_results(self):
+                #save data
+        store = get_store()
+        store.put('Capillary', value=float(self.ids.Capillary.text),
+                  unit=self.ids.CapillaryUnit.text)
+        store.put('Towindow', value=float(self.ids.Towindow.text),
+                  unit=self.ids.TowindowUnit.text)
+        store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                  unit=self.ids.IdiameterUnit.text)
+        store.put('Voltage', value=float(self.ids.Voltage.text),
+                  unit=self.ids.VoltageUnit.text)
+        store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
+                  unit=self.ids.ElectroosmosisUnit.text)
+        
+        
         self._popup = FlowPopup()
         self._popup.open()
 

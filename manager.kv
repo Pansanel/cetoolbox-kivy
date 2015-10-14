@@ -444,82 +444,92 @@
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'
+
 <FlowScreen>:
     fullscreen: True
     
-     
     BoxLayout:
         orientation: 'vertical'
-        ScrollViewTop:
+        
+        ScrollViewSpe:
+            size_hint_y: 0.85
+
+            
             TopScreenLayout:
-
-                Label:
-                    text: "Capillary Length :"
-                    id: ko
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:        
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
+                CEToolBoxLabel:
+                    text: "Capillary Length"
+
+                CEToolBoxTextInput:        
                     id: Capillary
-
-                Label:
-                    text: "Length to window :"
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
+                CEToolBoxUnitLabel:
+                    id: CapillaryUnit
+
+                CEToolBoxLabel:
+                    text: "Length to window"
+                
+                CEToolBoxTextInput:
                     id: Towindow
                 
-                Label:
-                    text: "Inside diameter :"
-                    height: 0.5
-                    size_hint_x: 0.5
+                CEToolBoxUnitLabel:
+                    id: TowindowUnit
+                
+                CEToolBoxLabel:
+                    text: "Inside diameter"
             
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
+                CEToolBoxTextInput:
                     id: Idiameter
-            
-                Label:
-                    text: "Pressure :"
-                    height: 0.5
-                    size_hint_x: 0.5
                 
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
-                    id: Pressure
+                CEToolBoxUnitLabel:
+                    id: IdiameterUnit
+				
+				CEToolBoxLabel:
+                    text: "Voltage"
+                 
+                CEToolBoxTextInput:
+                    id: Voltage
                 
-                Label:        
-                    text: "Time :"
-                    height: 0.5
-                    size_hint_x: 0.5
+                CEToolBoxUnitLabel:
+                    id: VoltageUnit
+                    
+                CEToolBoxLabel:
+                    text: "Electro-osmosis time"
+                 
+                CEToolBoxTextInput:
+                    id: Electroosmosis
                 
-                TextInput:
-                    height: 0.5
-                    pos_hint: {'right': 0.5}
-                    id: Time
-        
-        DownMenuLayout:
-            
-            CalculateButton:
-                on_release: root.show_flow_results()
-     
-            Button:
-                id: Resetbtn
-                text: "Reset"
-                on_press: Capillary.text="100.0"
-                on_press: Towindow.text="100.0"
-                on_press: Idiameter.text="50.0"
-                on_press: Pressure.text="30.0"
-                on_press: Time.text="10.0"
+                CEToolBoxSpinner:
+                    id: ElectroosmosisUnit
+                    values: ["s", "m"]
+                 
+    
+        ScrollViewSpe:
+            size_hint_y: 0.15
+                        
+            DownMenuLayout:  
 
-            MenuButton:
-                on_press: root.manager.current = 'menu'
+                CalculateButton:
+                    on_release: root.show_flow_results()
+                    
+                Button:
+                    id: Resetbtn
+                    text: "Reset"
+                    on_press: Capillary.text="100.0"
+                    on_press: CapillaryUnit.text="cm"
+                    on_press: Towindow.text="100.0"
+                    on_press: TowindowUnit.text="cm"
+                    on_press: Idiameter.text="50.0"
+                    on_press: IdiameterUnit.text="µm"
+                    on_press: Voltage.text="3.0"
+                    on_press: VoltageUnit.text="kV"
+                    on_press: Electroosmosis.text="1.0"
+                    on_press: ElectroosmosisUnit.text="m"
+                
+                MenuButton:
+                    on_press: root.manager.current = 'menu'
+
+
 
 <AboutScreen>:
     BoxLayout:
