@@ -27,6 +27,8 @@ class LengthUnits(BaseUnits):
     
     lengths = UnitManager()
     lengths.add(SIFamily(base='m', name='metter')) 
+    centimeter = Family(name='centimeter', base='cm')
+    lengths.add(centimeter, other="metter", factor=0.01)
     
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
@@ -86,11 +88,21 @@ class MolWeightUnits(BaseUnits):
     def convert_unit(cls, value, from_unit, to_unit):
         val = cls.molweight.convert_to_unit(value, from_unit, to_unit)[0]
         return float(val)
-    
+
+class VoltUnits(BaseUnits):
+	
+	volt = UnitManager()
+    volt.add(SIFamily(base='V', name='Volt'))
+	 
+	@classmethod
+    def convert_unit(cls, value, from_unit, to_unit):
+        val = cls.volt.convert_to_unit(value, from_unit, to_unit)[0]
+        return float(val)
 
 
 if __name__ == "__main__":
     print(LengthUnits.convert_unit(1000, 'µm', 'm'))
+    print(LengthUnits.convert_unit(100, 'cm', 'm'))
     print(PressureUnits.convert_unit(3, 'psi', 'pa'))
     print(PressureUnits.convert_unit(1, 'bar', 'pa'))
     print(TimeUnits.convert_unit(30, 's', 'm'))
