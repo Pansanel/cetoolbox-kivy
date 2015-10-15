@@ -80,57 +80,57 @@ class InjectionPopup(Popup):
         
         self.ids.inlayout.rows = 13
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Hydrodynamic \ninjection :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Hydrodynamic \ninjection :", "FFFFFF")))
         value = str(store.get('Hydrodynamicinjection')["value"])+" "+store.get('Hydrodynamicinjection')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Capillary volume :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Capillary volume :", "BFBFBF")))
         value = str(store.get('Capillaryvolume')["value"])+" "+store.get('Capillaryvolume')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Capillary volume \nto window :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Capillary volume \nto window :", "FFFFFF")))
         value = str(store.get('Capillaryvolumetowin')["value"])+" "+store.get('Capillaryvolumetowin')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Injection plug \nlength :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Injection plug \nlength :", "BFBFBF")))
         value = str(store.get('Injectionpluglen')["value"])+" "+store.get('Injectionpluglen')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
                 
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Plug (% of \ntotal length) :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Plug (% of \ntotal length) :", "FFFFFF")))
         value = str(store.get('Pluglenpertotallen')["value"])+" "+store.get('Pluglenpertotallen')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
                 
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Plug (% of \nlength to window) :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Plug (% of \nlength to window) :", "BFBFBF")))
         value = str(store.get('Pluglenperlentowin')["value"])+" "+store.get('Pluglenperlentowin')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
-                
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Time to replace \n1 volume :"))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
+            
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Time to replace \n1 volume :", "FFFFFF")))
         value = str(store.get('Timetoreplaces')["value"])+" "+store.get('Timetoreplaces')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=""))
         value = str(store.get('Timetoreplacem')["value"])+" "+store.get('Timetoreplacem')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
                 
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Injected analyte:"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Injected analyte:", "BFBFBF")))
         value = str(store.get('Injectedanalyteng')["value"])+" "+store.get('Injectedanalyteng')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
     
         self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=""))
         value = str(store.get('Injectedanalytepmol')["value"])+" "+store.get('Injectedanalytepmol')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Injection pressure :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Injection pressure :", "FFFFFF")))
         value = str(store.get('Injectionpressure')["value"])+" "+store.get('Injectionpressure')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Flow rate :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Flow rate :", "BFBFBF")))
         value = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Field strength :"))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Field strength :", "FFFFFF")))
         value = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.open()
         
