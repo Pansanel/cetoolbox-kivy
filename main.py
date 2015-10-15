@@ -34,7 +34,7 @@ from store import get_store, create_store
 from capillary import Capillary
 
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 
     
