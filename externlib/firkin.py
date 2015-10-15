@@ -307,11 +307,11 @@ class SIFamily(Family):
     def __init__(self, base, name=None, extended=False):
         super(SIFamily, self).__init__(base, name)
         factor=1000.0
-        for i in ('k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'):
+        for i in (u'k', u'M', u'G', u'T', u'P', u'E', u'Z', u'Y'):
             self.add('%s%s'%(i, base), factor)
             factor=factor*1000
         factor=1/1000.0
-        for i in ('m', 'µ', 'n', 'p', 'f', 'a', 'z', 'y'):
+        for i in (u'm', u'µ', u'n', u'p', u'f', u'a', u'z', u'y'):
             self.add('%s%s'%(i, base), factor)
             factor=factor/1000
         if extended:

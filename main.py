@@ -52,14 +52,17 @@ class FloatInput(TextInput):
 class MenuScreen(Screen):
     pass
 
+
 class ViscosityPopup(Popup):
     
-    def on_open(self):
-		store = get_store()
-		self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
-		self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
-		
-		
+    def show_popup(self, data):
+        store = get_store()
+        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
+        self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
+        print data
+        self.open()
+        
+    
 
 class InjectionPopup():
     
@@ -181,7 +184,7 @@ class ViscosityScreen(Screen):
         computation.save_vicosity_result()
         
         self._popup = ViscosityPopup()
-        self._popup.open()
+        self._popup.show_popup(1)
 
 
 class ConductivityScreen(Screen):
