@@ -103,13 +103,32 @@
             
 <ConductivityPopup>:
     id: popup
-    title: "Calculate"
-    size_hint: .6, .6
-    
-    Button:
-        id: btnpop
-        text: 'Conductivity : + result'
-        on_press: popup.dismiss()
+    title: "Coductivity Details"
+
+    BoxLayout:
+        orientation: 'vertical'
+        
+        ScrollViewSpe:
+            size_hint_y: 0.80
+            
+            TopScreenLayout:
+                rows: 1
+                CEToolBoxLabel:
+                    text: "Conductivity :"
+
+                CEToolBoxLabel:        
+                    id: Conductivity
+                
+                CEToolBoxLabel:
+                    id: ConductivityUnit
+
+        ScrollViewSpe:
+            size_hint_y: 0.20
+        
+            DownMenuClose:
+                Button:
+                    text: 'Close'
+                    on_press: popup.dismiss()
         
 <FlowPopup>:
     id: popup

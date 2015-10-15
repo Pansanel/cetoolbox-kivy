@@ -59,10 +59,8 @@ class ViscosityPopup(Popup):
         store = get_store()
         self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
         self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
-        print data
+        #~ need error gestion
         self.open()
-        
-    
 
 class InjectionPopup():
     
@@ -78,7 +76,13 @@ class InjectionPopup():
         popup.open()
 
 class ConductivityPopup(Popup):
-    pass
+    
+    def show_popup(self, data):
+        store = get_store()
+        self.ids.Conductivity.text = str(store.get('Conductivity')["value"])
+        self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
+        #~ need error gestion
+        self.open()
 
 class FlowPopup(Popup):
     pass
@@ -182,9 +186,11 @@ class ViscosityScreen(Screen):
         
         computation = Capillary()
         computation.save_vicosity_result()
+        data = {}
+        data["error"] = 0
         
         self._popup = ViscosityPopup()
-        self._popup.show_popup(1)
+        self._popup.show_popup(data)
 
 
 class ConductivityScreen(Screen):
@@ -220,9 +226,14 @@ class ConductivityScreen(Screen):
         store.put('Electriccurrent', value=float(self.ids.Electriccurrent.text),
                   unit=self.ids.ElectriccurrentUnit.text)
         
-                
+        computation = Capillary()
+        computation.save_conductivy_result()
+        
+        data = {}
+        data["error"] = 0
+        
         self._popup = ConductivityPopup()
-        self._popup.open()
+        self._popup.show_popup(data)
 
 class FlowScreen(Screen):
     
