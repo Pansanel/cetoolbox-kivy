@@ -18,6 +18,10 @@
     width: '110sp'
     #size_hint_y: None
 
+<CEToolBoxPopupLabel@CEToolBoxLabel>
+	size_hint_x: None
+	width: '100sp'
+
 <CEToolBoxTextInput@FloatInput>:
     font_size: '15sp'
     height: '30sp'
@@ -41,6 +45,15 @@
     minimum_height: '350sp'
     minimum_width: '350sp'
     cols: 3
+    padding: 10
+    spacing: 10
+
+<TopPopupLayout>:
+	size_hint_y: None
+    size_hint_x: None
+    minimum_height: '350sp'
+    minimum_width: '350sp'
+    cols: 2
     padding: 10
     spacing: 10
 
@@ -81,17 +94,14 @@
         ScrollViewSpe:
             size_hint_y: 0.80
             
-            TopScreenLayout:
+            TopPopupLayout:
                 rows: 1
-                CEToolBoxLabel:
+                CEToolBoxPopupLabel:
                     text: "Viscosity :"
 
                 CEToolBoxLabel:        
                     id: Viscosity
-                
-                CEToolBoxLabel:
-                    id: ViscosityUnit
-
+                    
         ScrollViewSpe:
             size_hint_y: 0.20
         
@@ -111,16 +121,13 @@
         ScrollViewSpe:
             size_hint_y: 0.80
             
-            TopScreenLayout:
+            TopPopupLayout:
                 rows: 1
-                CEToolBoxLabel:
+                CEToolBoxPopupLabel:
                     text: "Conductivity :"
 
                 CEToolBoxLabel:        
                     id: Conductivity
-                
-                CEToolBoxLabel:
-                    id: ConductivityUnit
 
         ScrollViewSpe:
             size_hint_y: 0.20

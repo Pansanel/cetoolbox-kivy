@@ -57,8 +57,8 @@ class ViscosityPopup(Popup):
     
     def show_popup(self, data):
         store = get_store()
-        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])
-        self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
+        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])+" "+str(store.get('Viscosity')["unit"])
+        #~ self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
         #~ need error gestion
         self.open()
 
@@ -79,8 +79,8 @@ class ConductivityPopup(Popup):
     
     def show_popup(self, data):
         store = get_store()
-        self.ids.Conductivity.text = str(store.get('Conductivity')["value"])
-        self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
+        self.ids.Conductivity.text = str(store.get('Conductivity')["value"])+" "+str(store.get('Conductivity')["unit"])
+        #~ self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
         #~ need error gestion
         self.open()
 
@@ -310,7 +310,15 @@ class TopScreenLayout(CEToolBoxLayout):
     of the scrollviewspe parrent."""
     def set_min_height(self):
         self.minimum_height = 40 *self.rows + 10 
-        
+
+class TopPopupLayout(CEToolBoxLayout):
+    """ set the size of the layout from minimals values and the size
+    of the scrollviewspe parrent."""
+    def set_min_height(self):
+        self.minimum_height = 40 *self.rows + 10 
+
+    def set_min_width(self):
+        self.minimum_width = 300
     
 class DownMenuLayout(CEToolBoxLayout):
     """ set the size of the layout from minimals values and the size
