@@ -69,7 +69,7 @@ class ViscosityPopup(Popup):
         self.ids.inlayout.rows = 1
         self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Viscosity :", "FFFFFF")))
         viscotext = str(store.get('Viscosity')["value"])+" "+store.get('Viscosity')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(viscotext, "FFFFFF"))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(viscotext, "FFFFFF")))
         self.open()
 
 class InjectionPopup(Popup):
