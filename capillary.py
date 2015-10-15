@@ -230,7 +230,7 @@ class Capillary:
         store.put("Pluglenpertotallen", value=plugpertotallen, unit="")
         store.put("Pluglenperlentowin", value=plugpertowinlen, unit="")
         store.put("Timetoreplaces", value=timetoonevols, unit="s")
-        store.put("Timetoreplacem", value=timetoonevolm, unit="s")
+        store.put("Timetoreplacem", value=timetoonevolm, unit="m")
         store.put("Injectedanalyteng", value=analyteinjng, unit="ng")
         store.put("Injectedanalytepmol", value=analyteinjpmol, unit="pmol")
         store.put("Injectionpressure", value=injpressure, unit="psi/s")

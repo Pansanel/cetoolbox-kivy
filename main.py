@@ -71,19 +71,68 @@ class ViscosityPopup(Popup):
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=viscotext))
         self.open()
 
-class InjectionPopup():
+class InjectionPopup(Popup):
     
     def show_popup(self, data):
+        #~ need error gestion => through data
+        store = get_store()
         
-        box = BoxLayout(orientation='vertical')
-        box.add_widget(Label(text='Hydrodynamic injection: %s' % data['injection']))
-        box.add_widget(Label(text='Capillary volume: %s' % data['volume']))
-        button_close = Button(text='Close')
-        box.add_widget(button_close)
-        popup = Popup(title='Injection Details', content=box)
-        button_close.bind(on_press=popup.dismiss)
-        popup.open()
-
+        self.ids.inlayout.rows = 13
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Hydrodynamic \ninjection :"))
+        value = str(store.get('Hydrodynamicinjection')["value"])+" "+store.get('Hydrodynamicinjection')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Capillary volume :"))
+        value = str(store.get('Capillaryvolume')["value"])+" "+store.get('Capillaryvolume')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Capillary volume \nto window :"))
+        value = str(store.get('Capillaryvolumetowin')["value"])+" "+store.get('Capillaryvolumetowin')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Injection plug \nlength :"))
+        value = str(store.get('Injectionpluglen')["value"])+" "+store.get('Injectionpluglen')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+                
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Plug (% of \ntotal length) :"))
+        value = str(store.get('Pluglenpertotallen')["value"])+" "+store.get('Pluglenpertotallen')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+                
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Plug (% of \nlength to window) :"))
+        value = str(store.get('Pluglenperlentowin')["value"])+" "+store.get('Pluglenperlentowin')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+                
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Time to replace \n1 volume :"))
+        value = str(store.get('Timetoreplaces')["value"])+" "+store.get('Timetoreplaces')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=""))
+        value = str(store.get('Timetoreplacem')["value"])+" "+store.get('Timetoreplacem')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+                
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Injected analyte:"))
+        value = str(store.get('Injectedanalyteng')["value"])+" "+store.get('Injectedanalyteng')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+    
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=""))
+        value = str(store.get('Injectedanalytepmol')["value"])+" "+store.get('Injectedanalytepmol')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Injection pressure :"))
+        value = str(store.get('Injectionpressure')["value"])+" "+store.get('Injectionpressure')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Flow rate :"))
+        value = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Field strength :"))
+        value = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.open()
+        
 class ConductivityPopup(Popup):
     
     def show_popup(self, data):
@@ -176,11 +225,14 @@ class InjectionScreen(Screen):
                   
         
         #add data          
+        computation = Capillary()
+        computation.save_injection_result()
+        
         data = {}
-        data['injection'] = self.ids.Capillary.text
-        data['volume'] = self.ids.Towindow.text
-        injection_popup = InjectionPopup()
-        injection_popup.show_popup(data)
+        data["error"] = 0
+        
+        self._popup = InjectionPopup()
+        self._popup.show_popup(data)
     
         
 
