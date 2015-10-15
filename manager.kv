@@ -16,13 +16,14 @@
     font_size: '15sp'
     height: '30sp'
     width: '110sp'
-    #size_hint_y: None
+    markup: True
 
 <CEToolBoxPopupLabel>
 	halign: 'center'
 	size_hint_x: None
 	width: '110sp'
-
+	markup: True
+	
 <CEToolBoxTextInput@FloatInput>:
     font_size: '15sp'
     height: '30sp'
@@ -39,7 +40,7 @@
     font_size: '15sp'
     height: '30sp'
     width: '30sp'
-
+	
 <TopScreenLayout>:
     size_hint_y: None
     size_hint_x: None
@@ -550,8 +551,8 @@
                     id: VoltageUnit
                     
                 CEToolBoxLabel:
-                    text: "Electro-osmosis time"
-                 
+                    text: "Electro-osmosis \ntime"
+             
                 CEToolBoxTextInput:
                     id: Electroosmosis
                 
