@@ -68,14 +68,18 @@ class Capillary:
                                                u"s")
         # The buffer viscosity (cp)
         self.viscosity = float(store.get('Viscosity')["value"])
-        # Analyte concentration (mol/l)
+        #molecular weight (g/mol)
+        self.molweight = float(store.get("Molweight")["value"])
+        
+        # Analyte concentration (g/L)
+        
         if store.get('Concentration')["unit"] == u"mmol/L":
-            self.concentration = MolConcentrationUnits.convert_unit(float(store.get('Concentration')["value"]),
-                                                                    store.get('Concentration')["unit"], 
-                                                                    u"mol/L")
+            tmpconcetration = MolConcentrationUnits.convert_unit(float(store.get('Concentration')["value"]),
+                                                                 store.get('Concentration')["unit"], 
+                                                                 u"mol/L")
+            self.concentration = self.molweight * tmpconcetration
         else:
-            self.concentration = float(store.get('Concentration')["value"]) / \
-                                       float(store.get('Molweight')["value"])
+            self.concentration = float(store.get('Concentration')["value"])
         # The voltage applied to the capillary (volt)
         self.voltage = VoltUnits.convert_unit(float(store.get('Voltage')["value"]),
                                               store.get('Voltage')["unit"], 
@@ -157,27 +161,79 @@ class Capillary:
         flow_rate = (math.pi * self.diameter**2 * self.length_per_minute()) / 4
         return flow_rate
 
+    def injection_pressure(self):
+        """ return the injection pressure /s : psi/s """
+        psi = PressureUnits.convert_unit(self.pressure, u"mbar", u"psi")
+        injection_pressure = psi/self.duration
+        return injection_pressure
+
+    def analyte_injected_ng(self):
+        """ return the analyte injected in ng """
+        return self.concentration * self.delivered_volume()
+    
+    def analyte_injected_pmol(self):
+        """ return the analyte injected in pmol """
+        return (self.analyte_injected_ng()/self.molweight)*1000
+    
     def save_vicosity_result(self):
         """ compute and save the results for the vicosity screen """
         store = get_store()
+        
         viscosity = self.compute_viscosity()
+        
         store.put('Viscosity', value=viscosity, unit="cp")
 		
     def save_conductivy_result(self):
         """ compute and save the result for the conductivy screen """  
         store = get_store()
+        
         conductivity = self.compute_conductivity()
+        
         store.put('Conductivity', value=conductivity, unit="S/m")
 		
     def save_flow_result(self):
         """ compute and save the result for the flow screen """
         store = get_store()
+        
         strengh = self.field_strength()
         microeof = self.micro_eof()
         lpermin = self.length_per_minute()
         flowrate = self.flow_rate()
+        
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("MicroEOF", value=microeof, unit="cm²/V/s")
         store.put("Lengthpermin", value=lpermin, unit="m")
+        store.put("Flowrate", value=flowrate, unit="nL/m")
+        
+    def save_injection_result(self):
+        """ compute and save the result for the injection screen """
+        store = get_store()
+        
+        hydroinj = self.delivered_volume()
+        capilaryvol = self.capillary_volume()
+        capilaryvoltowin = self.to_window_volume()
+        pluglen = self.injection_plug_length()
+        plugpertotallen = (pluglen/10)/self.total_length
+        plugpertowinlen = (pluglen/10)/self.to_window_length
+        timetoonevols = self.time_to_replace_volume()
+        timetoonevolm = TimeUnits.convert_unit(timetoonevols, u's', u'm')
+        analyteinjng = self.analyte_injected_ng()
+        analyteinjpmol = self.analyte_injected_pmol()
+        injpressure = self.injection_pressure()
+        strengh = self.field_strength()
+        flowrate = self.flow_rate()
+        
+        store.put("Hydrodynamicinjection", value=hydroinj, unit="nL")
+        store.put("Capillaryvolume", value=capilaryvol, unit="nL")
+        store.put("Capillaryvolumetowin", value=capilaryvoltowin, unit="nL")
+        store.put("Injectionpluglen", value=pluglen, unit="mm")
+        store.put("Pluglenpertotallen", value=plugpertotallen, unit="")
+        store.put("Pluglenperlentowin", value=plugpertowinlen, unit="")
+        store.put("Timetoreplaces", value=timetoonevols, unit="s")
+        store.put("Timetoreplacem", value=timetoonevolm, unit="s")
+        store.put("Injectedanalyteng", value=analyteinjng, unit="ng")
+        store.put("Injectedanalytepmol", value=analyteinjpmol, unit="pmol")
+        store.put("Injectionpressure", value=injpressure, unit="psi/s")
+        store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("Flowrate", value=flowrate, unit="nL/m")
         
