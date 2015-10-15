@@ -120,7 +120,7 @@ class InjectionPopup(Popup):
         value = str(store.get('Injectedanalytepmol')["value"])+" "+store.get('Injectedanalytepmol')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Injection pressure :", "FFFFFF")))
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text=add_color("Injection \npressure :", "FFFFFF")))
         value = str(store.get('Injectionpressure')["value"])+" "+store.get('Injectionpressure')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
