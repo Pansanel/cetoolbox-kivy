@@ -139,14 +139,50 @@
         
 <FlowPopup>:
     id: popup
-    title: "Calculate"
-    size_hint: .6, .6
-    
-    Button:
-        id: btnpop
-        text: 'Flow : + result'
-        on_press: popup.dismiss()
+    title: "Flow Details"
 
+    BoxLayout:
+        orientation: 'vertical'
+        
+        ScrollViewSpe:
+            size_hint_y: 0.80
+            
+            TopPopupLayout:
+                rows: 4
+                
+                CEToolBoxPopupLabel:
+                    text: "Field strength :"
+
+                CEToolBoxLabel:        
+                    id: Fieldstrength
+                
+                CEToolBoxPopupLabel:
+                    text: "µEOF :"
+
+                CEToolBoxLabel:        
+                    id: MicroEOF
+                    
+                CEToolBoxPopupLabel:
+                    text: "Length per min :"
+
+                CEToolBoxLabel:        
+                    id: Lengthpermin
+                    
+                CEToolBoxPopupLabel:
+                    text: "Flow rate :"
+
+                CEToolBoxLabel:        
+                    id: Flowrate
+                    
+                    
+
+        ScrollViewSpe:
+            size_hint_y: 0.20
+        
+            DownMenuClose:
+                Button:
+                    text: 'Close'
+                    on_press: popup.dismiss()
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'

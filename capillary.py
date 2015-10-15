@@ -169,3 +169,15 @@ class Capillary:
         conductivity = self.compute_conductivity()
         store.put('Conductivity', value=conductivity, unit="S/m")
 		
+    def save_flow_result(self):
+        """ compute and save the result for the flow screen """
+        store = get_store()
+        strengh = self.field_strength()
+        microeof = self.micro_eof()
+        lpermin = self.length_per_minute()
+        flowrate = self.flow_rate()
+        store.put("Fieldstrength", value=strengh, unit="V/cm")
+        store.put("MicroEOF", value=microeof, unit="cm²/V/s")
+        store.put("Lengthpermin", value=lpermin, unit="m")
+        store.put("Flowrate", value=flowrate, unit="nL/m")
+        

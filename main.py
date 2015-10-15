@@ -57,7 +57,7 @@ class ViscosityPopup(Popup):
     
     def show_popup(self, data):
         store = get_store()
-        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])+" "+str(store.get('Viscosity')["unit"])
+        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])+" "+store.get('Viscosity')["unit"]
         #~ self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
         #~ need error gestion
         self.open()
@@ -79,13 +79,24 @@ class ConductivityPopup(Popup):
     
     def show_popup(self, data):
         store = get_store()
-        self.ids.Conductivity.text = str(store.get('Conductivity')["value"])+" "+str(store.get('Conductivity')["unit"])
+        self.ids.Conductivity.text = str(store.get('Conductivity')["value"])+" "+store.get('Conductivity')["unit"]
         #~ self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
         #~ need error gestion
         self.open()
 
 class FlowPopup(Popup):
-    pass
+    
+    def show_popup(self, data):
+        #construct the rows in the window ?
+        
+        store = get_store()
+        self.ids.Fieldstrength.text = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
+        self.ids.MicroEOF.text = str(store.get('MicroEOF')["value"])+" "+store.get('MicroEOF')["unit"]
+        self.ids.Lengthpermin.text = str(store.get('Lengthpermin')["value"])+" "+store.get('Lengthpermin')["unit"]
+        self.ids.Flowrate.text = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
+        #~ self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
+        #~ need error gestion
+        self.open()
 
 class InjectionScreen(Screen):
     
@@ -268,10 +279,15 @@ class FlowScreen(Screen):
                   unit=self.ids.VoltageUnit.text)
         store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
                   unit=self.ids.ElectroosmosisUnit.text)
-
+        
+        computation = Capillary()
+        computation.save_flow_result()
+        
+        data = {}
+        data["error"] = 0
         
         self._popup = FlowPopup()
-        self._popup.open()
+        self._popup.show_popup(data)
 
 class AboutScreen(Screen):
     pass
