@@ -48,6 +48,12 @@ class FloatInput(TextInput):
             s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
         return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
+class CEToolBoxLabel(Label):
+    pass
+
+class CEToolBoxPopupLabel(CEToolBoxLabel):
+    pass
+
 
 class MenuScreen(Screen):
     pass
@@ -56,10 +62,13 @@ class MenuScreen(Screen):
 class ViscosityPopup(Popup):
     
     def show_popup(self, data):
+        #~ need error gestion => through data
         store = get_store()
-        self.ids.Viscosity.text = str(store.get('Viscosity')["value"])+" "+store.get('Viscosity')["unit"]
-        #~ self.ids.ViscosityUnit.text = str(store.get('Viscosity')["unit"])
-        #~ need error gestion
+        
+        self.ids.inlayout.rows = 1
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Viscosity :"))
+        viscotext = str(store.get('Viscosity')["value"])+" "+store.get('Viscosity')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=viscotext))
         self.open()
 
 class InjectionPopup():

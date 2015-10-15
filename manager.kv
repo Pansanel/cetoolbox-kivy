@@ -12,13 +12,13 @@
     text: 'Menu'
     on_press: root.on_press
 
-<CEToolBoxLabel@Label>:
+<CEToolBoxLabel>:
     font_size: '15sp'
     height: '30sp'
     width: '110sp'
     #size_hint_y: None
 
-<CEToolBoxPopupLabel@CEToolBoxLabel>
+<CEToolBoxPopupLabel>
 	size_hint_x: None
 	width: '100sp'
 
@@ -95,12 +95,7 @@
             size_hint_y: 0.80
             
             TopPopupLayout:
-                rows: 1
-                CEToolBoxPopupLabel:
-                    text: "Viscosity :"
-
-                CEToolBoxLabel:        
-                    id: Viscosity
+				id: inlayout
                     
         ScrollViewSpe:
             size_hint_y: 0.20
