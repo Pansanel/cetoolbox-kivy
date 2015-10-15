@@ -87,24 +87,39 @@ class InjectionPopup():
 class ConductivityPopup(Popup):
     
     def show_popup(self, data):
+        #~ need error gestion => through data
         store = get_store()
-        self.ids.Conductivity.text = str(store.get('Conductivity')["value"])+" "+store.get('Conductivity')["unit"]
-        #~ self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
-        #~ need error gestion
+        
+        self.ids.inlayout.rows = 1
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Conductivity :"))
+        conductivitytext = str(store.get('Conductivity')["value"])+" "+store.get('Conductivity')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=conductivitytext))
         self.open()
 
 class FlowPopup(Popup):
     
     def show_popup(self, data):
-        #construct the rows in the window ?
-        
+        #~ need error gestion => through data
         store = get_store()
-        self.ids.Fieldstrength.text = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
-        self.ids.MicroEOF.text = str(store.get('MicroEOF')["value"])+" "+store.get('MicroEOF')["unit"]
-        self.ids.Lengthpermin.text = str(store.get('Lengthpermin')["value"])+" "+store.get('Lengthpermin')["unit"]
-        self.ids.Flowrate.text = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
-        #~ self.ids.ConductivityUnit.text = str(store.get('Conductivity')["unit"])
-        #~ need error gestion
+        
+        self.ids.inlayout.rows = 4
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Field strength :"))
+        value = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="µEOF :"))
+        value = str(store.get('MicroEOF')["value"])+" "+store.get('MicroEOF')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Length per min :"))
+        value = str(store.get('Lengthpermin')["value"])+" "+store.get('Lengthpermin')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
+        self.ids.inlayout.add_widget(CEToolBoxPopupLabel(text="Flow rate :"))
+        value = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=value))
+        
         self.open()
 
 class InjectionScreen(Screen):
