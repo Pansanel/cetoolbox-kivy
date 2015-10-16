@@ -23,7 +23,15 @@
 	size_hint_x: None
 	width: '110sp'
 	markup: True
-	
+
+<AboutLabel@Label>:
+	font_size: '15sp'
+	size_hint_y: None
+    text_size: self.width, None
+    height: self.texture_size[1]	
+	markup: True
+
+
 <CEToolBoxTextInput@FloatInput>:
     font_size: '15sp'
     height: '30sp'
@@ -587,9 +595,22 @@
                     on_press: root.manager.current = 'menu'
 
 
-
 <AboutScreen>:
+    
     BoxLayout:
-        Button:
-            text: 'Back to menu'
-            on_press: root.manager.current = 'menu'
+		orientation: 'vertical'
+			
+		ScrollView:
+			size_hint_y: 0.85
+				
+			AboutLabel:
+				id: alabel
+				
+                    
+		ScrollViewSpe:
+			size_hint_y: 0.15
+			
+			DownMenuClose:
+				Button:
+					text: 'Menu'
+					on_press: root.manager.current = 'menu'

@@ -367,7 +367,14 @@ class FlowScreen(Screen):
         self._popup.show_popup(data)
 
 class AboutScreen(Screen):
-    pass
+    
+    def on_pre_enter(self):
+        self.ids.alabel.text = """[b][size=20]CEToolBox kivy v"""+ __version__ +"""[/size][/b]\n\n
+The Capillary Electrophoresis (CE) Toolbox is a software for computing Capillary Electrophoresis parameters.\n
+CEToolBox kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at 
+http://www.apache.org/licenses/LICENSE-2.0.\n
+For more information, visit the website: http://pansanel.github.io/cetoolbox/
+        """
 
 
 class CEToolBoxLayout(GridLayout):
