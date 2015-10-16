@@ -615,11 +615,16 @@
 					text: "The Capillary Electrophoresis (CE) Toolbox is a software for computing Capillary Electrophoresis parameters."
 				
 				AboutLabel:
-					text: "CEToolBox kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0."
-				
+					text: "CEToolBox kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at [ref=http://www.apache.org/licenses/LICENSE-2.0]http://www.apache.org/licenses/LICENSE-2.0[/ref]."
+					on_ref_press:
+						import webbrowser
+						webbrowser.open(args[1])
+					
 				AboutLabel:
-					text: "For more information, visit the website: http://pansanel.github.io/cetoolbox/"
-				
+					text: "For more information, visit the website: [ref=http://pansanel.github.io/cetoolbox/]http://pansanel.github.io/cetoolbox/[/ref]"
+					on_ref_press:
+						import webbrowser
+						webbrowser.open(args[1])
                     
 		ScrollViewSpe:
 			size_hint_y: 0.15
