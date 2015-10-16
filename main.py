@@ -175,6 +175,30 @@ class FlowPopup(Popup):
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
         
         self.open()
+        
+class MobilityPopup(Popup):
+    
+    def show_popup(self, data):
+        #~ need error gestion => through data
+        store = get_store()
+        
+        self.ids.inlayout.rows = 1 + 2 * store.get('Nbtimecompound')["value"]
+        
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEOF :","FFFFFF")))
+        value = str(store.get('MicroEOF')["value"])+" "+store.get('MicroEOF')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
+        
+        for i in range(1, store.get('Nbtimecompound')["value"]+1):
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µAPP"+str(i)+" :","BFBFBF")))
+            value = str(store.get('MicroAPP'+str(i))["value"])+" "+store.get('MicroAPP'+str(i))["unit"]
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
+            
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEP"+str(i)+" :","FFFFFF")))
+            value = str(store.get('MicroEP'+str(i))["value"])+" "+store.get('MicroEP'+str(i))["unit"]
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
+        
+        self.open()
+        
 
 class InjectionScreen(Screen):
     
@@ -372,6 +396,32 @@ class FlowScreen(Screen):
 
 
 class MobilityScreen(Screen):
+    
+    def show_mobility_results(self):
+        #save data
+        store = get_store()
+        store.put('Capillary', value=float(self.ids.Capillary.text),
+                  unit=self.ids.CapillaryUnit.text)
+        store.put('Towindow', value=float(self.ids.Towindow.text),
+                  unit=self.ids.TowindowUnit.text)
+        store.put('Voltage', value=float(self.ids.Voltage.text),
+                  unit=self.ids.VoltageUnit.text)
+        store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
+                  unit=self.ids.ElectroosmosisUnit.text)
+        
+        #save all the timecompound
+        for sublist in self.timecompoundlist:
+            store.put(sublist[1].id, value=float(sublist[1].text),
+                      unit=sublist[2].text)
+        
+        computation = Capillary()
+        computation.save_mobility_result()
+        
+        data = {}
+        data["error"] = 0
+        
+        self._popup = MobilityPopup()
+        self._popup.show_popup(data)
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go

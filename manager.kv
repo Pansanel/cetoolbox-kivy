@@ -110,6 +110,26 @@
                     text: 'Close'
                     on_press: popup.dismiss()
 
+<MobilityPopup>:
+    id: popup
+    title: "Mobility Details"
+
+    BoxLayout:
+        orientation: 'vertical'
+        
+        ScrollViewSpe:
+            size_hint_y: 0.80
+            
+            TopPopupLayout:
+				id: inlayout
+                    
+        ScrollViewSpe:
+            size_hint_y: 0.20
+        
+            DownMenuClose:
+                Button:
+                    text: 'Close'
+                    on_press: popup.dismiss()
 
 <ViscosityPopup>:
     id: popup

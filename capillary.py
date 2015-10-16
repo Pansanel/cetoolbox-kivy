@@ -175,6 +175,16 @@ class Capillary:
         """ return the analyte injected in pmol """
         return (self.analyte_injected_ng()/self.molweight)*1000
     
+    def micro_app(self, time):
+        """return the micro_app
+        time in second"""
+        return (self.total_length * self.to_window_length) / (time * self.voltage) 
+    
+    def micro_ep(self, time):
+        """return the micro_ep
+        time in second"""
+        return self.micro_app(time) - self.micro_eof()
+    
     def save_vicosity_result(self):
         """ compute and save the results for the vicosity screen """
         store = get_store()
@@ -190,7 +200,7 @@ class Capillary:
         conductivity = self.compute_conductivity()
         
         store.put('Conductivity', value=conductivity, unit="S/m")
-		
+	
     def save_flow_result(self):
         """ compute and save the result for the flow screen """
         store = get_store()
@@ -236,4 +246,20 @@ class Capillary:
         store.put("Injectionpressure", value=injpressure, unit="psi/s")
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("Flowrate", value=flowrate, unit="nL/m")
+        
+    def save_mobility_result(self):
+        """ compute and save the result for the mobility result """
+        store = get_store()
+        
+        microeof = self.micro_eof()
+        store.put("MicroEOF", value=microeof, unit="cm²/V/s")
+        for i in range(1, store.get('Nbtimecompound')["value"]+1):
+            keystore = "Timecompound"+str(i)
+            time = TimeUnits.convert_unit(float(store.get(keystore)["value"]),
+                                                store.get(keystore)["unit"], 
+                                                u"s")
+            microapp = self.micro_app(time)
+            microep = self.micro_ep(time)
+            store.put("MicroAPP"+str(i), value=microapp, unit="cm²/V/s")
+            store.put("MicroEP"+str(i), value=microep, unit="cm²/V/s")
         
