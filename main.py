@@ -27,6 +27,8 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
+from kivy.uix.spinner import Spinner
+
 from os.path import join
 import re
 
@@ -34,7 +36,7 @@ from store import get_store, create_store
 from capillary import Capillary
 
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 def add_color(text, color):
     return "[color="+color+"]"+text+"[/color]"
@@ -52,6 +54,12 @@ class FloatInput(TextInput):
 class CEToolBoxLabel(Label):
     pass
 
+class CEToolBoxTextInput(FloatInput):
+    pass
+
+class CEToolBoxSpinner(Spinner):
+    pass
+    
 class MenuScreen(Screen):
     pass
 
@@ -362,6 +370,112 @@ class FlowScreen(Screen):
         self._popup = FlowPopup()
         self._popup.show_popup(data)
 
+
+class MobilityScreen(Screen):
+    
+    def on_pre_enter(self):
+        """special function lauch at the clic of the button to go
+        on the injectionscreen 
+        this value comes from the json file where we keep it
+        """
+        store = get_store()
+        self.ids.Capillary.text = str(store.get('Capillary')["value"])
+        self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
+        self.ids.Towindow.text = str(store.get('Towindow')["value"])
+        self.ids.TowindowUnit.text = store.get('Towindow')["unit"]
+        self.ids.Voltage.text = str(store.get('Voltage')["value"])
+        self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
+        self.ids.Electroosmosis.text = str(store.get('Electroosmosis')["value"])
+        self.ids.ElectroosmosisUnit.text = store.get('Electroosmosis')["unit"]
+        self.ids.Timecompound1.text = str(store.get('Timecompound1')["value"])
+        self.ids.Timecompound1Unit.text = store.get('Timecompound1')["unit"]
+        
+        #set the number of rows
+        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        
+        #set the rest of the time compound
+        self.timecompoundlist = []
+        for i in range(2, store.get('Nbtimecompound')["value"]+1):
+            timecompount = CEToolBoxLabel(text="Time compound "+str(i))
+            timecompountvalue = CEToolBoxTextInput(text=str(store.get('Timecompound'+str(i))["value"]),
+                                                   id='Timecompound'+str(i))
+            timecompountunit =  CEToolBoxSpinner(text=store.get('Timecompound'+str(i))["unit"],
+                                                 id='Timecompound'+str(i)+'Unit', 
+                                                 values=["s", "m"])
+            self.ids.inlayout.add_widget(timecompount)
+            self.ids.inlayout.add_widget(timecompountvalue)
+            self.ids.inlayout.add_widget(timecompountunit)
+            tosave = [timecompount, timecompountvalue, timecompountunit]
+            self.timecompoundlist.append(tosave)
+            
+        #create the button add and del
+        self.add_button = Button(text="Add", id="addbutton", on_release=self.add_line)
+        self.ids.inlayout.add_widget(self.add_button)
+        self.del_button = Button(text="Del", id="delbutton", on_release=self.del_line)
+        self.ids.inlayout.add_widget(self.del_button)
+            
+    def add_line(self, buttoninstance):
+        #del and create again to respect the order
+        self.ids.inlayout.remove_widget(self.add_button)
+        self.ids.inlayout.remove_widget(self.del_button)
+        
+        #create the new line
+        store = get_store()
+        lastval = store.get('Nbtimecompound')["value"]
+        store.put('Nbtimecompound', value=1+lastval)
+        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        
+        #add the widget
+        newval = str(store.get('Nbtimecompound')["value"])
+        timecompount = CEToolBoxLabel(text="Time compound "+newval)
+        timecompountvalue = CEToolBoxTextInput(text=str(1.0),
+                                               id='Timecompound'+newval)
+        timecompountunit =  CEToolBoxSpinner(text=u"m",
+                                             id='Timecompound'+newval+'Unit', 
+                                             values=["s", "m"])
+        store.put('Timecompound'+newval, value=1.0, unit="m")
+        self.ids.inlayout.add_widget(timecompount)
+        self.ids.inlayout.add_widget(timecompountvalue)
+        self.ids.inlayout.add_widget(timecompountunit)
+        tosave = [timecompount, timecompountvalue, timecompountunit]
+        self.timecompoundlist.append(tosave)
+        
+        #recreate the button
+        self.add_button = Button(text="Add", id="addbutton", on_release=self.add_line)
+        self.ids.inlayout.add_widget(self.add_button)
+        self.del_button = Button(text="Del", id="delbutton", on_release=self.del_line)
+        self.ids.inlayout.add_widget(self.del_button)
+        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        
+        #set the good height and width
+        self.ids.inlayout.change_height(self.ids.inlayout.height)
+        self.ids.inlayout.change_width(self.ids.inlayout.width)
+        
+        
+    def del_line(self, buttoninstance):
+        try:
+            widgets = self.timecompoundlist.pop()
+        except IndexError:
+            return
+        for w in widgets:
+            self.ids.inlayout.remove_widget(w)
+        
+        store = get_store()
+        lastval = store.get('Nbtimecompound')["value"]
+        store.put('Nbtimecompound', value=lastval-1)
+        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        #don't reduce the box, why ????
+        
+        
+    def on_pre_leave(self):
+        for widgets in self.timecompoundlist:
+            for w in widgets:
+                self.ids.inlayout.remove_widget(w)
+        self.ids.inlayout.remove_widget(self.add_button)
+        self.ids.inlayout.remove_widget(self.del_button)
+        
+    
+
 class AboutScreen(Screen):
     
     def on_pre_enter(self):
@@ -456,6 +570,7 @@ class ManagerApp(App):
         sm.add_widget(InjectionScreen(name='injection'))
         sm.add_widget(ViscosityScreen(name='viscosity'))
         sm.add_widget(ConductivityScreen(name='conductivity'))
+        sm.add_widget(MobilityScreen(name='mobility'))
         sm.add_widget(FlowScreen(name='flow'))
         sm.add_widget(AboutScreen(name='about'))
         return sm

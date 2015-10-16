@@ -46,4 +46,8 @@ def create_store():
     if not store.exists('Electriccurrent'):
         store.put('Electriccurrent', value=10.0, unit="µA")
     if not store.exists('Electroosmosis'):
-        store.put('Electroosmosis', value=1.0, unit="m")
+        store.put('Electroosmosis', value=1.0, unit="m")  
+    if not store.exists("Timecompound1"):
+        store.put('Timecompound1', value=1.0, unit="m")
+    if not store.exists("Nbtimecompound"):
+        store.put('Nbtimecompound', value=1)

@@ -27,7 +27,7 @@
 	markup: True
 
 
-<CEToolBoxTextInput@FloatInput>:
+<CEToolBoxTextInput>:
     font_size: '15sp'
     height: '30sp'
     width: '60sp'
@@ -39,7 +39,7 @@
     height: '30sp'
     width: '30sp'
 
-<CEToolBoxSpinner@Spinner>:
+<CEToolBoxSpinner>:
     font_size: '15sp'
     height: '30sp'
     width: '30sp'
@@ -196,6 +196,10 @@
         Button:
             text: 'Flow'
             on_press: root.manager.current = 'flow'
+        
+        Button:
+			text: 'Mobility'
+			on_press: root.manager.current = 'mobility'
 
         Button:
             text: 'About'
@@ -585,6 +589,94 @@
                     on_press: VoltageUnit.text="kV"
                     on_press: Electroosmosis.text="1.0"
                     on_press: ElectroosmosisUnit.text="m"
+                
+                MenuButton:
+                    on_press: root.manager.current = 'menu'
+
+<MobilityScreen>:
+    fullscreen: True
+    
+    BoxLayout:
+        orientation: 'vertical'
+        
+        ScrollViewSpe:
+            size_hint_y: 0.85
+
+            
+            TopScreenLayout:
+				id: inlayout
+                rows: 6
+                
+                CEToolBoxLabel:
+                    text: "Capillary Length"
+
+                CEToolBoxTextInput:        
+                    id: Capillary
+                
+                CEToolBoxUnitLabel:
+                    id: CapillaryUnit
+
+                CEToolBoxLabel:
+                    text: "Length to window"
+                
+                CEToolBoxTextInput:
+                    id: Towindow
+                
+                CEToolBoxUnitLabel:
+                    id: TowindowUnit
+				
+				CEToolBoxLabel:
+                    text: "Voltage"
+                 
+                CEToolBoxTextInput:
+                    id: Voltage
+                
+                CEToolBoxUnitLabel:
+                    id: VoltageUnit
+                    
+                CEToolBoxLabel:
+                    text: "Electro-osmosis time"
+             
+                CEToolBoxTextInput:
+                    id: Electroosmosis
+                
+                CEToolBoxSpinner:
+                    id: ElectroosmosisUnit
+                    values: ["s", "m"]
+                    
+                CEToolBoxLabel:
+					text: "Time compound 1"
+				
+				CEToolBoxTextInput:
+					id: Timecompound1
+				
+				CEToolBoxSpinner:
+                    id: Timecompound1Unit
+                    values: ["s", "m"]
+				
+                 
+    
+        ScrollViewSpe:
+            size_hint_y: 0.15
+                        
+            DownMenuLayout:  
+
+                CalculateButton:
+                    on_release: root.show_flow_results()
+                    
+                Button:
+                    id: Resetbtn
+                    text: "Reset"
+                    on_press: Capillary.text="100.0"
+                    on_press: CapillaryUnit.text="cm"
+                    on_press: Towindow.text="100.0"
+                    on_press: TowindowUnit.text="cm"
+                    on_press: Voltage.text="3.0"
+                    on_press: VoltageUnit.text="kV"
+                    on_press: Electroosmosis.text="1.0"
+                    on_press: ElectroosmosisUnit.text="m"
+                    on_press: Timecompound1.text="1.0"
+                    on_press: Timecompound1Unit.text="m"
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'
