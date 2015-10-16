@@ -663,7 +663,7 @@
             DownMenuLayout:  
 
                 CalculateButton:
-                    on_release: root.show_flow_results()
+                    on_release: root.show_mobility_results()
                     
                 Button:
                     id: Resetbtn
@@ -678,6 +678,7 @@
                     on_press: ElectroosmosisUnit.text="m"
                     on_press: Timecompound1.text="1.0"
                     on_press: Timecompound1Unit.text="m"
+                    on_press: root.reset()
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'

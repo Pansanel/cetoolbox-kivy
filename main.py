@@ -460,9 +460,8 @@ class MobilityScreen(Screen):
             return
         for w in widgets:
             self.ids.inlayout.remove_widget(w)
+        
         store = get_store()
-        
-        
         lastval = store.get('Nbtimecompound')["value"]
         store.delete('Timecompound'+str(lastval))
         store.put('Nbtimecompound', value=lastval-1)
@@ -480,7 +479,11 @@ class MobilityScreen(Screen):
         self.ids.inlayout.remove_widget(self.del_button)
     
     def reset(self):
-        pass
+        store = get_store()
+        nbval = store.get('Nbtimecompound')["value"]
+        for i in range(1, nbval):
+            self.del_line(1) 
+        
         
     
 
