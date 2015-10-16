@@ -36,7 +36,7 @@ from store import get_store, create_store
 from capillary import Capillary
 
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 def add_color(text, color):
     return "[color="+color+"]"+text+"[/color]"
