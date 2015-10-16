@@ -600,11 +600,25 @@
     BoxLayout:
 		orientation: 'vertical'
 			
-		ScrollView:
+		ScrollViewSpe:
 			size_hint_y: 0.85
+			
+			TopScreenLayout:
+				cols: 1
+				rows: 4
 				
-			AboutLabel:
-				id: alabel
+				AboutLabel:
+					halign: "center"
+					id: alabel
+				
+				AboutLabel:
+					text: "The Capillary Electrophoresis (CE) Toolbox is a software for computing Capillary Electrophoresis parameters."
+				
+				AboutLabel:
+					text: "CEToolBox kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0."
+				
+				AboutLabel:
+					text: "For more information, visit the website: http://pansanel.github.io/cetoolbox/"
 				
                     
 		ScrollViewSpe:
