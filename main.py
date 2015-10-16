@@ -542,12 +542,12 @@ class DownMenuLayout(CEToolBoxLayout):
     of the scrollviewspe parrent."""
     
     def set_min_height(self):
-        self.minimum_height = 30 
+        self.minimum_height = 40 
     
 class DownMenuClose(CEToolBoxLayout):
     
     def set_min_height(self):
-        self.minimum_height = 30
+        self.minimum_height = 40
     
     def set_min_width(self):
         self.minimum_width = 100
