@@ -377,7 +377,7 @@ class MobilityScreen(Screen):
         """special function lauch at the clic of the button to go
         on the injectionscreen 
         this value comes from the json file where we keep it
-        """
+        """        
         store = get_store()
         self.ids.Capillary.text = str(store.get('Capillary')["value"])
         self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
@@ -392,6 +392,8 @@ class MobilityScreen(Screen):
         
         #set the number of rows
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        #force the good size
+        self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
         
         #set the rest of the time compound
         self.timecompoundlist = []
@@ -447,9 +449,8 @@ class MobilityScreen(Screen):
         self.ids.inlayout.add_widget(self.del_button)
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
         
-        #set the good height and width
-        self.ids.inlayout.change_height(self.ids.inlayout.height)
-        self.ids.inlayout.change_width(self.ids.inlayout.width)
+        #force the good size
+        self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
         
         
     def del_line(self, buttoninstance):
@@ -459,20 +460,27 @@ class MobilityScreen(Screen):
             return
         for w in widgets:
             self.ids.inlayout.remove_widget(w)
-        
         store = get_store()
+        
+        
         lastval = store.get('Nbtimecompound')["value"]
+        store.delete('Timecompound'+str(lastval))
         store.put('Nbtimecompound', value=lastval-1)
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
-        #don't reduce the box, why ????
         
+        #force the good size
+        self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
+            
         
-    def on_pre_leave(self):
+    def on_leave(self):
         for widgets in self.timecompoundlist:
             for w in widgets:
                 self.ids.inlayout.remove_widget(w)
         self.ids.inlayout.remove_widget(self.add_button)
         self.ids.inlayout.remove_widget(self.del_button)
+    
+    def reset(self):
+        pass
         
     
 
