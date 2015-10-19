@@ -259,8 +259,6 @@ class Capillary:
             time = TimeUnits.convert_unit(float(store.get(keystore)["value"]),
                                                 store.get(keystore)["unit"], 
                                                 u"s")
-            microapp = self.micro_app(time)
             microep = self.micro_ep(time)
-            store.put("MicroAPP"+str(i), value=microapp, unit="cm²/V/s")
             store.put("MicroEP"+str(i), value=microep, unit="cm²/V/s")
         

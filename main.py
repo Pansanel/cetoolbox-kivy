@@ -82,7 +82,8 @@ class ViscosityPopup(CEToolBoxPopup):
         
         self.ids.inlayout.rows = 1
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Viscosity :", "FFFFFF")))
-        viscotext = str(store.get('Viscosity')["value"])+" "+store.get('Viscosity')["unit"]
+        value = round(store.get('Viscosity')["value"], 2)
+        viscotext = str(value)+" "+store.get('Viscosity')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(viscotext, "FFFFFF")))
         self.open()
 
@@ -95,55 +96,68 @@ class InjectionPopup(CEToolBoxPopup):
         self.ids.inlayout.rows = 13
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Hydrodynamic injection :", "FFFFFF")))
-        value = str(store.get('Hydrodynamicinjection')["value"])+" "+store.get('Hydrodynamicinjection')["unit"]
+        value = round(store.get('Hydrodynamicinjection')["value"], 2)
+        value = str(value)+" "+store.get('Hydrodynamicinjection')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Capillary volume :", "BFBFBF")))
-        value = str(store.get('Capillaryvolume')["value"])+" "+store.get('Capillaryvolume')["unit"]
+        value = round(store.get('Capillaryvolume')["value"], 2)
+        value = str(value)+" "+store.get('Capillaryvolume')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Capillary volume to window :", "FFFFFF")))
-        value = str(store.get('Capillaryvolumetowin')["value"])+" "+store.get('Capillaryvolumetowin')["unit"]
+        value = round(store.get('Capillaryvolumetowin')["value"], 2)
+        value = str(value)+" "+store.get('Capillaryvolumetowin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection plug length :", "BFBFBF")))
-        value = str(store.get('Injectionpluglen')["value"])+" "+store.get('Injectionpluglen')["unit"]
+        value = round(store.get('Injectionpluglen')["value"], 2)
+        value = str(value)+" "+store.get('Injectionpluglen')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
                 
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Plug (% of total length) :", "FFFFFF")))
-        value = str(store.get('Pluglenpertotallen')["value"])+" "+store.get('Pluglenpertotallen')["unit"]
+        value = round(store.get('Pluglenpertotallen')["value"], 2)
+        value = str(value)+" "+store.get('Pluglenpertotallen')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
                 
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Plug (% of length to window) :", "BFBFBF")))
-        value = str(store.get('Pluglenperlentowin')["value"])+" "+store.get('Pluglenperlentowin')["unit"]
+        value = round(store.get('Pluglenperlentowin')["value"], 2)
+        value = str(value)+" "+store.get('Pluglenperlentowin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
             
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Time to replace 1 volume :", "FFFFFF")))
-        value = str(store.get('Timetoreplaces')["value"])+" "+store.get('Timetoreplaces')["unit"]
+        value = round(store.get('Timetoreplaces')["value"], 2)
+        value = str(value)+" "+store.get('Timetoreplaces')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
-        value = str(store.get('Timetoreplacem')["value"])+" "+store.get('Timetoreplacem')["unit"]
+        value = round(store.get('Timetoreplacem')["value"], 2)
+        value = str(value)+" "+store.get('Timetoreplacem')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
                 
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte:", "BFBFBF")))
-        value = str(store.get('Injectedanalyteng')["value"])+" "+store.get('Injectedanalyteng')["unit"]
+        value = round(store.get('Injectedanalyteng')["value"], 2)
+        value = str(value)+" "+store.get('Injectedanalyteng')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
     
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
-        value = str(store.get('Injectedanalytepmol')["value"])+" "+store.get('Injectedanalytepmol')["unit"]
+        value = round(store.get('Injectedanalytepmol')["value"], 2)
+        value = str(value)+" "+store.get('Injectedanalytepmol')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "FFFFFF")))
-        value = str(store.get('Injectionpressure')["value"])+" "+store.get('Injectionpressure')["unit"]
+        value = round(store.get('Injectionpressure')["value"], 2)
+        value = str(value)+" "+store.get('Injectionpressure')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "BFBFBF")))
-        value = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
+        value = round(store.get('Flowrate')["value"], 2)
+        value = str(value)+" "+store.get('Flowrate')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Field strength :", "FFFFFF")))
-        value = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
+        value = round(store.get('Fieldstrength')["value"], 2)
+        value = str(value)+" "+store.get('Fieldstrength')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.open()
@@ -156,7 +170,8 @@ class ConductivityPopup(CEToolBoxPopup):
         
         self.ids.inlayout.rows = 1
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Conductivity :", "FFFFFF")))
-        conductivitytext = str(store.get('Conductivity')["value"])+" "+store.get('Conductivity')["unit"]
+        value = round(store.get('Conductivity')["value"], 2)
+        conductivitytext = str(value)+" "+store.get('Conductivity')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(conductivitytext, "FFFFFF")))
         self.open()
 
@@ -169,19 +184,23 @@ class FlowPopup(CEToolBoxPopup):
         self.ids.inlayout.rows = 4
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Field strength :", "FFFFFF")))
-        value = str(store.get('Fieldstrength')["value"])+" "+store.get('Fieldstrength')["unit"]
+        value = round(store.get('Fieldstrength')["value"], 2)
+        value = str(value)+" "+store.get('Fieldstrength')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEOF :","BFBFBF")))
-        value = str(store.get('MicroEOF')["value"])+" "+store.get('MicroEOF')["unit"]
+        value = "{:.2E}".format(store.get('MicroEOF')["value"])
+        value = value +" "+store.get('MicroEOF')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Length per min :", "FFFFFF")))
-        value = str(store.get('Lengthpermin')["value"])+" "+store.get('Lengthpermin')["unit"]
+        value = round(store.get('Lengthpermin')["value"], 2)
+        value = str(value)+" "+store.get('Lengthpermin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "BFBFBF")))
-        value = str(store.get('Flowrate')["value"])+" "+store.get('Flowrate')["unit"]
+        value = round(store.get('Flowrate')["value"], 2)
+        value = str(value)+" "+store.get('Flowrate')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
         
         self.open()
@@ -195,17 +214,20 @@ class MobilityPopup(CEToolBoxPopup):
         self.ids.inlayout.rows = 1 + 2 * store.get('Nbtimecompound')["value"]
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEOF :","FFFFFF")))
-        value = str(store.get('MicroEOF')["value"])+" "+store.get('MicroEOF')["unit"]
+        value = "{:.2E}".format(store.get('MicroEOF')["value"])
+        value = value+" "+store.get('MicroEOF')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
         
         for i in range(1, store.get('Nbtimecompound')["value"]+1):
-            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µAPP"+str(i)+" :","BFBFBF")))
-            value = str(store.get('MicroAPP'+str(i))["value"])+" "+store.get('MicroAPP'+str(i))["unit"]
-            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
+            if i%2 != 0:
+                color = "BFBFBF"
+            else:
+                color = "FFFFFF"
             
-            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEP"+str(i)+" :","FFFFFF")))
-            value = str(store.get('MicroEP'+str(i))["value"])+" "+store.get('MicroEP'+str(i))["unit"]
-            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEP"+str(i)+" :", color)))
+            value = "{:.2E}".format(store.get('MicroEP'+str(i))["value"])
+            value = value +" "+store.get('MicroEP'+str(i))["unit"]
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,color)))
         
         self.open()
         
