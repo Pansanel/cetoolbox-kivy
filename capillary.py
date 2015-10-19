@@ -158,7 +158,8 @@ class Capillary:
     def flow_rate(self):
         """Return the flow rate
         """
-        flow_rate = (math.pi * self.diameter**2 * self.length_per_minute()) / 4
+        onevol = self.time_to_replace_volume()
+        flow_rate = self.capillary_volume()/TimeUnits.convert_unit(onevol, u's', u'min')
         return flow_rate
 
     def injection_pressure(self):
