@@ -2,7 +2,6 @@
 */*.pyc
 */__pycache__/*
 bin
-buildozer.spec
 .buildozer
 values.json
 kivyinstall
