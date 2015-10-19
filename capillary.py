@@ -155,11 +155,16 @@ class Capillary:
         length_per_minute = 60 * self.micro_eof() * self.field_strength() * 10**-2
         return length_per_minute 
 
-    def flow_rate(self):
-        """Return the flow rate
+    def flow_rate_inj(self):
+        """Return the flow rate for the flow rate screen
         """
         onevol = self.time_to_replace_volume()
         flow_rate = self.capillary_volume()/TimeUnits.convert_unit(onevol, u's', u'min')
+        return flow_rate
+        
+    def flow_rate_flow(self):
+        """Return the flow rate for the flow screen """
+        flow_rate = (math.pi * self.diameter**2 * self.length_per_minute()) / 4
         return flow_rate
 
     def injection_pressure(self):
@@ -196,6 +201,10 @@ class Capillary:
                 return 1, "The capillary length cannot be null"
             else:
                 return 1, "The window length cannot be null"
+        
+        if self.to_window_length > self.total_length:
+            return 1, "The length to window cannot be greater than the capillary length"
+        
         store.put('Viscosity', value=viscosity, unit="cp")
         return 0, ""
 		
@@ -210,6 +219,10 @@ class Capillary:
                 return 1, "The voltage cannot be null"
             else:
                 return 1, "The diameter cannot be null"
+        
+        if self.to_window_length > self.total_length:
+            return 1, "The length to window cannot be greater than the capillary length"
+        
         store.put('Conductivity', value=conductivity, unit="S/m")
         return 0, ""
 	
@@ -221,23 +234,21 @@ class Capillary:
             strengh = self.field_strength()
             microeof = self.micro_eof()
             lpermin = self.length_per_minute()
-            flowrate = self.flow_rate()
+            flowrate = self.flow_rate_flow()
         except ZeroDivisionError:
             if self.total_length == 0:
                 return 1, "The capillary length cannot be null"
             elif self.electro_osmosis_time:
                 return 1, "The EOF Time cannot be null" 
-            elif self.voltage:
-                return 1, "The voltage cannot be null"
-            elif self.diameter:
-                return 1, "The diameter cannot be null"
             else:
-                return 1, "The pressure cannot be null"
+                return 1, "The voltage cannot be null"
             
+        if self.to_window_length > self.total_length:
+            return 1, "The length to window cannot be greater than the capillary length"
         
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("MicroEOF", value=microeof, unit="cm²/V/s")
-        store.put("Lengthpermin", value=lpermin, unit="m")
+        store.put("Lengthpermin", value=LengthUnits.convert_unit(lpermin, u'm', u'cm'), unit="cm")
         store.put("Flowrate", value=flowrate, unit="nL/min")
         return 0, ""
         
@@ -258,7 +269,7 @@ class Capillary:
             analyteinjpmol = self.analyte_injected_pmol()
             injpressure = self.injection_pressure()
             strengh = self.field_strength()
-            flowrate = self.flow_rate()
+            flowrate = self.flow_rate_inj()
         except ZeroDivisionError:
             if self.viscosity == 0:
                 return 1, "The viscosity cannot be null" 
@@ -294,7 +305,7 @@ class Capillary:
         store.put("Flowrate", value=flowrate, unit="nL/min")
         
         if plugpertowinlen > 100.:
-            return 2, "the capillary is full"
+            return 2, "The capillary is full"
         return 0, ""
             
         
@@ -308,6 +319,9 @@ class Capillary:
                 return 1, "The EOF Time cannot be null" 
             else:
                 return 1, "The voltage cannot be null" 
+        
+        if self.to_window_length > self.total_length:
+            return 1, "The length to window cannot be greater than the capillary length"
         
         store.put("MicroEOF", value=microeof, unit="cm²/V/s")
         for i in range(1, store.get('Nbtimecompound')["value"]+1):

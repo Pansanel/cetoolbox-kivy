@@ -44,8 +44,6 @@ Window.softinput_mode = 'resize'
 #~ Window.softinput_mode = 'below_target'
 
 
-
-
 __version__ = '0.0.7'
 
 def add_color(text, color):
@@ -720,7 +718,6 @@ class ManagerApp(App):
         return True
     
     def on_resume(self):
-        pass
         store = get_store()
         self.sm.current = str(store.get('pause')["value"])
 
