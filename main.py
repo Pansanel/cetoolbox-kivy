@@ -42,6 +42,9 @@ Window.softinput_mode = 'resize'
 #to test when the version 1.9.1 of kivy is out
 #~ Window.softinput_mode = 'below_target'
 
+
+
+
 __version__ = '0.0.6'
 
 def add_color(text, color):
@@ -83,7 +86,6 @@ class ErrorPopup(CEToolBoxPopup):
 class ViscosityPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
-        #~ need error gestion => through data
         store = get_store()
         
         self.ids.inlayout.rows = 1
@@ -96,7 +98,6 @@ class ViscosityPopup(CEToolBoxPopup):
 class InjectionPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
-        #~ need error gestion => through data
         store = get_store()
         
         if data["errcode"] == 2:
@@ -178,7 +179,6 @@ class InjectionPopup(CEToolBoxPopup):
 class ConductivityPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
-        #~ need error gestion => through data
         store = get_store()
         
         self.ids.inlayout.rows = 1
@@ -191,7 +191,6 @@ class ConductivityPopup(CEToolBoxPopup):
 class FlowPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
-        #~ need error gestion => through data
         store = get_store()
         
         self.ids.inlayout.rows = 4
@@ -221,10 +220,9 @@ class FlowPopup(CEToolBoxPopup):
 class MobilityPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
-        #~ need error gestion => through data
         store = get_store()
         
-        self.ids.inlayout.rows = 1 + 2 * store.get('Nbtimecompound')["value"]
+        self.ids.inlayout.rows = 1 + store.get('Nbtimecompound')["value"]
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEOF :","FFFFFF")))
         value = "{:.2E}".format(store.get('MicroEOF')["value"])
