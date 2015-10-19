@@ -29,6 +29,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
 from kivy.core.window import Window
+from kivy.utils import platform
 
 from os.path import join
 import re
@@ -52,14 +53,14 @@ def add_color(text, color):
   
 class FloatInput(TextInput):
     pass
-    #~ pat = re.compile('[^0-9]')
-    #~ def insert_text(self, substring, from_undo=False):
-        #~ pat = self.pat
-        #~ if '.' in self.text:
-            #~ s = re.sub(pat, '', substring)
-        #~ else:
-            #~ s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
-        #~ return super(FloatInput, self).insert_text(s, from_undo=from_undo)
+    pat = re.compile('[^0-9]')
+    def insert_text(self, substring, from_undo=False):
+        pat = self.pat
+        if '.' in self.text:
+            s = re.sub(pat, '', substring)
+        else:
+            s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
+        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
 class CEToolBoxLabel(Label):
     pass
@@ -689,16 +690,39 @@ class ManagerApp(App):
     title = "CEToolBox"
     create_store()
     
+    
     def build(self):
-        sm = ScreenManager()
-        sm.add_widget(MenuScreen(name='menu'))
-        sm.add_widget(InjectionScreen(name='injection'))
-        sm.add_widget(ViscosityScreen(name='viscosity'))
-        sm.add_widget(ConductivityScreen(name='conductivity'))
-        sm.add_widget(MobilityScreen(name='mobility'))
-        sm.add_widget(FlowScreen(name='flow'))
-        sm.add_widget(AboutScreen(name='about'))
-        return sm
+        self.sm = ScreenManager()
+        self.sm.add_widget(MenuScreen(name='menu'))
+        self.sm.add_widget(InjectionScreen(name='injection'))
+        self.sm.add_widget(ViscosityScreen(name='viscosity'))
+        self.sm.add_widget(ConductivityScreen(name='conductivity'))
+        self.sm.add_widget(MobilityScreen(name='mobility'))
+        self.sm.add_widget(FlowScreen(name='flow'))
+        self.sm.add_widget(AboutScreen(name='about'))
+        self.bind(on_start=self.post_build_init)
+        return self.sm
+
+    def post_build_init(self, *args):
+        win = Window
+        win.bind(on_keyboard=self.my_key_handler)
+
+    def my_key_handler(self, window, keycode1, keycode2, text, modifiers):
+        if keycode1 in [27, 1001]:
+            self.sm.current = "menu"
+            return True
+        return False
+
+    def on_pause(self):
+        #perfect save but why ?
+        store = get_store()
+        store.put("pause", value=self.sm.current)
+        return True
+    
+    def on_resume(self):
+        pass
+        store = get_store()
+        self.sm.current = str(store.get('pause')["value"])
 
 if __name__ == '__main__':
     ManagerApp().run()

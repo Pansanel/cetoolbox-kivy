@@ -51,3 +51,5 @@ def create_store():
         store.put('Timecompound1', value=1.0, unit="min")
     if not store.exists("Nbtimecompound"):
         store.put('Nbtimecompound', value=1)
+    if not store.exists("pause"):
+		store.put('pause', value="menu")

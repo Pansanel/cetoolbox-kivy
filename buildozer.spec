@@ -60,7 +60,7 @@ fullscreen = 1
 #
 
 # (list) Permissions
-android.permissions = WRITE_EXTERNAL_STORAGE, WAKE_LOCK
+android.permissions = WRITE_EXTERNAL_STORAGE
 
 # (int) Android API to use
 #android.api = 19
@@ -127,7 +127,7 @@ android.minapi = 13
 
 # (bool) Indicate whether the screen should stay on
 # Don't forget to add the WAKE_LOCK permission if you set this to True
-android.wakelock = True
+#android.wakelock = False
 
 # (list) Android application meta-data to set (key=value format)
 #android.meta_data =
