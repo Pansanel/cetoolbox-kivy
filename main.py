@@ -46,7 +46,7 @@ Window.softinput_mode = 'resize'
 
 
 
-__version__ = '0.0.6'
+__version__ = '0.0.7'
 
 def add_color(text, color):
     return "[color="+color+"]"+text+"[/color]"
