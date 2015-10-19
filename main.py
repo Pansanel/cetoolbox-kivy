@@ -460,7 +460,7 @@ class MobilityScreen(Screen):
                                                    id='Timecompound'+str(i))
             timecompountunit =  CEToolBoxSpinner(text=store.get('Timecompound'+str(i))["unit"],
                                                  id='Timecompound'+str(i)+'Unit', 
-                                                 values=["s", "m"])
+                                                 values=["s", "min"])
             self.ids.inlayout.add_widget(timecompount)
             self.ids.inlayout.add_widget(timecompountvalue)
             self.ids.inlayout.add_widget(timecompountunit)
@@ -489,10 +489,10 @@ class MobilityScreen(Screen):
         timecompount = CEToolBoxLabel(text="Time compound "+newval)
         timecompountvalue = CEToolBoxTextInput(text=str(1.0),
                                                id='Timecompound'+newval)
-        timecompountunit =  CEToolBoxSpinner(text=u"m",
+        timecompountunit =  CEToolBoxSpinner(text=u"min",
                                              id='Timecompound'+newval+'Unit', 
-                                             values=["s", "m"])
-        store.put('Timecompound'+newval, value=1.0, unit="m")
+                                             values=["s", "min"])
+        store.put('Timecompound'+newval, value=1.0, unit="min")
         self.ids.inlayout.add_widget(timecompount)
         self.ids.inlayout.add_widget(timecompountvalue)
         self.ids.inlayout.add_widget(timecompountunit)

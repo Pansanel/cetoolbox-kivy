@@ -32,7 +32,6 @@
     height: '30sp'
     width: '60sp'
     input_type: 'number'
-    #size_hint_y: None
 
 <CEToolBoxUnitLabel@Label>:
     font_size: '15sp'
@@ -415,7 +414,7 @@
                 
                 CEToolBoxSpinner:
                     id: DetectiontimeUnit
-                    values: ["s", "m"]
+                    values: ["s", "min"]
 
     
         ScrollViewSpe:
@@ -438,7 +437,7 @@
                     on_press: Pressure.text="30.0"
                     on_press: PressureUnit.text="mbar"
                     on_press: Detectiontime.text="10.0"
-                    on_press: DetectiontimeUnit.text="m"
+                    on_press: DetectiontimeUnit.text="min"
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'
@@ -521,7 +520,7 @@
                     on_press: Idiameter.text="50.0"
                     on_press: IdiameterUnit.text="µm"
                     on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="kV"
+                    on_press: VoltageUnit.text="V"
                     on_press: Electriccurrent.text="10.0"
                     on_press: ElectriccurrentUnit.text="µA"
                 
@@ -578,14 +577,14 @@
                     id: VoltageUnit
                     
                 CEToolBoxLabel:
-                    text: "Electro-osmosis time"
+                    text: "EOF time"
              
                 CEToolBoxTextInput:
                     id: Electroosmosis
                 
                 CEToolBoxSpinner:
                     id: ElectroosmosisUnit
-                    values: ["s", "m"]
+                    values: ["s", "min"]
                  
     
         ScrollViewSpe:
@@ -606,9 +605,9 @@
                     on_press: Idiameter.text="50.0"
                     on_press: IdiameterUnit.text="µm"
                     on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="kV"
+                    on_press: VoltageUnit.text="V"
                     on_press: Electroosmosis.text="1.0"
-                    on_press: ElectroosmosisUnit.text="m"
+                    on_press: ElectroosmosisUnit.text="min"
                 
                 MenuButton:
                     on_press: root.manager.current = 'menu'
@@ -656,14 +655,14 @@
                     id: VoltageUnit
                     
                 CEToolBoxLabel:
-                    text: "Electro-osmosis time"
+                    text: "EOF time"
              
                 CEToolBoxTextInput:
                     id: Electroosmosis
                 
                 CEToolBoxSpinner:
                     id: ElectroosmosisUnit
-                    values: ["s", "m"]
+                    values: ["s", "min"]
                     
                 CEToolBoxLabel:
 					text: "Time compound 1"
@@ -673,7 +672,7 @@
 				
 				CEToolBoxSpinner:
                     id: Timecompound1Unit
-                    values: ["s", "m"]
+                    values: ["s", "min"]
 				
                  
     
@@ -693,11 +692,11 @@
                     on_press: Towindow.text="100.0"
                     on_press: TowindowUnit.text="cm"
                     on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="kV"
+                    on_press: VoltageUnit.text="V"
                     on_press: Electroosmosis.text="1.0"
-                    on_press: ElectroosmosisUnit.text="m"
+                    on_press: ElectroosmosisUnit.text="min"
                     on_press: Timecompound1.text="1.0"
-                    on_press: Timecompound1Unit.text="m"
+                    on_press: Timecompound1Unit.text="min"
                     on_press: root.reset()
                 
                 MenuButton:

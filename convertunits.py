@@ -51,8 +51,8 @@ class PressureUnits(BaseUnits):
 class TimeUnits(BaseUnits):
     
     times = Family(name='time', base='s')
-    times.add('m', 60, 's')
-    times.add('h', 60, 'm')
+    times.add('min', 60, 's')
+    times.add('h', 60, 'min')
     
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):

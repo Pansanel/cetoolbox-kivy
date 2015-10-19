@@ -40,14 +40,14 @@ def create_store():
     if not store.exists('Molweight'):
         store.put('Molweight', value=1000.0, unit="g/mol")
     if not store.exists('Detectiontime'):
-        store.put('Detectiontime', value=10.0, unit="m")
+        store.put('Detectiontime', value=10.0, unit="min")
     if not store.exists('Voltage'):
-        store.put('Voltage', value=3.0, unit="kV")
+        store.put('Voltage', value=3.0, unit="V")
     if not store.exists('Electriccurrent'):
         store.put('Electriccurrent', value=10.0, unit="µA")
     if not store.exists('Electroosmosis'):
-        store.put('Electroosmosis', value=1.0, unit="m")  
+        store.put('Electroosmosis', value=1.0, unit="min")  
     if not store.exists("Timecompound1"):
-        store.put('Timecompound1', value=1.0, unit="m")
+        store.put('Timecompound1', value=1.0, unit="min")
     if not store.exists("Nbtimecompound"):
         store.put('Nbtimecompound', value=1)

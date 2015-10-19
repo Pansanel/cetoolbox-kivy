@@ -213,7 +213,7 @@ class Capillary:
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("MicroEOF", value=microeof, unit="cm²/V/s")
         store.put("Lengthpermin", value=lpermin, unit="m")
-        store.put("Flowrate", value=flowrate, unit="nL/m")
+        store.put("Flowrate", value=flowrate, unit="nL/min")
         
     def save_injection_result(self):
         """ compute and save the result for the injection screen """
@@ -226,7 +226,7 @@ class Capillary:
         plugpertotallen = (pluglen/10)/self.total_length
         plugpertowinlen = (pluglen/10)/self.to_window_length
         timetoonevols = self.time_to_replace_volume()
-        timetoonevolm = TimeUnits.convert_unit(timetoonevols, u's', u'm')
+        timetoonevolm = TimeUnits.convert_unit(timetoonevols, u's', u'min')
         analyteinjng = self.analyte_injected_ng()
         analyteinjpmol = self.analyte_injected_pmol()
         injpressure = self.injection_pressure()
@@ -240,12 +240,12 @@ class Capillary:
         store.put("Pluglenpertotallen", value=plugpertotallen, unit="")
         store.put("Pluglenperlentowin", value=plugpertowinlen, unit="")
         store.put("Timetoreplaces", value=timetoonevols, unit="s")
-        store.put("Timetoreplacem", value=timetoonevolm, unit="m")
+        store.put("Timetoreplacem", value=timetoonevolm, unit="min")
         store.put("Injectedanalyteng", value=analyteinjng, unit="ng")
         store.put("Injectedanalytepmol", value=analyteinjpmol, unit="pmol")
         store.put("Injectionpressure", value=injpressure, unit="psi/s")
         store.put("Fieldstrength", value=strengh, unit="V/cm")
-        store.put("Flowrate", value=flowrate, unit="nL/m")
+        store.put("Flowrate", value=flowrate, unit="nL/min")
         
     def save_mobility_result(self):
         """ compute and save the result for the mobility result """
