@@ -28,6 +28,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
+from kivy.core.window import Window
 
 from os.path import join
 import re
@@ -36,20 +37,26 @@ from store import get_store, create_store
 from capillary import Capillary
 
 
-__version__ = '0.0.5'
+#when the keyboard is open resize the window
+Window.softinput_mode = 'resize'
+#to test when the version 1.9.1 of kivy is out
+#~ Window.softinput_mode = 'below_target'
+
+__version__ = '0.0.6'
 
 def add_color(text, color):
     return "[color="+color+"]"+text+"[/color]"
-    
+  
 class FloatInput(TextInput):
-    pat = re.compile('[^0-9]')
-    def insert_text(self, substring, from_undo=False):
-        pat = self.pat
-        if '.' in self.text:
-            s = re.sub(pat, '', substring)
-        else:
-            s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
-        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
+    pass
+    #~ pat = re.compile('[^0-9]')
+    #~ def insert_text(self, substring, from_undo=False):
+        #~ pat = self.pat
+        #~ if '.' in self.text:
+            #~ s = re.sub(pat, '', substring)
+        #~ else:
+            #~ s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
+        #~ return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
 class CEToolBoxLabel(Label):
     pass
@@ -623,6 +630,8 @@ class ScrollViewSpe(ScrollView):
 
 class ManagerApp(App):
     title = "CEToolBox"
+    #~ softinput_mode='resize'
+    softinput_mode = 'pan'
     create_store()
     
     def build(self):
