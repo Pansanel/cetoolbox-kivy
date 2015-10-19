@@ -66,12 +66,15 @@ class CEToolBoxTextInput(FloatInput):
 
 class CEToolBoxSpinner(Spinner):
     pass
+
+class CEToolBoxPopup(Popup):
+    pass
     
 class MenuScreen(Screen):
     pass
 
 
-class ViscosityPopup(Popup):
+class ViscosityPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
         #~ need error gestion => through data
@@ -83,7 +86,7 @@ class ViscosityPopup(Popup):
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(viscotext, "FFFFFF")))
         self.open()
 
-class InjectionPopup(Popup):
+class InjectionPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
         #~ need error gestion => through data
@@ -145,7 +148,7 @@ class InjectionPopup(Popup):
         
         self.open()
         
-class ConductivityPopup(Popup):
+class ConductivityPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
         #~ need error gestion => through data
@@ -157,7 +160,7 @@ class ConductivityPopup(Popup):
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(conductivitytext, "FFFFFF")))
         self.open()
 
-class FlowPopup(Popup):
+class FlowPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
         #~ need error gestion => through data
@@ -183,7 +186,7 @@ class FlowPopup(Popup):
         
         self.open()
         
-class MobilityPopup(Popup):
+class MobilityPopup(CEToolBoxPopup):
     
     def show_popup(self, data):
         #~ need error gestion => through data
