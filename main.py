@@ -630,8 +630,6 @@ class ScrollViewSpe(ScrollView):
 
 class ManagerApp(App):
     title = "CEToolBox"
-    #~ softinput_mode='resize'
-    softinput_mode = 'pan'
     create_store()
     
     def build(self):
