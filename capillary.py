@@ -189,50 +189,95 @@ class Capillary:
     def save_vicosity_result(self):
         """ compute and save the results for the vicosity screen """
         store = get_store()
-        
-        viscosity = self.compute_viscosity()
-        
+        try:
+            viscosity = self.compute_viscosity()
+        except ZeroDivisionError: 
+            if self.total_length == 0:
+                return 1, "The capillary length cannot be null"
+            else:
+                return 1, "The window length cannot be null"
         store.put('Viscosity', value=viscosity, unit="cp")
+        return 0, ""
 		
     def save_conductivy_result(self):
         """ compute and save the result for the conductivy screen """  
         store = get_store()
         
-        conductivity = self.compute_conductivity()
-        
+        try:
+            conductivity = self.compute_conductivity()
+        except ZeroDivisionError:
+            if self.voltage == 0:
+                return 1, "The voltage cannot be null"
+            else:
+                return 1, "The diameter cannot be null"
         store.put('Conductivity', value=conductivity, unit="S/m")
+        return 0, ""
 	
     def save_flow_result(self):
         """ compute and save the result for the flow screen """
         store = get_store()
         
-        strengh = self.field_strength()
-        microeof = self.micro_eof()
-        lpermin = self.length_per_minute()
-        flowrate = self.flow_rate()
+        try:
+            strengh = self.field_strength()
+            microeof = self.micro_eof()
+            lpermin = self.length_per_minute()
+            flowrate = self.flow_rate()
+        except ZeroDivisionError:
+            if self.total_length == 0:
+                return 1, "The capillary length cannot be null"
+            elif self.electro_osmosis_time:
+                return 1, "The EOF Time cannot be null" 
+            elif self.voltage:
+                return 1, "The voltage cannot be null"
+            elif self.diameter:
+                return 1, "The diameter cannot be null"
+            else:
+                return 1, "The pressure cannot be null"
+            
         
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("MicroEOF", value=microeof, unit="cm²/V/s")
         store.put("Lengthpermin", value=lpermin, unit="m")
         store.put("Flowrate", value=flowrate, unit="nL/min")
+        return 0, ""
         
     def save_injection_result(self):
         """ compute and save the result for the injection screen """
         store = get_store()
         
-        hydroinj = self.delivered_volume()
-        capilaryvol = self.capillary_volume()
-        capilaryvoltowin = self.to_window_volume()
-        pluglen = self.injection_plug_length()
-        plugpertotallen = (pluglen/10)/self.total_length
-        plugpertowinlen = (pluglen/10)/self.to_window_length
-        timetoonevols = self.time_to_replace_volume()
-        timetoonevolm = TimeUnits.convert_unit(timetoonevols, u's', u'min')
-        analyteinjng = self.analyte_injected_ng()
-        analyteinjpmol = self.analyte_injected_pmol()
-        injpressure = self.injection_pressure()
-        strengh = self.field_strength()
-        flowrate = self.flow_rate()
+        try:
+            hydroinj = self.delivered_volume()
+            capilaryvol = self.capillary_volume()
+            capilaryvoltowin = self.to_window_volume()
+            pluglen = self.injection_plug_length()
+            plugpertotallen = (pluglen/10)/self.total_length
+            plugpertowinlen = (pluglen/10)/self.to_window_length
+            timetoonevols = self.time_to_replace_volume()
+            timetoonevolm = TimeUnits.convert_unit(timetoonevols, u's', u'min')
+            analyteinjng = self.analyte_injected_ng()
+            analyteinjpmol = self.analyte_injected_pmol()
+            injpressure = self.injection_pressure()
+            strengh = self.field_strength()
+            flowrate = self.flow_rate()
+        except ZeroDivisionError:
+            if self.viscosity == 0:
+                return 1, "The viscosity cannot be null" 
+            elif self.total_length == 0:
+                return 1, "The capillary length cannot be null"
+            elif self.to_window_length == 0:
+                return 1, "The length to window cannot be null"
+            elif self.diameter == 0:
+                return 1, "The diameter cannot be null"
+            elif self.pressure == 0:
+                return 1, "The pressure cannot be null"
+            elif self.duration == 0:
+                return 1, "The time cannot be null"
+            else :
+                return 1, "The molecular weight cannot be null"
+        
+        if self.to_window_length > self.total_length:
+            return 1, "The length to window cannot be greater than the capillary length"
+            
         
         store.put("Hydrodynamicinjection", value=hydroinj, unit="nL")
         store.put("Capillaryvolume", value=capilaryvol, unit="nL")
@@ -248,11 +293,22 @@ class Capillary:
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("Flowrate", value=flowrate, unit="nL/min")
         
+        if plugpertowinlen > 100.:
+            return 2, "the capillary is full"
+        return 0, ""
+            
+        
     def save_mobility_result(self):
         """ compute and save the result for the mobility result """
         store = get_store()
+        try :
+            microeof = self.micro_eof()
+        except ZeroDivisionError:
+            if self.electro_osmosis_time == 0:
+                return 1, "The EOF Time cannot be null" 
+            else:
+                return 1, "The voltage cannot be null" 
         
-        microeof = self.micro_eof()
         store.put("MicroEOF", value=microeof, unit="cm²/V/s")
         for i in range(1, store.get('Nbtimecompound')["value"]+1):
             keystore = "Timecompound"+str(i)
@@ -261,4 +317,4 @@ class Capillary:
                                                 u"s")
             microep = self.micro_ep(time)
             store.put("MicroEP"+str(i), value=microep, unit="cm²/V/s")
-        
+        return 0, ""

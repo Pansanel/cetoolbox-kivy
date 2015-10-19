@@ -73,6 +73,12 @@ class CEToolBoxPopup(Popup):
 class MenuScreen(Screen):
     pass
 
+class ErrorPopup(CEToolBoxPopup):
+    
+    def show_popup(self, data):
+        message = add_color(data["errtext"], "FF0000")
+        self.ids.errormessage.text = message
+        self.open()
 
 class ViscosityPopup(CEToolBoxPopup):
     
@@ -93,7 +99,10 @@ class InjectionPopup(CEToolBoxPopup):
         #~ need error gestion => through data
         store = get_store()
         
-        self.ids.inlayout.rows = 13
+        if data["errcode"] == 2:
+            self.ids.inlayout.rows = 14
+        else:
+            self.ids.inlayout.rows = 13
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Hydrodynamic injection :", "FFFFFF")))
         value = round(store.get('Hydrodynamicinjection')["value"], 2)
@@ -135,7 +144,7 @@ class InjectionPopup(CEToolBoxPopup):
         value = str(value)+" "+store.get('Timetoreplacem')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
                 
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte:", "BFBFBF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte :", "BFBFBF")))
         value = round(store.get('Injectedanalyteng')["value"], 2)
         value = str(value)+" "+store.get('Injectedanalyteng')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
@@ -159,6 +168,10 @@ class InjectionPopup(CEToolBoxPopup):
         value = round(store.get('Fieldstrength')["value"], 2)
         value = str(value)+" "+store.get('Fieldstrength')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
+        
+        if data["errcode"] == 2:
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Warning :", "FF0000")))
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(data["errtext"], "FF0000")))
         
         self.open()
         
@@ -287,12 +300,16 @@ class InjectionScreen(Screen):
         
         #add data          
         computation = Capillary()
-        computation.save_injection_result()
+        errcode, errtext = computation.save_injection_result()
         
         data = {}
-        data["error"] = 0
+        data["errcode"] = errcode
+        data["errtext"] = errtext
         
-        self._popup = InjectionPopup()
+        if data["errcode"] == 1:
+            self._popup = ErrorPopup()
+        else:
+            self._popup = InjectionPopup()
         self._popup.show_popup(data)
     
         
@@ -333,11 +350,16 @@ class ViscosityScreen(Screen):
                   unit=self.ids.DetectiontimeUnit.text)
         
         computation = Capillary()
-        computation.save_vicosity_result()
-        data = {}
-        data["error"] = 0
+        errcode, errtext = computation.save_vicosity_result()
         
-        self._popup = ViscosityPopup()
+        data = {}
+        data["errcode"] = errcode
+        data["errtext"] = errtext
+        
+        if data["errcode"] == 1:
+            self._popup = ErrorPopup()
+        else:
+            self._popup = ViscosityPopup()
         self._popup.show_popup(data)
 
 
@@ -375,12 +397,16 @@ class ConductivityScreen(Screen):
                   unit=self.ids.ElectriccurrentUnit.text)
         
         computation = Capillary()
-        computation.save_conductivy_result()
+        errcode, errtext = computation.save_conductivy_result()
         
         data = {}
-        data["error"] = 0
+        data["errcode"] = errcode
+        data["errtext"] = errtext
         
-        self._popup = ConductivityPopup()
+        if data["errcode"] == 1:
+            self._popup = ErrorPopup()
+        else:
+            self._popup = ConductivityPopup()
         self._popup.show_popup(data)
 
 class FlowScreen(Screen):
@@ -418,12 +444,16 @@ class FlowScreen(Screen):
                   unit=self.ids.ElectroosmosisUnit.text)
         
         computation = Capillary()
-        computation.save_flow_result()
+        errcode, errtext = computation.save_flow_result()
         
         data = {}
-        data["error"] = 0
+        data["errcode"] = errcode
+        data["errtext"] = errtext
         
-        self._popup = FlowPopup()
+        if data["errcode"] == 1:
+            self._popup = ErrorPopup()
+        else:
+            self._popup = FlowPopup()
         self._popup.show_popup(data)
 
 
@@ -447,12 +477,16 @@ class MobilityScreen(Screen):
                       unit=sublist[2].text)
         
         computation = Capillary()
-        computation.save_mobility_result()
+        errcode, errtext = computation.save_mobility_result()
         
         data = {}
-        data["error"] = 0
+        data["errcode"] = errcode
+        data["errtext"] = errtext
         
-        self._popup = MobilityPopup()
+        if data["errcode"] == 1:
+            self._popup = ErrorPopup()
+        else:
+            self._popup = MobilityPopup()
         self._popup.show_popup(data)
     
     def on_pre_enter(self):
