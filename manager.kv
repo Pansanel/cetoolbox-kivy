@@ -42,6 +42,8 @@
     font_size: '15sp'
     height: '30sp'
     width: '60sp'
+    #centering the text
+	padding: [6,self.height/2-10,6,self.height/2-10]
     input_filter: 'float'
     #waiting for a fix (floating point missing)
     input_type: 'number'
@@ -58,8 +60,6 @@
 
 <CEToolBoxSpinnerOption@SpinnerOption>:
 	font_size: '15sp'
-    #height: '30sp'
-	#width: '30sp'
 	text_size: self.width-10, self.height
     halign: 'left'
     valign: 'middle'
@@ -108,10 +108,7 @@
 
 <TitleImage@Image>:
 	source: "data/logo.png"
-	allow_stretch: True
-	text_size: self.width, self.height
-	halign: 'left'
-	valign: 'middle'
+	size_hint_x: None
 
 <TopTitleLayout@CEToolBoxFixedLayout>:
 	cols: 2
@@ -277,6 +274,8 @@
         
         TopTitleLayout:
 			
+			TitleImage:
+			
 			CEToolBoxLabelTitle:
 				text: "CEToolBox Kivy - Injection"
         
@@ -407,6 +406,8 @@
         
         TopTitleLayout:
 			
+			TitleImage:
+			
 			CEToolBoxLabelTitle:
 				text: "CEToolBox Kivy - Viscosity"
         
@@ -493,6 +494,8 @@
         
         TopTitleLayout:
 			
+			TitleImage:
+			
 			CEToolBoxLabelTitle:
 				text: "CEToolBox Kivy - Conductivity"
         
@@ -574,6 +577,8 @@
         orientation: 'vertical'
         
         TopTitleLayout:
+			
+			TitleImage:
 			
 			CEToolBoxLabelTitle:
 				text: "CEToolBox Kivy - Flow"
@@ -659,6 +664,8 @@
         orientation: 'vertical'
         
 		TopTitleLayout:
+			
+			TitleImage:
 			
 			CEToolBoxLabelTitle:
 				text: "CEToolBox Kivy - Mobility"
