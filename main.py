@@ -47,19 +47,11 @@ Window.softinput_mode = 'resize'
 __version__ = '0.0.7'
 
 def add_color(text, color):
-    return "[color="+color+"]"+text+"[/color]"
+    return "[color="+color+"]"+text+"[/color]" 
   
 class FloatInput(TextInput):
     pass
-    pat = re.compile('[^0-9]')
-    def insert_text(self, substring, from_undo=False):
-        pat = self.pat
-        if '.' in self.text:
-            s = re.sub(pat, '', substring)
-        else:
-            s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
-        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
-
+    
 class CEToolBoxLabel(Label):
     pass
 
@@ -638,6 +630,7 @@ class CEToolBoxLayout(GridLayout):
 class TopScreenLayout(CEToolBoxLayout):
     """ set the size of the layout from minimals values and the size
     of the scrollviewspe parrent."""
+    
     def set_min_height(self):
         self.minimum_height = 40 *self.rows + 10 
 
@@ -689,7 +682,7 @@ class ManagerApp(App):
     create_store()
     
     
-    def build(self):
+    def build(self):        
         self.sm = ScreenManager()
         self.sm.add_widget(MenuScreen(name='menu'))
         self.sm.add_widget(InjectionScreen(name='injection'))
