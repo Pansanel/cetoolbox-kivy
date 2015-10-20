@@ -643,12 +643,12 @@ class TopPopupLayout(CEToolBoxLayout):
     def set_min_width(self):
         self.minimum_width = 300
     
-class DownMenuLayout(CEToolBoxLayout):
-    """ set the size of the layout from minimals values and the size
-    of the scrollviewspe parrent."""
-    
-    def set_min_height(self):
-        self.minimum_height = 40 
+#~ class DownMenuLayout(CEToolBoxLayout):
+    #~ """ set the size of the layout from minimals values and the size
+    #~ of the scrollviewspe parrent."""
+    #~ 
+    #~ def set_min_height(self):
+        #~ self.minimum_height = 40 
     
 #~ class DownMenuClose(CEToolBoxLayout):
     #~ 

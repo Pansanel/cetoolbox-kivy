@@ -75,6 +75,10 @@
     option_cls: Factory.get("CEToolBoxSpinnerOption")
 	#magic to use if I want a fixed size
 	#size_hint_y: None
+
+<CEToolBoxLayout>:
+	padding: 10
+    spacing: 10
 	
 <TopScreenLayout>:
     size_hint_y: None
@@ -82,34 +86,25 @@
     minimum_height: '350sp'
     minimum_width: '350sp'
     cols: 3
-    padding: 10
-    spacing: 10
-
+    
 <TopPopupLayout>:
 	size_hint_y: None
     size_hint_x: None
     minimum_height: '350sp'
     minimum_width: '350sp'
     cols: 2
-    padding: 10
-    spacing: 10
 
-<DownMenuLayout>:
-    size_hint_y: None
-    size_hint_x: None
-    minimum_height: '30sp'
-    minimum_width: '350sp'
+<CEToolBoxFixedLayout@CEToolBoxLayout>:
+	size_hint_y: None
+    height: '60sp'
+
+<DownMenuLayout@CEToolBoxFixedLayout>:
     cols: 3 
-    padding: 10
-    spacing: 10
 
-<DownMenuClose@CEToolBoxLayout>:
-    size_hint_y: None
-    id: mc
+<DownMenuClose@CEToolBoxFixedLayout>:
     cols: 1
-    padding: 10
-    spacing: 10
-    
+	spacing: 0
+
     
 <ScrollViewSpe>:
     height: self.change_child_height(self.height)
@@ -260,8 +255,6 @@
         orientation: 'vertical'
         
         ScrollViewSpe:
-            size_hint_y: 0.85
-
             
             TopScreenLayout:
                 rows: 9
@@ -348,38 +341,35 @@
                 
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-    
-        ScrollViewSpe:
-            size_hint_y: 0.15
-                        
-            DownMenuLayout:  
+      
+		DownMenuLayout:  
 
-                CalculateButton:
-                    on_release: root.show_injection_results()
+			CalculateButton:
+				on_release: root.show_injection_results()
                     
-                ResetButton:
-                    id: Resetbtn
-                    on_press: Capillary.text="100.0"
-                    on_press: CapillaryUnit.text="cm"
-                    on_press: Towindow.text="100.0"
-                    on_press: TowindowUnit.text="cm"
-                    on_press: Idiameter.text="50.0"
-                    on_press: IdiameterUnit.text="µm"
-                    on_press: Pressure.text="30.0"
-                    on_press: PressureUnit.text="mbar"
-                    on_press: Time.text="10.0"
-                    on_press: TimeUnit.text="s"
-                    on_press: Viscosity.text="1.0"
-                    on_press: ViscosityUnit.text="cp"
-                    on_press: Concentration.text="1.0"
-                    on_press: ConcentrationUnit.text="g/L"
-                    on_press: Molweight.text="1000.0"
-                    on_press: MolweightUnit.text="g/mol"
-                    on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="kV"
+            ResetButton:
+                id: Resetbtn
+                on_press: Capillary.text="100.0"
+                on_press: CapillaryUnit.text="cm"
+                on_press: Towindow.text="100.0"
+                on_press: TowindowUnit.text="cm"
+                on_press: Idiameter.text="50.0"
+                on_press: IdiameterUnit.text="µm"
+                on_press: Pressure.text="30.0"
+                on_press: PressureUnit.text="mbar"
+                on_press: Time.text="10.0"
+                on_press: TimeUnit.text="s"
+                on_press: Viscosity.text="1.0"
+                on_press: ViscosityUnit.text="cp"
+                on_press: Concentration.text="1.0"
+                on_press: ConcentrationUnit.text="g/L"
+                on_press: Molweight.text="1000.0"
+                on_press: MolweightUnit.text="g/mol"
+                on_press: Voltage.text="3.0"
+                on_press: VoltageUnit.text="kV"
                 
-                MenuButton:
-                    on_press: root.manager.current = 'menu'
+            MenuButton:
+                on_press: root.manager.current = 'menu'
 
 
 
@@ -390,8 +380,6 @@
         orientation: 'vertical'
         
         ScrollViewSpe:
-            size_hint_y: 0.85
-
             
             TopScreenLayout:
                 rows: 5
@@ -443,30 +431,27 @@
                     id: DetectiontimeUnit
                     values: ["s", "min"]
 
-    
-        ScrollViewSpe:
-            size_hint_y: 0.15
                         
-            DownMenuLayout:  
+        DownMenuLayout:  
 
-                CalculateButton:
-                    on_release: root.show_viscosity_results()
-                    
-                ResetButton:
-                    id: Resetbtn
-                    on_press: Capillary.text="100.0"
-                    on_press: CapillaryUnit.text="cm"
-                    on_press: Towindow.text="100.0"
-                    on_press: TowindowUnit.text="cm"
-                    on_press: Idiameter.text="50.0"
-                    on_press: IdiameterUnit.text="µm"
-                    on_press: Pressure.text="30.0"
-                    on_press: PressureUnit.text="mbar"
-                    on_press: Detectiontime.text="10.0"
-                    on_press: DetectiontimeUnit.text="min"
+            CalculateButton:
+                on_release: root.show_viscosity_results()
                 
-                MenuButton:
-                    on_press: root.manager.current = 'menu'
+            ResetButton:
+                id: Resetbtn
+                on_press: Capillary.text="100.0"
+                on_press: CapillaryUnit.text="cm"
+                on_press: Towindow.text="100.0"
+                on_press: TowindowUnit.text="cm"
+                on_press: Idiameter.text="50.0"
+                on_press: IdiameterUnit.text="µm"
+                on_press: Pressure.text="30.0"
+                on_press: PressureUnit.text="mbar"
+                on_press: Detectiontime.text="10.0"
+                on_press: DetectiontimeUnit.text="min"
+            
+            MenuButton:
+                on_press: root.manager.current = 'menu'
             
           
 <ConductivityScreen>:
@@ -476,9 +461,7 @@
         orientation: 'vertical'
         
         ScrollViewSpe:
-            size_hint_y: 0.85
-
-            
+                    
             TopScreenLayout:
                 rows: 5
                 
@@ -526,31 +509,27 @@
                 
                 CEToolBoxUnitLabel:
                     id: ElectriccurrentUnit
-                 
-    
-        ScrollViewSpe:
-            size_hint_y: 0.15
                         
-            DownMenuLayout:  
+        DownMenuLayout:  
 
-                CalculateButton:
-                    on_release: root.show_conductivity_results()
-                    
-                ResetButton:
-                    id: Resetbtn
-                    on_press: Capillary.text="100.0"
-                    on_press: CapillaryUnit.text="cm"
-                    on_press: Towindow.text="100.0"
-                    on_press: TowindowUnit.text="cm"
-                    on_press: Idiameter.text="50.0"
-                    on_press: IdiameterUnit.text="µm"
-                    on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="V"
-                    on_press: Electriccurrent.text="10.0"
-                    on_press: ElectriccurrentUnit.text="µA"
+            CalculateButton:
+                on_release: root.show_conductivity_results()
                 
-                MenuButton:
-                    on_press: root.manager.current = 'menu'
+            ResetButton:
+                id: Resetbtn
+                on_press: Capillary.text="100.0"
+                on_press: CapillaryUnit.text="cm"
+                on_press: Towindow.text="100.0"
+                on_press: TowindowUnit.text="cm"
+                on_press: Idiameter.text="50.0"
+                on_press: IdiameterUnit.text="µm"
+                on_press: Voltage.text="3.0"
+                on_press: VoltageUnit.text="V"
+                on_press: Electriccurrent.text="10.0"
+                on_press: ElectriccurrentUnit.text="µA"
+            
+            MenuButton:
+                on_press: root.manager.current = 'menu'
 
 <FlowScreen>:
     fullscreen: True
@@ -611,30 +590,27 @@
                     id: ElectroosmosisUnit
                     values: ["s", "min"]
                  
-    
-        ScrollViewSpe:
-            size_hint_y: 0.15
                         
-            DownMenuLayout:  
+        DownMenuLayout:  
 
-                CalculateButton:
-                    on_release: root.show_flow_results()
-                    
-                ResetButton:
-                    id: Resetbtn
-                    on_press: Capillary.text="100.0"
-                    on_press: CapillaryUnit.text="cm"
-                    on_press: Towindow.text="100.0"
-                    on_press: TowindowUnit.text="cm"
-                    on_press: Idiameter.text="50.0"
-                    on_press: IdiameterUnit.text="µm"
-                    on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="V"
-                    on_press: Electroosmosis.text="1.0"
-                    on_press: ElectroosmosisUnit.text="min"
+            CalculateButton:
+                on_release: root.show_flow_results()
                 
-                MenuButton:
-                    on_press: root.manager.current = 'menu'
+            ResetButton:
+                id: Resetbtn
+                on_press: Capillary.text="100.0"
+                on_press: CapillaryUnit.text="cm"
+                on_press: Towindow.text="100.0"
+                on_press: TowindowUnit.text="cm"
+                on_press: Idiameter.text="50.0"
+                on_press: IdiameterUnit.text="µm"
+                on_press: Voltage.text="3.0"
+                on_press: VoltageUnit.text="V"
+                on_press: Electroosmosis.text="1.0"
+                on_press: ElectroosmosisUnit.text="min"
+            
+            MenuButton:
+                on_press: root.manager.current = 'menu'
 
 <MobilityScreen>:
     fullscreen: True
@@ -644,8 +620,6 @@
         
         ScrollViewSpe:
             id: tscrollview
-            size_hint_y: 0.85
-
             
             TopScreenLayout:
 				id: inlayout
@@ -697,33 +671,28 @@
 				CEToolBoxSpinner:
                     id: Timecompound1Unit
                     values: ["s", "min"]
-				
-                 
-    
-        ScrollViewSpe:
-            size_hint_y: 0.15
                         
-            DownMenuLayout:  
+        DownMenuLayout:  
 
-                CalculateButton:
-                    on_release: root.show_mobility_results()
-                    
-                ResetButton:
-                    id: Resetbtn
-                    on_press: Capillary.text="100.0"
-                    on_press: CapillaryUnit.text="cm"
-                    on_press: Towindow.text="100.0"
-                    on_press: TowindowUnit.text="cm"
-                    on_press: Voltage.text="3.0"
-                    on_press: VoltageUnit.text="V"
-                    on_press: Electroosmosis.text="1.0"
-                    on_press: ElectroosmosisUnit.text="min"
-                    on_press: Timecompound1.text="1.0"
-                    on_press: Timecompound1Unit.text="min"
-                    on_press: root.reset()
+            CalculateButton:
+                on_release: root.show_mobility_results()
                 
-                MenuButton:
-                    on_press: root.manager.current = 'menu'
+            ResetButton:
+                id: Resetbtn
+                on_press: Capillary.text="100.0"
+                on_press: CapillaryUnit.text="cm"
+                on_press: Towindow.text="100.0"
+                on_press: TowindowUnit.text="cm"
+                on_press: Voltage.text="3.0"
+                on_press: VoltageUnit.text="V"
+                on_press: Electroosmosis.text="1.0"
+                on_press: ElectroosmosisUnit.text="min"
+                on_press: Timecompound1.text="1.0"
+                on_press: Timecompound1Unit.text="min"
+                on_press: root.reset()
+            
+            MenuButton:
+                on_press: root.manager.current = 'menu'
 
 
 <AboutScreen>:
