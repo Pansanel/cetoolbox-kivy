@@ -49,13 +49,10 @@ __version__ = '0.0.7'
 def add_color(text, color):
     return "[color="+color+"]"+text+"[/color]" 
   
-class FloatInput(TextInput):
-    pass
-    
 class CEToolBoxLabel(Label):
     pass
 
-class CEToolBoxTextInput(FloatInput):
+class CEToolBoxTextInput(TextInput):
     pass
 
 class CEToolBoxSpinner(Spinner):

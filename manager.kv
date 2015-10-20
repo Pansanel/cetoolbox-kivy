@@ -1,4 +1,5 @@
 #:kivy 1.9.0
+#:import Factory kivy.factory.Factory
 
 <CEToolBoxButton@Button>:
     font_size: '15sp'
@@ -32,20 +33,43 @@
     width: '60sp'
     input_filter: 'float'
     #waiting for a fix (floating point missing)
-    input_type: 'tel'
-
+    input_type: 'number'
 
 <CEToolBoxUnitLabel@Label>:
     font_size: '15sp'
     height: '30sp'
     width: '30sp'
+    text_size: self.width-10, self.height
+    halign: 'left'
+    valign: 'middle'
     #magic to use if I want a fixed size
     #size_hint_y: None
-    
+
+<CEToolBoxSpinnerLabel@Label>:
+	font_size: '15sp'
+    height: '30sp'
+	width: '30sp'
+	text_size: self.width-10, self.height
+    halign: 'left'
+    valign: 'middle'
+
+
+<CEToolBoxSpinnerOption@SpinnerOption>:
+	font_size: '15sp'
+    height: '30sp'
+	width: '30sp'
+	text_size: self.width-10, self.height
+    halign: 'left'
+    valign: 'middle'
+   
 <CEToolBoxSpinner>:
     font_size: '15sp'
     height: '30sp'
 	width: '30sp'
+	text_size: self.width-10, self.height
+    halign: 'left'
+    valign: 'middle'
+    option_cls: Factory.get("CEToolBoxSpinnerOption")
 	#magic to use if I want a fixed size
 	#size_hint_y: None
 	
