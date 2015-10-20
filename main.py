@@ -636,7 +636,7 @@ class TopPopupLayout(CEToolBoxLayout):
     """ set the size of the layout from minimals values and the size
     of the scrollviewspe parrent."""
     def set_min_height(self):
-        self.minimum_height = 40 *self.rows + 10 
+        self.minimum_height = 50 *self.rows + 10 
 
     def set_min_width(self):
         self.minimum_width = 300
