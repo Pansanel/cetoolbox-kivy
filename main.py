@@ -29,10 +29,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
 from kivy.core.window import Window
-from kivy.utils import platform
 
-from os.path import join
-import re
 
 from store import get_store, create_store
 from capillary import Capillary
@@ -260,6 +257,7 @@ class InjectionScreen(Screen):
         self.ids.MolweightUnit.text = store.get('Molweight')["unit"]
         self.ids.Voltage.text = str(store.get('Voltage')["value"])
         self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
+        
     
     
     def show_injection_results(self):

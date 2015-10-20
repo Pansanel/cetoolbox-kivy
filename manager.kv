@@ -22,7 +22,6 @@
     height: '30sp'
 	text: 'Close'
 	on_press: root.on_press
-	#weird behaviour if size_hint_y
 	#size_hint_y: None
 
 <CEToolBoxLabel>:
@@ -59,8 +58,8 @@
 
 <CEToolBoxSpinnerOption@SpinnerOption>:
 	font_size: '15sp'
-    height: '30sp'
-	width: '30sp'
+    #height: '30sp'
+	#width: '30sp'
 	text_size: self.width-10, self.height
     halign: 'left'
     valign: 'middle'
@@ -98,6 +97,27 @@
 	size_hint_y: None
     height: '60sp'
 
+<CEToolBoxLabelTitle@Label>:
+	font_size: '18sp'
+	height: '20sp'
+	text_size: self.width, self.height
+	halign: 'left'
+	valign: 'middle'
+	markup: True
+
+<TitleImage@Image>:
+	source: "data/logo.png"
+	allow_stretch: True
+	text_size: self.width, self.height
+	halign: 'left'
+	valign: 'middle'
+
+<TopTitleLayout@CEToolBoxFixedLayout>:
+	cols: 2
+	height: '50sp'
+	spacing: 5
+	pading: 5
+	
 <DownMenuLayout@CEToolBoxFixedLayout>:
     cols: 3 
 
@@ -254,6 +274,11 @@
     BoxLayout:
         orientation: 'vertical'
         
+        TopTitleLayout:
+			
+			CEToolBoxLabelTitle:
+				text: "CEToolBox Kivy - Injection"
+        
         ScrollViewSpe:
             
             TopScreenLayout:
@@ -379,6 +404,11 @@
     BoxLayout:
         orientation: 'vertical'
         
+        TopTitleLayout:
+			
+			CEToolBoxLabelTitle:
+				text: "CEToolBox Kivy - Viscosity"
+        
         ScrollViewSpe:
             
             TopScreenLayout:
@@ -460,6 +490,11 @@
     BoxLayout:
         orientation: 'vertical'
         
+        TopTitleLayout:
+			
+			CEToolBoxLabelTitle:
+				text: "CEToolBox Kivy - Conductivity"
+        
         ScrollViewSpe:
                     
             TopScreenLayout:
@@ -537,8 +572,12 @@
     BoxLayout:
         orientation: 'vertical'
         
+        TopTitleLayout:
+			
+			CEToolBoxLabelTitle:
+				text: "CEToolBox Kivy - Flow"
+        
         ScrollViewSpe:
-            size_hint_y: 0.85
 
             
             TopScreenLayout:
@@ -617,6 +656,11 @@
     
     BoxLayout:
         orientation: 'vertical'
+        
+		TopTitleLayout:
+			
+			CEToolBoxLabelTitle:
+				text: "CEToolBox Kivy - Mobility"
         
         ScrollViewSpe:
             id: tscrollview
@@ -701,7 +745,6 @@
 		orientation: 'vertical'
 			
 		ScrollViewSpe:
-			size_hint_y: 0.85
 			
 			TopScreenLayout:
 				cols: 1
@@ -726,10 +769,8 @@
 						import webbrowser
 						webbrowser.open(args[1])
                     
-		ScrollViewSpe:
-			size_hint_y: 0.15
-			
-			DownMenuClose:
-				Button:
-					text: 'Menu'
-					on_press: root.manager.current = 'menu'
+
+		DownMenuClose:
+			CloseButton:
+				text: 'Menu'
+				on_press: root.manager.current = 'menu'
