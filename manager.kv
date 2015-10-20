@@ -13,6 +13,10 @@
     text: 'Menu'
     on_press: root.on_press
 
+<CloseButton@CEToolBoxButton>:
+	text: 'Close'
+	on_press: root.on_press
+
 <CEToolBoxLabel>:
     font_size: '15sp'
     height: '30sp'
@@ -145,8 +149,7 @@
             size_hint_y: 0.20
         
             DownMenuClose:
-                Button:
-                    text: 'Close'
+                CloseButton:
                     on_press: popup.dismiss()
 
 <InjectionPopup>:
@@ -167,8 +170,7 @@
             size_hint_y: 0.20
         
             DownMenuClose:
-                Button:
-                    text: 'Close'
+                CloseButton:
                     on_press: popup.dismiss()
 
 <MobilityPopup>:
@@ -188,8 +190,7 @@
             size_hint_y: 0.20
         
             DownMenuClose:
-                Button:
-                    text: 'Close'
+                CloseButton:
                     on_press: popup.dismiss()
 
 <ViscosityPopup>:
@@ -209,8 +210,7 @@
             size_hint_y: 0.20
         
             DownMenuClose:
-                Button:
-                    text: 'Close'
+                CloseButton:
                     on_press: popup.dismiss()
 
             
@@ -232,8 +232,7 @@
             size_hint_y: 0.20
         
             DownMenuClose:
-                Button:
-                    text: 'Close'
+                CloseButton:
                     on_press: popup.dismiss()
         
 <FlowPopup>:
@@ -253,8 +252,7 @@
             size_hint_y: 0.20
         
             DownMenuClose:
-                Button:
-                    text: 'Close'
+                CloseButton:
                     on_press: popup.dismiss()
 <MenuScreen>:
     BoxLayout:
