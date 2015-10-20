@@ -55,6 +55,9 @@ class CEToolBoxLabel(Label):
 class CEToolBoxTextInput(TextInput):
     pass
 
+class CEToolBoxButton(Button):
+    pass
+
 class CEToolBoxSpinner(Spinner):
     pass
 
@@ -513,9 +516,9 @@ class MobilityScreen(Screen):
             self.timecompoundlist.append(tosave)
             
         #create the button add and del
-        self.add_button = Button(text="Add", id="addbutton", on_release=self.add_line)
+        self.add_button = CEToolBoxButton(text="Add", id="addbutton", on_release=self.add_line)
         self.ids.inlayout.add_widget(self.add_button)
-        self.del_button = Button(text="Del", id="delbutton", on_release=self.del_line)
+        self.del_button = CEToolBoxButton(text="Del", id="delbutton", on_release=self.del_line)
         self.ids.inlayout.add_widget(self.del_button)
             
     def add_line(self, buttoninstance):
@@ -545,9 +548,9 @@ class MobilityScreen(Screen):
         self.timecompoundlist.append(tosave)
         
         #recreate the button
-        self.add_button = Button(text="Add", id="addbutton", on_release=self.add_line)
+        self.add_button = CEToolBoxButton(text="Add", id="addbutton", on_release=self.add_line)
         self.ids.inlayout.add_widget(self.add_button)
-        self.del_button = Button(text="Del", id="delbutton", on_release=self.del_line)
+        self.del_button = CEToolBoxButton(text="Del", id="delbutton", on_release=self.del_line)
         self.ids.inlayout.add_widget(self.del_button)
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
         
