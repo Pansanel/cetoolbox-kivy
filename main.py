@@ -650,13 +650,13 @@ class DownMenuLayout(CEToolBoxLayout):
     def set_min_height(self):
         self.minimum_height = 40 
     
-class DownMenuClose(CEToolBoxLayout):
-    
-    def set_min_height(self):
-        self.minimum_height = 40
-    
-    def set_min_width(self):
-        self.minimum_width = 100
+#~ class DownMenuClose(CEToolBoxLayout):
+    #~ 
+    #~ def set_min_height(self):
+        #~ self.minimum_height = 100
+    #~ 
+    #~ def set_min_width(self):
+        #~ self.minimum_width = 100
     
     
     
