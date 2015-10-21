@@ -261,8 +261,8 @@ class Capillary:
             capilaryvol = self.capillary_volume()
             capilaryvoltowin = self.to_window_volume()
             pluglen = self.injection_plug_length()
-            plugpertotallen = (pluglen/10)/self.total_length
-            plugpertowinlen = (pluglen/10)/self.to_window_length
+            plugpertotallen = ((pluglen/10)/self.total_length)*100
+            plugpertowinlen = ((pluglen/10)/self.to_window_length)*100
             timetoonevols = self.time_to_replace_volume()
             timetoonevolm = TimeUnits.convert_unit(timetoonevols, u's', u'min')
             analyteinjng = self.analyte_injected_ng()
@@ -294,8 +294,8 @@ class Capillary:
         store.put("Capillaryvolume", value=capilaryvol, unit="nL")
         store.put("Capillaryvolumetowin", value=capilaryvoltowin, unit="nL")
         store.put("Injectionpluglen", value=pluglen, unit="mm")
-        store.put("Pluglenpertotallen", value=plugpertotallen, unit="")
-        store.put("Pluglenperlentowin", value=plugpertowinlen, unit="")
+        store.put("Pluglenpertotallen", value=plugpertotallen, unit="%")
+        store.put("Pluglenperlentowin", value=plugpertowinlen, unit="%")
         store.put("Timetoreplaces", value=timetoonevols, unit="s")
         store.put("Timetoreplacem", value=timetoonevolm, unit="min")
         store.put("Injectedanalyteng", value=analyteinjng, unit="ng")
@@ -329,6 +329,7 @@ class Capillary:
             time = TimeUnits.convert_unit(float(store.get(keystore)["value"]),
                                                 store.get(keystore)["unit"], 
                                                 u"s")
+            
             microep = self.micro_ep(time)
             store.put("MicroEP"+str(i), value=microep, unit="cm²/V/s")
         return 0, ""

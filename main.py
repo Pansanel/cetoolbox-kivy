@@ -457,6 +457,9 @@ class MobilityScreen(Screen):
                   unit=self.ids.VoltageUnit.text)
         store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
                   unit=self.ids.ElectroosmosisUnit.text)
+        store.put('Timecompound1', value=float(self.ids.Timecompound1.text),
+                  unit=self.ids.Timecompound1Unit.text)
+        
         
         #save all the timecompound
         for sublist in self.timecompoundlist:
