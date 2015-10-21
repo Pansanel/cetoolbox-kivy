@@ -89,9 +89,9 @@ class InjectionPopup(CEToolBoxPopup):
         store = get_store()
         
         if data["errcode"] == 2:
-            self.ids.inlayout.rows = 14
+            self.ids.inlayout.rows = 12
         else:
-            self.ids.inlayout.rows = 13
+            self.ids.inlayout.rows = 11
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Hydrodynamic injection :", "FFFFFF")))
         value = round(store.get('Hydrodynamicinjection')["value"], 2)
@@ -123,40 +123,40 @@ class InjectionPopup(CEToolBoxPopup):
         value = str(value)+" "+store.get('Pluglenperlentowin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
             
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Time to replace 1 volume :", "FFFFFF")))
-        value = round(store.get('Timetoreplaces')["value"], 2)
-        value = str(value)+" "+store.get('Timetoreplaces')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
-        value = round(store.get('Timetoreplacem')["value"], 2)
-        value = str(value)+" "+store.get('Timetoreplacem')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
+        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Time to replace 1 volume :", "FFFFFF")))
+        #~ value = round(store.get('Timetoreplaces')["value"], 2)
+        #~ value = str(value)+" "+store.get('Timetoreplaces')["unit"]
+        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
+        #~ 
+        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
+        #~ value = round(store.get('Timetoreplacem')["value"], 2)
+        #~ value = str(value)+" "+store.get('Timetoreplacem')["unit"]
+        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
                 
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte :", "BFBFBF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte :", "FFFFFF")))
         value = round(store.get('Injectedanalyteng')["value"], 2)
         value = str(value)+" "+store.get('Injectedanalyteng')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
     
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
         value = round(store.get('Injectedanalytepmol')["value"], 2)
         value = str(value)+" "+store.get('Injectedanalytepmol')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "FFFFFF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "BFBFBF")))
         value = round(store.get('Injectionpressure')["value"], 2)
         value = str(value)+" "+store.get('Injectionpressure')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "BFBFBF")))
-        value = round(store.get('Flowrate')["value"], 2)
-        value = str(value)+" "+store.get('Flowrate')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Field strength :", "FFFFFF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "FFFFFF")))
+        value = round(store.get('Flowrate')["value"], 2)
+        value = str(value)+" "+store.get('Flowrate')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
+        
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Field strength :", "BFBFBF")))
         value = round(store.get('Fieldstrength')["value"], 2)
         value = str(value)+" "+store.get('Fieldstrength')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         
         if data["errcode"] == 2:
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Warning :", "FF0000")))
@@ -643,23 +643,6 @@ class TopPopupLayout(CEToolBoxLayout):
 
     def set_min_width(self):
         self.minimum_width = 300
-    
-#~ class DownMenuLayout(CEToolBoxLayout):
-    #~ """ set the size of the layout from minimals values and the size
-    #~ of the scrollviewspe parrent."""
-    #~ 
-    #~ def set_min_height(self):
-        #~ self.minimum_height = 40 
-    
-#~ class DownMenuClose(CEToolBoxLayout):
-    #~ 
-    #~ def set_min_height(self):
-        #~ self.minimum_height = 100
-    #~ 
-    #~ def set_min_width(self):
-        #~ self.minimum_width = 100
-    
-    
     
             
 class ScrollViewSpe(ScrollView):
