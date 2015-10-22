@@ -31,8 +31,10 @@ from kivy.uix.spinner import Spinner
 from kivy.core.window import Window
 
 
+
 from store import get_store, create_store
 from capillary import Capillary
+from base import *
 
 
 #when the keyboard is open resize the window
@@ -41,28 +43,8 @@ Window.softinput_mode = 'resize'
 #~ Window.softinput_mode = 'below_target'
 
 
-__version__ = '0.0.9'
+__version__ = '0.0.9.1'
 
-def add_color(text, color):
-    return "[color="+color+"]"+text+"[/color]" 
-  
-class CEToolBoxLabel(Label):
-    pass
-
-class CEToolBoxTextInput(TextInput):
-    pass
-
-class CEToolBoxButton(Button):
-    pass
-
-class CEToolBoxSpinner(Spinner):
-    pass
-
-class CEToolBoxPopup(Popup):
-    pass
-    
-class MenuScreen(Screen):
-    pass
 
 class ErrorPopup(CEToolBoxPopup):
     
@@ -589,77 +571,11 @@ class MobilityScreen(Screen):
         nbval = store.get('Nbtimecompound')["value"]
         for i in range(1, nbval):
             self.del_line(1) 
-        
-        
     
-
 class AboutScreen(Screen):
     
     def on_pre_enter(self):
         self.ids.alabel.text = """[b][size=20]CEToolBox kivy v"""+ __version__ +"""[/size][/b]\n"""
-        
-
-
-class CEToolBoxLayout(GridLayout):
-    
-    def set_min_height(self):
-        self.minimum_height = 350
-    
-    def set_min_width(self):
-        self.minimum_width = 350
-    
-    def change_height(self, height_par):
-        #~ reset because of a bug in kivy
-        #~ need to depend of the number of row 
-        self.set_min_height()
-        
-        if height_par > self.minimum_height:
-            self.height = height_par
-        else:
-            self.height = self.minimum_height
-    
-    def change_width(self, wid):
-        #~ reset because of a bug in kivy
-        self.set_min_width()
-        
-        if wid > self.minimum_width:
-            self.width = wid
-        else:
-            self.width = self.minimum_width
-    
-    
-class TopScreenLayout(CEToolBoxLayout):
-    """ set the size of the layout from minimals values and the size
-    of the scrollviewspe parrent."""
-    
-    def set_min_height(self):
-        self.minimum_height = 40 *self.rows + 10 
-
-class TopPopupLayout(CEToolBoxLayout):
-    """ set the size of the layout from minimals values and the size
-    of the scrollviewspe parrent."""
-    def set_min_height(self):
-        self.minimum_height = 50 *self.rows + 10 
-
-    def set_min_width(self):
-        self.minimum_width = 300
-    
-            
-class ScrollViewSpe(ScrollView):
-    """ Special class made to give it's own value at his layout child
-    See the kv file for an exemple of use """
-    
-        
-    def change_child_height(self, height_par):
-        for child in self.children:
-            child.change_height(height_par)
-        return height_par
-
-    def change_child_width(self, wid):
-        for child in self.children:
-            child.change_width(wid)
-        return wid
-
 
 class ManagerApp(App):
     title = "CEToolBox"
