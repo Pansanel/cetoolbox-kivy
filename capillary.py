@@ -44,6 +44,7 @@ class Capillary:
     '''Capillary class, see module documentation for more information.
     '''
     def __init__(self):
+        """ Get all needed values from the store"""
         store = get_store()
         # The length of the capillary (centimeter)
         self.total_length = LengthUnits.convert_unit(float(store.get('Capillary')["value"]), 
