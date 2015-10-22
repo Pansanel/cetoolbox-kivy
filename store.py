@@ -13,15 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
+"""
+store.py
+=========
+
+Contain fonctions to create and access to the store
+
+"""
+
 from kivy.storage.jsonstore import JsonStore
 
 
 def get_store():
+	""" get_store return the store (it's a JsonStore).
+	See kivy documentation for more information :
+	http://kivy.org/docs/api-kivy.storage.html#module-kivy.storage
+	@return : A JsonStore object
+	@rtype : JsonStore
+	"""
     store = JsonStore('cetoolboxdata.json')
     return store
 
 def create_store():
-    """ function to create a file with default value of each var"""
+    """ function to create a JsonStore.
+    See kivy documentation for more information :
+	http://kivy.org/docs/api-kivy.storage.html#module-kivy.storage
+    """
     store = get_store()
     if not store.exists('Capillary'):
         store.put('Capillary', value=100.00, unit="cm")
