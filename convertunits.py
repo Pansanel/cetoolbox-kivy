@@ -13,6 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
+"""
+convertunits.py
+=========
+
+Contain static class to do convertions of units
+
+"""
+
 from externlib.firkin import UnitManager, SIFamily, Family
 
 class BaseUnits:
