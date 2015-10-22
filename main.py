@@ -12,6 +12,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License
+"""
+main.py
+=========
+
+Contain Screen, Popup and App related to kivy.
+It's link to the manager.kv file
+
+"""
+
 
 import kivy
 kivy.require('1.9.0')
@@ -43,19 +52,31 @@ Window.softinput_mode = 'resize'
 #~ Window.softinput_mode = 'below_target'
 
 
-__version__ = '0.0.9.1'
+__version__ = '0.1.0'
 
+class CEToolBoxPopup(Popup):
+    """ Popup use to be herited by all Popup of the app"""
+    pass
 
 class ErrorPopup(CEToolBoxPopup):
+    """ Popup to show in case of erreur """
     
     def show_popup(self, data):
+        """ feel the popup with the error message present in data
+        @param data: dictionnary with the error type (should be 
+        always 1 for this kind of popup) and the error message
+        @type data: {str: int, str: str}
+        """
+        
         message = add_color(data["errtext"], "FF0000")
         self.ids.errormessage.text = message
         self.open()
 
 class ViscosityPopup(CEToolBoxPopup):
+    """Popup to show the Viscosity result """
     
     def show_popup(self, data):
+        """ get and show the viscosity result from the store """
         store = get_store()
         
         self.ids.inlayout.rows = 1
@@ -66,8 +87,16 @@ class ViscosityPopup(CEToolBoxPopup):
         self.open()
 
 class InjectionPopup(CEToolBoxPopup):
+    """Popup to show the Injection result """
     
     def show_popup(self, data):
+        """ get and show injections results from the store.
+        Can add an error message from data.
+        @param data: dictionnary with the error type (should be 
+        always 0 (no error) or 2 for this kind of popup) and the error message
+        @type data: {str: int, str: str}
+        """
+        
         store = get_store()
         
         if data["errcode"] == 2:
@@ -147,8 +176,10 @@ class InjectionPopup(CEToolBoxPopup):
         self.open()
         
 class ConductivityPopup(CEToolBoxPopup):
+    """Popup to show the Conductivity result """
     
     def show_popup(self, data):
+        """ get and show the conductivity result from the store. """
         store = get_store()
         
         self.ids.inlayout.rows = 1
@@ -159,8 +190,10 @@ class ConductivityPopup(CEToolBoxPopup):
         self.open()
 
 class FlowPopup(CEToolBoxPopup):
-    
+    """Popup to show the Flow results """
+     
     def show_popup(self, data):
+        """ get and show Flows results from the store. """
         store = get_store()
         
         self.ids.inlayout.rows = 4
@@ -188,8 +221,10 @@ class FlowPopup(CEToolBoxPopup):
         self.open()
         
 class MobilityPopup(CEToolBoxPopup):
+    """Popup to show the Mobility results """
     
     def show_popup(self, data):
+        """ get and show Mobility results from the store. """
         store = get_store()
         
         self.ids.inlayout.rows = 1 + store.get('Nbtimecompound')["value"]
@@ -214,10 +249,11 @@ class MobilityPopup(CEToolBoxPopup):
         
 
 class InjectionScreen(Screen):
+    """ The screen for Injection """
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
-        on the injectionscreen 
+        on the InjectionScreen 
         this value comes from the json file where we keep it
         """
         store = get_store()
@@ -243,7 +279,8 @@ class InjectionScreen(Screen):
     
     
     def show_injection_results(self):
-        """ lauch when clicked on result"""
+        """ lauch when clicked on result.
+        Compute, store the computation and lauch a popup"""
         #save data
         store = get_store()
         store.put('Capillary', value=float(self.ids.Capillary.text),
@@ -284,10 +321,11 @@ class InjectionScreen(Screen):
         
 
 class ViscosityScreen(Screen):
+    """ The screen for Viscosity """
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
-        on the injectionscreen 
+        on the ViscosityScreen 
         this value comes from the json file where we keep it
         """
         store = get_store()
@@ -304,7 +342,8 @@ class ViscosityScreen(Screen):
     
     
     def show_viscosity_results(self):
-        """ lauch when clicked on result"""
+        """ lauch when clicked on result
+        Compute, store the computation and lauch a popup"""
         #save data
         store = get_store()
         store.put('Capillary', value=float(self.ids.Capillary.text),
@@ -333,10 +372,11 @@ class ViscosityScreen(Screen):
 
 
 class ConductivityScreen(Screen):
+    """The screen for conductivity """
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
-        on the injectionscreen 
+        on the ConductivityScreen 
         this value comes from the json file where we keep it
         """
         store = get_store()
@@ -352,7 +392,8 @@ class ConductivityScreen(Screen):
         self.ids.ElectriccurrentUnit.text = store.get('Electriccurrent')["unit"]
     
     def show_conductivity_results(self):
-        #save data
+        """ lauch when clicked on result
+        Compute, store the computation and lauch a popup"""
         store = get_store()
         store.put('Capillary', value=float(self.ids.Capillary.text),
                   unit=self.ids.CapillaryUnit.text)
@@ -379,10 +420,11 @@ class ConductivityScreen(Screen):
         self._popup.show_popup(data)
 
 class FlowScreen(Screen):
+    """ the screen for the flow"""
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
-        on the injectionscreen 
+        on the FlowScreen
         this value comes from the json file where we keep it
         """
         store = get_store()
@@ -399,7 +441,8 @@ class FlowScreen(Screen):
     
     
     def show_flow_results(self):
-                #save data
+        """ lauch when clicked on result
+        Compute, store the computation and lauch a popup"""
         store = get_store()
         store.put('Capillary', value=float(self.ids.Capillary.text),
                   unit=self.ids.CapillaryUnit.text)
@@ -427,9 +470,11 @@ class FlowScreen(Screen):
 
 
 class MobilityScreen(Screen):
+    """ The mobility Screen"""
     
     def show_mobility_results(self):
-        #save data
+        """ lauch when clicked on result
+        Compute, store the computation and lauch a popup"""
         store = get_store()
         store.put('Capillary', value=float(self.ids.Capillary.text),
                   unit=self.ids.CapillaryUnit.text)
@@ -463,7 +508,7 @@ class MobilityScreen(Screen):
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
-        on the injectionscreen 
+        on the MobilityScreen 
         this value comes from the json file where we keep it
         """        
         store = get_store()
@@ -505,6 +550,9 @@ class MobilityScreen(Screen):
         self.ids.inlayout.add_widget(self.del_button)
             
     def add_line(self, buttoninstance):
+        """ add a line of timecompount
+        @param buttoninstance: the instance of the button (not used)
+        """
         #del and create again to respect the order
         self.ids.inlayout.remove_widget(self.add_button)
         self.ids.inlayout.remove_widget(self.del_button)
@@ -542,6 +590,10 @@ class MobilityScreen(Screen):
         
         
     def del_line(self, buttoninstance):
+        """ delete a line of timecompound (do nothing if there is only
+        one timecompound line)
+        @param buttoninstance: the instance of the button (not used) """
+        
         try:
             widgets = self.timecompoundlist.pop()
         except IndexError:
@@ -549,6 +601,7 @@ class MobilityScreen(Screen):
         for w in widgets:
             self.ids.inlayout.remove_widget(w)
         
+        #del the line in the jsonfile
         store = get_store()
         lastval = store.get('Nbtimecompound')["value"]
         store.delete('Timecompound'+str(lastval))
@@ -560,6 +613,8 @@ class MobilityScreen(Screen):
             
         
     def on_leave(self):
+        """ when the screen is leaved, delete all widget generated from 
+        the jsonfile"""
         for widgets in self.timecompoundlist:
             for w in widgets:
                 self.ids.inlayout.remove_widget(w)
@@ -567,22 +622,34 @@ class MobilityScreen(Screen):
         self.ids.inlayout.remove_widget(self.del_button)
     
     def reset(self):
+        """ executed when cliqued on the reset button 
+        set the value of nbtimecompound at 1 and delete lines"""
         store = get_store()
         nbval = store.get('Nbtimecompound')["value"]
         for i in range(1, nbval):
             self.del_line(1) 
     
 class AboutScreen(Screen):
+    """ the About screen """
     
     def on_pre_enter(self):
+        """ get the version before enter """
         self.ids.alabel.text = """[b][size=20]CEToolBox kivy v"""+ __version__ +"""[/size][/b]\n"""
 
+class MenuScreen(Screen):
+    """ the menu screen"""
+    pass
+
+
 class ManagerApp(App):
+    """ The app """
     title = "CEToolBox"
     create_store()
     
     
-    def build(self):        
+    def build(self):
+        """ add all the screen to the ScreenManager and
+        lauch the post_build_init method"""        
         self.sm = ScreenManager()
         self.sm.add_widget(MenuScreen(name='menu'))
         self.sm.add_widget(InjectionScreen(name='injection'))
@@ -595,22 +662,28 @@ class ManagerApp(App):
         return self.sm
 
     def post_build_init(self, *args):
+        """ bind the keyboard to go_menu method """
         win = Window
-        win.bind(on_keyboard=self.my_key_handler)
+        win.bind(on_keyboard=self.go_menu)
 
-    def my_key_handler(self, window, keycode1, keycode2, text, modifiers):
+    def go_menu(self, window, keycode1, keycode2, text, modifiers):
+        """ executed for each key press, if the key is return then
+        go to the menu screen"""
         if keycode1 in [27, 1001]:
             self.sm.current = "menu"
             return True
         return False
 
     def on_pause(self):
-        #perfect save but why ?
+        """on mobile device, when the device goes on sleep save the 
+        screen we was on"""
         store = get_store()
         store.put("pause", value=self.sm.current)
         return True
     
     def on_resume(self):
+        """when the app is recall from sleep get the screen we was on
+        and set it """
         store = get_store()
         self.sm.current = str(store.get('pause')["value"])
 

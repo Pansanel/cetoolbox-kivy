@@ -25,19 +25,19 @@ from kivy.storage.jsonstore import JsonStore
 
 
 def get_store():
-	""" get_store return the store (it's a JsonStore).
-	See kivy documentation for more information :
-	http://kivy.org/docs/api-kivy.storage.html#module-kivy.storage
-	@return : A JsonStore object
-	@rtype : JsonStore
-	"""
+    """ get_store return the store (it's a JsonStore).
+    See kivy documentation for more information :
+    http://kivy.org/docs/api-kivy.storage.html#module-kivy.storage
+    @return : A JsonStore object
+    @rtype : JsonStore
+    """
     store = JsonStore('cetoolboxdata.json')
     return store
 
 def create_store():
     """ function to create a JsonStore.
     See kivy documentation for more information :
-	http://kivy.org/docs/api-kivy.storage.html#module-kivy.storage
+    http://kivy.org/docs/api-kivy.storage.html#module-kivy.storage
     """
     store = get_store()
     if not store.exists('Capillary'):
@@ -69,4 +69,4 @@ def create_store():
     if not store.exists("Nbtimecompound"):
         store.put('Nbtimecompound', value=1)
     if not store.exists("pause"):
-		store.put('pause', value="menu")
+        store.put('pause', value="menu")

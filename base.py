@@ -12,7 +12,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License
+"""
+base.py
+=========
 
+Contain all usefull function and method related to kivy if
+they are not Screen, Popup or App.
+It's link to the base.kv file
+
+"""
 import kivy
 kivy.require('1.9.0')
 
@@ -47,15 +55,28 @@ class CEToolBoxTextInput(TextInput):
 class CEToolBoxSpinner(Spinner):
     pass
 
-class CEToolBoxPopup(Popup):
-    pass
     
-class MenuScreen(Screen):
-    pass
+class ScrollViewSpe(ScrollView):
+    """ Special class made to give it's own value at his layout child
+    See the kv file for an exemple of use """
     
+    def change_child_height(self, height_par):
+        for child in self.children:
+            child.change_height(height_par)
+        return height_par
+
+    def change_child_width(self, wid):
+        for child in self.children:
+            child.change_width(wid)
+        return wid
 
 
 class CEToolBoxLayout(GridLayout):
+    """Special Layout use to choose the minimal size allowed
+    if the actual size of the parent widget is lower.
+    If the actual size of the parent is biger then get the biger size.
+    /!\ The parent must be a ScrollViewSpe
+    """
     
     def set_min_height(self):
         self.minimum_height = 350
@@ -100,18 +121,6 @@ class TopPopupLayout(CEToolBoxLayout):
         self.minimum_width = 300
     
             
-class ScrollViewSpe(ScrollView):
-    """ Special class made to give it's own value at his layout child
-    See the kv file for an exemple of use """
-    
-    def change_child_height(self, height_par):
-        for child in self.children:
-            child.change_height(height_par)
-        return height_par
 
-    def change_child_width(self, wid):
-        for child in self.children:
-            child.change_width(wid)
-        return wid
 
 
