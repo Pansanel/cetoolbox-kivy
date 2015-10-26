@@ -24,6 +24,10 @@ It's link to the manager.kv file
 
 import kivy
 kivy.require('1.9.0')
+#~ from kivy.config import Config
+#~ Config.set('kivy', 'keyboard_mode', 'dock')
+
+
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -34,6 +38,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+#~ from kivy.uix.vkeyboard import VKeyboard
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
@@ -247,9 +252,43 @@ class MobilityPopup(CEToolBoxPopup):
         
         self.open()
         
+#~ class KeyBoardScreen(Screen):
+    #~ 
+    #~ def __init__(self, **kwargs):
+        #~ super(KeyBoardScreen, self).__init__(**kwargs)
+        #~ self._add_keyboards()
+#~ 
+    #~ def _add_keyboards(self):
+        #~ """ Add a buttons for each available keyboard layout. When clicked,
+        #~ the buttons will change the keyboard layout to the one selected. """
+        #~ layouts = VKeyboard().available_layouts.keys()
+        #~ layouts.append("data/numeric.json")  # Add the file in our app directory
+                                        #~ # Note the .json extension is required
+        #~ 
+        #~ self.set_layout(layouts[-1])
+#~ 
+    #~ def set_layout(self, layout):
+        #~ """ Change the keyboard layout to the one specified by *layout*. """
+        #~ kb = Window.request_keyboard(
+            #~ self._keyboard_close, self)
+        #~ if kb.widget:
+            #~ # If the current configuration supports Virtual Keyboards, this
+            #~ # widget will be a kivy.uix.vkeyboard.VKeyboard instance.
+            #~ self._keyboard = kb.widget
+            #~ self._keyboard.layout = layout
+        #~ else:
+            #~ self._keyboard = kb
+#~ 
+    #~ def _keyboard_close(self, *args):
+        #~ """ The active keyboard is being closed. """
+        #~ print "lol"
+        #~ if self._keyboard:
+            #~ self._keyboard = None
+
 
 class InjectionScreen(Screen):
     """ The screen for Injection """
+    
     
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
@@ -658,6 +697,7 @@ class ManagerApp(App):
         self.sm.add_widget(MobilityScreen(name='mobility'))
         self.sm.add_widget(FlowScreen(name='flow'))
         self.sm.add_widget(AboutScreen(name='about'))
+        #~ self.sm.add_widget(KeyBoardScreen(name="keyboard"))
         self.bind(on_start=self.post_build_init)
         return self.sm
 
