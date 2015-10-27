@@ -51,7 +51,7 @@ from base import *
 Window.softinput_mode = 'resize'
 
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 class CEToolBoxPopup(Popup):
     """ Popup use to be herited by all Popup of the app"""
