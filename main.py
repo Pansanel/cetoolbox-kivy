@@ -107,7 +107,6 @@ class InjectionPopup(CEToolBoxPopup):
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Warning :", "FF0000")))
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(data["errtext"], "FF0000")))
         
-        
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Hydrodynamic injection :", "FFFFFF")))
         value = round(store.get('Hydrodynamicinjection')["value"], 2)
         value = str(value)+" "+store.get('Hydrodynamicinjection')["unit"]
