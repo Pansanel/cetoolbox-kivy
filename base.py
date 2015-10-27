@@ -37,6 +37,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
 from kivy.core.window import Window
+from kivy.metrics import sp
 from kivy.lang import Builder
 Builder.load_file('base.kv')
 
@@ -79,10 +80,10 @@ class CEToolBoxLayout(GridLayout):
     """
     
     def set_min_height(self):
-        self.minimum_height = 350
+        self.minimum_height = sp(350)
     
     def set_min_width(self):
-        self.minimum_width = 350
+        self.minimum_width = sp(350)
     
     def change_height(self, height_par):
         #~ reset because of a bug in kivy
@@ -109,16 +110,16 @@ class TopScreenLayout(CEToolBoxLayout):
     of the scrollviewspe parrent."""
     
     def set_min_height(self):
-        self.minimum_height = 50 * self.rows + 20 
+        self.minimum_height = sp(50) * self.rows + sp(20) 
 
 class TopPopupLayout(CEToolBoxLayout):
     """ set the size of the layout from minimals values and the size
     of the scrollviewspe parrent."""
     def set_min_height(self):
-        self.minimum_height = 50 * self.rows + 20
+        self.minimum_height = sp(50) * self.rows + sp(20)
 
     def set_min_width(self):
-        self.minimum_width = 300
+        self.minimum_width = sp(300)
     
             
 
