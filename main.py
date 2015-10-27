@@ -285,26 +285,33 @@ class InjectionScreen(Screen):
         Compute, store the computation and lauch a popup"""
         #save data
         store = get_store()
-        store.put('Capillary', value=float(self.ids.Capillary.text),
-                  unit=self.ids.CapillaryUnit.text)
-        store.put('Towindow', value=float(self.ids.Towindow.text),
-                  unit=self.ids.TowindowUnit.text)
-        store.put('Idiameter', value=float(self.ids.Idiameter.text),
-                  unit=self.ids.IdiameterUnit.text)
-        store.put('Pressure', value=float(self.ids.Pressure.text),
-                  unit=self.ids.PressureUnit.text)
-        store.put('Time', value=float(self.ids.Time.text),
-                  unit=self.ids.TimeUnit.text)
-        store.put('Viscosity', value=float(self.ids.Viscosity.text),
-                  unit=self.ids.ViscosityUnit.text)
-        store.put('Concentration', 
-                  value=float(self.ids.Concentration.text), 
-                  unit=self.ids.ConcentrationUnit.text)
-        store.put('Molweight', value=float(self.ids.Molweight.text),
-                  unit=self.ids.MolweightUnit.text)
-        store.put('Voltage', value=float(self.ids.Voltage.text),
-                  unit=self.ids.VoltageUnit.text)
-                  
+        try:
+            store.put('Capillary', value=float(self.ids.Capillary.text),
+                      unit=self.ids.CapillaryUnit.text)
+            store.put('Towindow', value=float(self.ids.Towindow.text),
+                      unit=self.ids.TowindowUnit.text)
+            store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                      unit=self.ids.IdiameterUnit.text)
+            store.put('Pressure', value=float(self.ids.Pressure.text),
+                      unit=self.ids.PressureUnit.text)
+            store.put('Time', value=float(self.ids.Time.text),
+                      unit=self.ids.TimeUnit.text)
+            store.put('Viscosity', value=float(self.ids.Viscosity.text),
+                      unit=self.ids.ViscosityUnit.text)
+            store.put('Concentration', 
+                      value=float(self.ids.Concentration.text), 
+                      unit=self.ids.ConcentrationUnit.text)
+            store.put('Molweight', value=float(self.ids.Molweight.text),
+                      unit=self.ids.MolweightUnit.text)
+            store.put('Voltage', value=float(self.ids.Voltage.text),
+                      unit=self.ids.VoltageUnit.text)
+        except ValueError:
+            data = {}
+            data["errcode"] = 1
+            data["errtext"] = "Empty field not allowed"
+            self._popup = ErrorPopup()
+            self._popup.show_popup(data)
+            return
         
         #add data          
         computation = Capillary()
@@ -348,16 +355,24 @@ class ViscosityScreen(Screen):
         Compute, store the computation and lauch a popup"""
         #save data
         store = get_store()
-        store.put('Capillary', value=float(self.ids.Capillary.text),
-                  unit=self.ids.CapillaryUnit.text)
-        store.put('Towindow', value=float(self.ids.Towindow.text),
-                  unit=self.ids.TowindowUnit.text)
-        store.put('Idiameter', value=float(self.ids.Idiameter.text),
-                  unit=self.ids.IdiameterUnit.text)
-        store.put('Pressure', value=float(self.ids.Pressure.text),
-                  unit=self.ids.PressureUnit.text)
-        store.put('Detectiontime', value=float(self.ids.Detectiontime.text),
-                  unit=self.ids.DetectiontimeUnit.text)
+        try:
+            store.put('Capillary', value=float(self.ids.Capillary.text),
+                      unit=self.ids.CapillaryUnit.text)
+            store.put('Towindow', value=float(self.ids.Towindow.text),
+                      unit=self.ids.TowindowUnit.text)
+            store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                      unit=self.ids.IdiameterUnit.text)
+            store.put('Pressure', value=float(self.ids.Pressure.text),
+                      unit=self.ids.PressureUnit.text)
+            store.put('Detectiontime', value=float(self.ids.Detectiontime.text),
+                      unit=self.ids.DetectiontimeUnit.text)
+        except ValueError:
+            data = {}
+            data["errcode"] = 1
+            data["errtext"] = "Empty field not allowed"
+            self._popup = ErrorPopup()
+            self._popup.show_popup(data)
+            return
         
         computation = Capillary()
         errcode, errtext = computation.save_vicosity_result()
@@ -397,16 +412,24 @@ class ConductivityScreen(Screen):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
         store = get_store()
-        store.put('Capillary', value=float(self.ids.Capillary.text),
-                  unit=self.ids.CapillaryUnit.text)
-        store.put('Towindow', value=float(self.ids.Towindow.text),
-                  unit=self.ids.TowindowUnit.text)
-        store.put('Idiameter', value=float(self.ids.Idiameter.text),
-                  unit=self.ids.IdiameterUnit.text)
-        store.put('Voltage', value=float(self.ids.Voltage.text),
-                  unit=self.ids.VoltageUnit.text)
-        store.put('Electriccurrent', value=float(self.ids.Electriccurrent.text),
-                  unit=self.ids.ElectriccurrentUnit.text)
+        try:
+            store.put('Capillary', value=float(self.ids.Capillary.text),
+                      unit=self.ids.CapillaryUnit.text)
+            store.put('Towindow', value=float(self.ids.Towindow.text),
+                      unit=self.ids.TowindowUnit.text)
+            store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                      unit=self.ids.IdiameterUnit.text)
+            store.put('Voltage', value=float(self.ids.Voltage.text),
+                      unit=self.ids.VoltageUnit.text)
+            store.put('Electriccurrent', value=float(self.ids.Electriccurrent.text),
+                      unit=self.ids.ElectriccurrentUnit.text)
+        except ValueError:
+            data = {}
+            data["errcode"] = 1
+            data["errtext"] = "Empty field not allowed"
+            self._popup = ErrorPopup()
+            self._popup.show_popup(data)
+            return
         
         computation = Capillary()
         errcode, errtext = computation.save_conductivy_result()
@@ -446,16 +469,24 @@ class FlowScreen(Screen):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
         store = get_store()
-        store.put('Capillary', value=float(self.ids.Capillary.text),
-                  unit=self.ids.CapillaryUnit.text)
-        store.put('Towindow', value=float(self.ids.Towindow.text),
-                  unit=self.ids.TowindowUnit.text)
-        store.put('Idiameter', value=float(self.ids.Idiameter.text),
-                  unit=self.ids.IdiameterUnit.text)
-        store.put('Voltage', value=float(self.ids.Voltage.text),
-                  unit=self.ids.VoltageUnit.text)
-        store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
-                  unit=self.ids.ElectroosmosisUnit.text)
+        try:
+            store.put('Capillary', value=float(self.ids.Capillary.text),
+                      unit=self.ids.CapillaryUnit.text)
+            store.put('Towindow', value=float(self.ids.Towindow.text),
+                      unit=self.ids.TowindowUnit.text)
+            store.put('Idiameter', value=float(self.ids.Idiameter.text),
+                      unit=self.ids.IdiameterUnit.text)
+            store.put('Voltage', value=float(self.ids.Voltage.text),
+                      unit=self.ids.VoltageUnit.text)
+            store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
+                      unit=self.ids.ElectroosmosisUnit.text)
+        except ValueError:
+            data = {}
+            data["errcode"] = 1
+            data["errtext"] = "Empty field not allowed"
+            self._popup = ErrorPopup()
+            self._popup.show_popup(data)
+            return
         
         computation = Capillary()
         errcode, errtext = computation.save_flow_result()
@@ -478,16 +509,24 @@ class MobilityScreen(Screen):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
         store = get_store()
-        store.put('Capillary', value=float(self.ids.Capillary.text),
-                  unit=self.ids.CapillaryUnit.text)
-        store.put('Towindow', value=float(self.ids.Towindow.text),
-                  unit=self.ids.TowindowUnit.text)
-        store.put('Voltage', value=float(self.ids.Voltage.text),
-                  unit=self.ids.VoltageUnit.text)
-        store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
-                  unit=self.ids.ElectroosmosisUnit.text)
-        store.put('Timecompound1', value=float(self.ids.Timecompound1.text),
-                  unit=self.ids.Timecompound1Unit.text)
+        try:
+            store.put('Capillary', value=float(self.ids.Capillary.text),
+                      unit=self.ids.CapillaryUnit.text)
+            store.put('Towindow', value=float(self.ids.Towindow.text),
+                      unit=self.ids.TowindowUnit.text)
+            store.put('Voltage', value=float(self.ids.Voltage.text),
+                      unit=self.ids.VoltageUnit.text)
+            store.put('Electroosmosis', value=float(self.ids.Electroosmosis.text),
+                      unit=self.ids.ElectroosmosisUnit.text)
+            store.put('Timecompound1', value=float(self.ids.Timecompound1.text),
+                      unit=self.ids.Timecompound1Unit.text)
+        except ValueError:
+            data = {}
+            data["errcode"] = 1
+            data["errtext"] = "Empty field not allowed"
+            self._popup = ErrorPopup()
+            self._popup.show_popup(data)
+            return
         
         
         #save all the timecompound
