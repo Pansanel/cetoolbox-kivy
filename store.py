@@ -41,15 +41,15 @@ def create_store():
     """
     store = get_store()
     if not store.exists('Capillary'):
-        store.put('Capillary', value=100.00, unit="cm")
+        store.put('Capillary', value=60.00, unit="cm")
     if not store.exists('Towindow'):
-        store.put('Towindow', value=100.00, unit="cm")
+        store.put('Towindow', value=50.00, unit="cm")
     if not store.exists('Idiameter'):
         store.put('Idiameter', value=50.00, unit="µm")
     if not store.exists('Pressure'):
-        store.put('Pressure', value=50.00, unit="mbar")
+        store.put('Pressure', value=0.5, unit="psi")
     if not store.exists('Time'):
-        store.put('Time', value=50.00, unit="s")
+        store.put('Time', value=15.0, unit="s")
     if not store.exists('Viscosity'):
         store.put('Viscosity', value=1.0, unit="cp")
     if not store.exists('Concentration'):
@@ -57,11 +57,11 @@ def create_store():
     if not store.exists('Molweight'):
         store.put('Molweight', value=1000.0, unit="g/mol")
     if not store.exists('Detectiontime'):
-        store.put('Detectiontime', value=10.0, unit="min")
+        store.put('Detectiontime', value=20.0, unit="min")
     if not store.exists('Voltage'):
-        store.put('Voltage', value=3.0, unit="V")
+        store.put('Voltage', value=30000.0, unit="V")
     if not store.exists('Electriccurrent'):
-        store.put('Electriccurrent', value=10.0, unit="µA")
+        store.put('Electriccurrent', value=25.0, unit="µA")
     if not store.exists('Electroosmosis'):
         store.put('Electroosmosis', value=1.0, unit="min")  
     if not store.exists("Timecompound1"):

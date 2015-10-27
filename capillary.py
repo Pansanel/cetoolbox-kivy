@@ -287,9 +287,23 @@ class Capillary:
             else :
                 return 1, "The molecular weight cannot be null"
         
+        
         if self.to_window_length > self.total_length:
             return 1, "The length to window cannot be greater than the capillary length"
+        
+        #special warning
+        if plugpertowinlen > 100.:
+            ret = (2, "The capillary is full")
+        else:
+            ret = (0, "")
             
+        #floor for values
+        if hydroinj > capilaryvol:
+            hydroinj = capilaryvol
+        if plugpertotallen > 100.:
+            plugpertotallen = 100.
+        if plugpertowinlen > 100.:
+            plugpertowinlen = 100.
         
         store.put("Hydrodynamicinjection", value=hydroinj, unit="nL")
         store.put("Capillaryvolume", value=capilaryvol, unit="nL")
@@ -305,9 +319,7 @@ class Capillary:
         store.put("Fieldstrength", value=strengh, unit="V/cm")
         store.put("Flowrate", value=flowrate, unit="nL/min")
         
-        if plugpertowinlen > 100.:
-            return 2, "The capillary is full"
-        return 0, ""
+        return ret
             
         
     def save_mobility_result(self):

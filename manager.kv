@@ -112,29 +112,38 @@
         orientation: 'vertical'
         padding: 10
         spacing: 10
-
+		
+		Image:
+			source: "data/logo_512.png"
+		
         Button:
             text: 'Injection'
+            font_size: '18sp'
             on_press: root.manager.current = 'injection'
 
         Button:
             text: 'Flowrate'
+            font_size: '18sp'
             on_press: root.manager.current = 'flow'
         
         Button:
 			text: 'Mobility'
+			font_size: '18sp'
 			on_press: root.manager.current = 'mobility'
         
         Button:
             text: 'Viscosity'
+            font_size: '18sp'
             on_press: root.manager.current = 'viscosity'
 
         Button:
             text: 'Conductivity'
+            font_size: '18sp'
             on_press: root.manager.current = 'conductivity'
 
         Button:
             text: 'About'
+            font_size: '18sp'
             on_press: root.manager.current = 'about'
 
 
@@ -246,15 +255,15 @@
                     
             ResetButton:
                 id: Resetbtn
-                on_press: Capillary.text="100.0"
+                on_press: Capillary.text="60.0"
                 on_press: CapillaryUnit.text="cm"
-                on_press: Towindow.text="100.0"
+                on_press: Towindow.text="50.0"
                 on_press: TowindowUnit.text="cm"
                 on_press: Idiameter.text="50.0"
                 on_press: IdiameterUnit.text="µm"
-                on_press: Pressure.text="30.0"
-                on_press: PressureUnit.text="mbar"
-                on_press: Time.text="10.0"
+                on_press: Pressure.text="0.5"
+                on_press: PressureUnit.text="psi"
+                on_press: Time.text="15.0"
                 on_press: TimeUnit.text="s"
                 on_press: Viscosity.text="1.0"
                 on_press: ViscosityUnit.text="cp"
@@ -262,8 +271,8 @@
                 on_press: ConcentrationUnit.text="g/L"
                 on_press: Molweight.text="1000.0"
                 on_press: MolweightUnit.text="g/mol"
-                on_press: Voltage.text="3.0"
-                on_press: VoltageUnit.text="kV"
+                on_press: Voltage.text="30000.0"
+                on_press: VoltageUnit.text="V"
                 
             MenuButton:
                 on_press: root.manager.current = 'menu'
@@ -343,16 +352,16 @@
                 
             ResetButton:
                 id: Resetbtn
-                on_press: Capillary.text="100.0"
+                on_press: Capillary.text="60.0"
                 on_press: CapillaryUnit.text="cm"
-                on_press: Towindow.text="100.0"
+                on_press: Towindow.text="50.0"
                 on_press: TowindowUnit.text="cm"
                 on_press: Idiameter.text="50.0"
                 on_press: IdiameterUnit.text="µm"
-                on_press: Pressure.text="30.0"
-                on_press: PressureUnit.text="mbar"
-                on_press: Detectiontime.text="10.0"
-                on_press: DetectiontimeUnit.text="min"
+                on_press: Pressure.text="0.5"
+                on_press: PressureUnit.text="psi"
+                on_press: Time.text="15.0"
+                on_press: TimeUnit.text="s"
             
             MenuButton:
                 on_press: root.manager.current = 'menu'
@@ -428,15 +437,15 @@
                 
             ResetButton:
                 id: Resetbtn
-                on_press: Capillary.text="100.0"
+                on_press: Capillary.text="60.0"
                 on_press: CapillaryUnit.text="cm"
-                on_press: Towindow.text="100.0"
+                on_press: Towindow.text="50.0"
                 on_press: TowindowUnit.text="cm"
                 on_press: Idiameter.text="50.0"
                 on_press: IdiameterUnit.text="µm"
-                on_press: Voltage.text="3.0"
+                on_press: Voltage.text="30000.0"
                 on_press: VoltageUnit.text="V"
-                on_press: Electriccurrent.text="10.0"
+                on_press: Electriccurrent.text="25.0"
                 on_press: ElectriccurrentUnit.text="µA"
             
             MenuButton:
@@ -515,13 +524,13 @@
                 
             ResetButton:
                 id: Resetbtn
-                on_press: Capillary.text="100.0"
+                on_press: Capillary.text="60.0"
                 on_press: CapillaryUnit.text="cm"
-                on_press: Towindow.text="100.0"
+                on_press: Towindow.text="50.0"
                 on_press: TowindowUnit.text="cm"
                 on_press: Idiameter.text="50.0"
                 on_press: IdiameterUnit.text="µm"
-                on_press: Voltage.text="3.0"
+                on_press: Voltage.text="30000.0"
                 on_press: VoltageUnit.text="V"
                 on_press: Electroosmosis.text="1.0"
                 on_press: ElectroosmosisUnit.text="min"
@@ -603,11 +612,11 @@
                 
             ResetButton:
                 id: Resetbtn
-                on_press: Capillary.text="100.0"
+                on_press: Capillary.text="60.0"
                 on_press: CapillaryUnit.text="cm"
-                on_press: Towindow.text="100.0"
+                on_press: Towindow.text="50.0"
                 on_press: TowindowUnit.text="cm"
-                on_press: Voltage.text="3.0"
+                on_press: Voltage.text="30000.0"
                 on_press: VoltageUnit.text="V"
                 on_press: Electroosmosis.text="1.0"
                 on_press: ElectroosmosisUnit.text="min"

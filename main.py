@@ -51,7 +51,7 @@ from base import *
 Window.softinput_mode = 'resize'
 
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 class CEToolBoxPopup(Popup):
     """ Popup use to be herited by all Popup of the app"""
@@ -102,6 +102,11 @@ class InjectionPopup(CEToolBoxPopup):
             self.ids.inlayout.rows = 12
         else:
             self.ids.inlayout.rows = 11
+            
+        if data["errcode"] == 2:
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Warning :", "FF0000")))
+            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(data["errtext"], "FF0000")))
+        
         
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Hydrodynamic injection :", "FFFFFF")))
         value = round(store.get('Hydrodynamicinjection')["value"], 2)
@@ -167,10 +172,6 @@ class InjectionPopup(CEToolBoxPopup):
         value = round(store.get('Fieldstrength')["value"], 2)
         value = str(value)+" "+store.get('Fieldstrength')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-        
-        if data["errcode"] == 2:
-            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Warning :", "FF0000")))
-            self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(data["errtext"], "FF0000")))
         
         self.open()
         

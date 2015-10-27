@@ -37,13 +37,13 @@ requirements = kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
-# requirements.source.kivy = ../../kivy
+# requirements.source.kivy = /usr/local/lib/python2.7/dist-packages/kivy/
 
 # (list) Garden requirements
 #garden_requirements =
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/data/logo.png
+presplash.filename = %(source.dir)s/data/image_256_125.png
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/data/logo.png
