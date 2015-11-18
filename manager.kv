@@ -3,42 +3,32 @@
 <CEToolBoxPopup>:
     title_size: "18sp"
     title_align: "center"
-    
+
 <ErrorPopup>:
     id: popup
     title: "Error"
     title_color: [1, 0, 0, 1]
-    
     BoxLayout:
         orientation: 'vertical'
-        
         ScrollViewSpe:
-            
             TopPopupLayout:
                 cols: 1
                 rows: 1
-                
                 AboutLabel:
                     id: errormessage
-                    
         DownMenuClose:
             CloseButton:
                 on_press: popup.dismiss()
-                
+
 <InjectionPopup>:
     id: popup
     title: "Injection Details"
-
-
     BoxLayout:
         orientation: 'vertical'
-        
         ScrollViewSpe:
             size_hint_y: 1.
-            
             TopPopupLayout:
                 id: inlayout
-                    
         DownMenuClose:
             CloseButton:
                 on_press: popup.dismiss()
@@ -46,15 +36,11 @@
 <MobilityPopup>:
     id: popup
     title: "Mobility Details"
-
     BoxLayout:
         orientation: 'vertical'
-        
         ScrollViewSpe:
-            
             TopPopupLayout:
                 id: inlayout
-                    
         DownMenuClose:
             CloseButton:
                 on_press: popup.dismiss()
@@ -62,197 +48,141 @@
 <ViscosityPopup>:
     id: popup
     title: "Viscosity Details"
-
     BoxLayout:
         orientation: 'vertical'
-        
         ScrollViewSpe:
-            
             TopPopupLayout:
                 id: inlayout
-                    
         DownMenuClose:
             CloseButton:
                 on_press: popup.dismiss()
-            
+
 <ConductivityPopup>:
     id: popup
     title: "Coductivity Details"
-
     BoxLayout:
         orientation: 'vertical'
-        
         ScrollViewSpe:
-            
             TopPopupLayout:
                 id: inlayout
-        
         DownMenuClose:
             CloseButton:
                 on_press: popup.dismiss()
-        
+
 <FlowPopup>:
     id: popup
     title: "Flow Details"
-
     BoxLayout:
         orientation: 'vertical'
-        
         ScrollViewSpe:
-            
             TopPopupLayout:
                 id: inlayout
-
         DownMenuClose:
             CloseButton:
                 on_press: popup.dismiss()
-                
+
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
         padding: 10
         spacing: 10
-        
         Image:
             source: "data/logo_512.png"
-        
         Button:
             text: 'Injection'
             font_size: '18sp'
             on_press: root.manager.current = 'injection'
-
         Button:
             text: 'Flowrate'
             font_size: '18sp'
             on_press: root.manager.current = 'flow'
-        
         Button:
             text: 'Mobility'
             font_size: '18sp'
             on_press: root.manager.current = 'mobility'
-        
         Button:
             text: 'Viscosity'
             font_size: '18sp'
             on_press: root.manager.current = 'viscosity'
-
         Button:
             text: 'Conductivity'
             font_size: '18sp'
             on_press: root.manager.current = 'conductivity'
-
         Button:
             text: 'About'
             font_size: '18sp'
             on_press: root.manager.current = 'about'
 
-
 <InjectionScreen>:
     fullscreen: True
-    
     BoxLayout:
         orientation: 'vertical'
-        
         TopTitleLayout:
-            
             TitleImage:
-            
             CEToolBoxLabelTitle:
                 text: "Injection"
-        
         ScrollViewSpe:
-            
             TopScreenLayout:
                 rows: 9
-                
                 CEToolBoxLabel:
                     text: "Capillary Length"
-
-                CEToolBoxTextInput:        
+                CEToolBoxTextInput:
                     id: Capillary
-                
                 CEToolBoxUnitLabel:
                     id: CapillaryUnit
-
                 CEToolBoxLabel:
                     text: "Length to window"
-                
                 CEToolBoxTextInput:
                     id: Towindow
-                
                 CEToolBoxUnitLabel:
                     id: TowindowUnit
-                
                 CEToolBoxLabel:
                     text: "Inside diameter"
-            
                 CEToolBoxTextInput:
                     id: Idiameter
-                
                 CEToolBoxUnitLabel:
                     id: IdiameterUnit
-            
                 CEToolBoxLabel:
                     text: "Pressure"
-                
                 CEToolBoxTextInput:
                     id: Pressure
-                
                 CEToolBoxSpinner:
                     id: PressureUnit
                     values: ["mbar", "psi"]
-                    
-                CEToolBoxLabel:        
+                CEToolBoxLabel:
                     text: "Time"
-                
                 CEToolBoxTextInput:
                     id: Time
-                
                 CEToolBoxUnitLabel:
                     id: TimeUnit
-
                 CEToolBoxLabel:
                     text: "Viscosity"
-            
                 CEToolBoxTextInput:
                     id: Viscosity
-                
                 CEToolBoxUnitLabel:
                     id: ViscosityUnit
-                
                 CEToolBoxLabel:
                     text: "Concentration"
-            
                 CEToolBoxTextInput:
                     id: Concentration
-                    
                 CEToolBoxSpinner:
                     id: ConcentrationUnit
                     values: ["g/L", "mmol/L"]
-
                 CEToolBoxLabel:
                     text: "Molecular weight"
-                            
                 CEToolBoxTextInput:
                     id: Molweight
-                    
                 CEToolBoxUnitLabel:
                     id: MolweightUnit
-                
                 CEToolBoxLabel:
                     text: "Voltage"
-                            
                 CEToolBoxTextInput:
                     id: Voltage
-                
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-      
-        DownMenuLayout:  
-
+        DownMenuLayout:
             CalculateButton:
                 on_release: root.show_injection_results()
-                    
             ResetButton:
                 id: Resetbtn
                 on_press: Capillary.text="60.0"
@@ -273,83 +203,55 @@
                 on_press: MolweightUnit.text="g/mol"
                 on_press: Voltage.text="30000.0"
                 on_press: VoltageUnit.text="V"
-                
             MenuButton:
                 on_press: root.manager.current = 'menu'
 
-
-
 <ViscosityScreen>:
     fullscreen: True
-    
     BoxLayout:
         orientation: 'vertical'
-        
         TopTitleLayout:
-            
             TitleImage:
-            
             CEToolBoxLabelTitle:
                 text: "Viscosity"
-        
         ScrollViewSpe:
-            
             TopScreenLayout:
                 rows: 5
-                
                 CEToolBoxLabel:
                     text: "Capillary Length"
-
-                CEToolBoxTextInput:        
+                CEToolBoxTextInput:
                     id: Capillary
-                
                 CEToolBoxUnitLabel:
                     id: CapillaryUnit
-
                 CEToolBoxLabel:
                     text: "Length to window"
-                
                 CEToolBoxTextInput:
                     id: Towindow
-                
                 CEToolBoxUnitLabel:
                     id: TowindowUnit
-                
                 CEToolBoxLabel:
                     text: "Inside diameter"
-            
                 CEToolBoxTextInput:
                     id: Idiameter
-                
                 CEToolBoxUnitLabel:
                     id: IdiameterUnit
-            
                 CEToolBoxLabel:
                     text: "Pressure"
-                
                 CEToolBoxTextInput:
                     id: Pressure
-                
                 CEToolBoxSpinner:
                     id: PressureUnit
                     values: ["mbar", "psi"]
-                    
-                CEToolBoxLabel:        
+                CEToolBoxLabel:
                     text: "Detection time"
-                
                 CEToolBoxTextInput:
                     id: Detectiontime
-                
                 CEToolBoxSpinner:
                     id: DetectiontimeUnit
                     values: ["s", "min"]
-
-                        
-        DownMenuLayout:  
-
+        DownMenuLayout:
             CalculateButton:
                 on_release: root.show_viscosity_results()
-                
             ResetButton:
                 id: Resetbtn
                 on_press: Capillary.text="60.0"
@@ -362,79 +264,53 @@
                 on_press: PressureUnit.text="psi"
                 on_press: Time.text="15.0"
                 on_press: TimeUnit.text="s"
-            
             MenuButton:
                 on_press: root.manager.current = 'menu'
-            
-          
+
 <ConductivityScreen>:
     fullscreen: True
-    
     BoxLayout:
         orientation: 'vertical'
-        
         TopTitleLayout:
-            
             TitleImage:
-            
             CEToolBoxLabelTitle:
                 text: "Conductivity"
-        
         ScrollViewSpe:
-                    
             TopScreenLayout:
                 rows: 5
-                
                 CEToolBoxLabel:
                     text: "Capillary Length"
-
-                CEToolBoxTextInput:        
+                CEToolBoxTextInput:
                     id: Capillary
-                
                 CEToolBoxUnitLabel:
                     id: CapillaryUnit
-
                 CEToolBoxLabel:
                     text: "Length to window"
-                
                 CEToolBoxTextInput:
                     id: Towindow
-                
                 CEToolBoxUnitLabel:
                     id: TowindowUnit
-                
                 CEToolBoxLabel:
                     text: "Inside diameter"
-            
                 CEToolBoxTextInput:
                     id: Idiameter
-                
                 CEToolBoxUnitLabel:
                     id: IdiameterUnit
-                
                 CEToolBoxLabel:
                     text: "Voltage"
-                 
                 CEToolBoxTextInput:
                     id: Voltage
-                
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-                    
                 CEToolBoxLabel:
                     text: "Electric current"
-                 
                 CEToolBoxTextInput:
                     id: Electriccurrent
-                
                 CEToolBoxUnitLabel:
                     id: ElectriccurrentUnit
-                        
-        DownMenuLayout:  
-
+        DownMenuLayout:
             CalculateButton:
                 on_release: root.show_conductivity_results()
-                
             ResetButton:
                 id: Resetbtn
                 on_press: Capillary.text="60.0"
@@ -447,81 +323,54 @@
                 on_press: VoltageUnit.text="V"
                 on_press: Electriccurrent.text="25.0"
                 on_press: ElectriccurrentUnit.text="µA"
-            
             MenuButton:
                 on_press: root.manager.current = 'menu'
 
 <FlowScreen>:
     fullscreen: True
-    
     BoxLayout:
         orientation: 'vertical'
-        
         TopTitleLayout:
-            
             TitleImage:
-            
             CEToolBoxLabelTitle:
                 text: "Flowrate"
-        
         ScrollViewSpe:
-
-            
             TopScreenLayout:
                 rows: 5
-                
                 CEToolBoxLabel:
                     text: "Capillary Length"
-
-                CEToolBoxTextInput:        
+                CEToolBoxTextInput:
                     id: Capillary
-                
                 CEToolBoxUnitLabel:
                     id: CapillaryUnit
-
                 CEToolBoxLabel:
                     text: "Length to window"
-                
                 CEToolBoxTextInput:
                     id: Towindow
-                
                 CEToolBoxUnitLabel:
                     id: TowindowUnit
-                
                 CEToolBoxLabel:
                     text: "Inside diameter"
-            
                 CEToolBoxTextInput:
                     id: Idiameter
-                
                 CEToolBoxUnitLabel:
                     id: IdiameterUnit
-                
                 CEToolBoxLabel:
                     text: "Voltage"
-                 
                 CEToolBoxTextInput:
                     id: Voltage
-                
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-                    
                 CEToolBoxLabel:
                     text: "EOF time"
-             
                 CEToolBoxTextInput:
                     id: Electroosmosis
-                
                 CEToolBoxSpinner:
                     id: ElectroosmosisUnit
                     values: ["s", "min"]
-                 
-                        
-        DownMenuLayout:  
-
+        DownMenuLayout:
             CalculateButton:
                 on_release: root.show_flow_results()
-                
             ResetButton:
                 id: Resetbtn
                 on_press: Capillary.text="60.0"
@@ -534,82 +383,57 @@
                 on_press: VoltageUnit.text="V"
                 on_press: Electroosmosis.text="1.0"
                 on_press: ElectroosmosisUnit.text="min"
-            
             MenuButton:
                 on_press: root.manager.current = 'menu'
 
 <MobilityScreen>:
     fullscreen: True
-    
     BoxLayout:
         orientation: 'vertical'
-        
         TopTitleLayout:
-            
             TitleImage:
-            
             CEToolBoxLabelTitle:
                 text: "Mobility"
-        
         ScrollViewSpe:
             id: tscrollview
-            
             TopScreenLayout:
                 id: inlayout
                 rows: 6
-                
                 CEToolBoxLabel:
                     text: "Capillary Length"
-
-                CEToolBoxTextInput:        
+                CEToolBoxTextInput:
                     id: Capillary
-                
                 CEToolBoxUnitLabel:
                     id: CapillaryUnit
-
                 CEToolBoxLabel:
                     text: "Length to window"
-                
                 CEToolBoxTextInput:
                     id: Towindow
-                
                 CEToolBoxUnitLabel:
                     id: TowindowUnit
-                
                 CEToolBoxLabel:
                     text: "Voltage"
-                 
                 CEToolBoxTextInput:
                     id: Voltage
-                
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-                    
                 CEToolBoxLabel:
                     text: "EOF time"
-             
                 CEToolBoxTextInput:
                     id: Electroosmosis
-                
                 CEToolBoxSpinner:
                     id: ElectroosmosisUnit
                     values: ["s", "min"]
-                    
                 CEToolBoxLabel:
                     text: "Time compound 1"
-                
                 CEToolBoxTextInput:
                     id: Timecompound1
-                
                 CEToolBoxSpinner:
                     id: Timecompound1Unit
                     values: ["s", "min"]
-                        
-        DownMenuLayout:  
-
+        DownMenuLayout:
             CalculateButton:
                 on_release: root.show_mobility_results()
-                
             ResetButton:
                 id: Resetbtn
                 on_press: Capillary.text="60.0"
@@ -623,42 +447,31 @@
                 on_press: Timecompound1.text="1.0"
                 on_press: Timecompound1Unit.text="min"
                 on_press: root.reset()
-            
             MenuButton:
                 on_press: root.manager.current = 'menu'
 
-
 <AboutScreen>:
-    
     BoxLayout:
         orientation: 'vertical'
-            
         ScrollViewSpe:
-            
             TopScreenLayout:
                 cols: 1
                 rows: 4
-                
                 AboutLabel:
                     halign: "center"
                     id: alabel
-                
                 AboutLabel:
                     text: "The Capillary Electrophoresis (CE) ToolBox is a software for computing Capillary Electrophoresis parameters."
-                
                 AboutLabel:
                     text: "CEToolBox Kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at [ref=http://www.apache.org/licenses/LICENSE-2.0][color=#08598E]http://www.apache.org/licenses/LICENSE-2.0[/color][/ref]."
                     on_ref_press:
                         import webbrowser
                         webbrowser.open(args[1])
-                    
                 AboutLabel:
                     text: "For more information, visit the website: [ref=http://pansanel.github.io/cetoolbox/][color=#08598E]http://pansanel.github.io/cetoolbox/[/color][/ref]"
                     on_ref_press:
                         import webbrowser
                         webbrowser.open(args[1])
-                    
-
         DownMenuClose:
             CloseButton:
                 text: 'Menu'

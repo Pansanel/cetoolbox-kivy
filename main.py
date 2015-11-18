@@ -21,10 +21,9 @@ It's link to the manager.kv file
 
 """
 
-
+#kivy and system import
 import kivy
 kivy.require('1.9.0')
-
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -39,19 +38,15 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
 from kivy.core.window import Window
-
-
-
+#project import
 from store import get_store, create_store
 from capillary import Capillary
 from base import *
 
-
 #when the keyboard is open resize the window
 Window.softinput_mode = 'resize'
 
-
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 class CEToolBoxPopup(Popup):
     """ Popup use to be herited by all Popup of the app"""
@@ -59,25 +54,23 @@ class CEToolBoxPopup(Popup):
 
 class ErrorPopup(CEToolBoxPopup):
     """ Popup to show in case of erreur """
-    
+
     def show_popup(self, data):
         """ feel the popup with the error message present in data
         @param data: dictionnary with the error type (should be 
         always 1 for this kind of popup) and the error message
         @type data: {str: int, str: str}
         """
-        
         message = add_color(data["errtext"], "FF0000")
         self.ids.errormessage.text = message
         self.open()
 
 class ViscosityPopup(CEToolBoxPopup):
     """Popup to show the Viscosity result """
-    
+
     def show_popup(self, data):
         """ get and show the viscosity result from the store """
         store = get_store()
-        
         self.ids.inlayout.rows = 1
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Viscosity :", "FFFFFF")))
         value = round(store.get('Viscosity')["value"], 2)
@@ -87,7 +80,7 @@ class ViscosityPopup(CEToolBoxPopup):
 
 class InjectionPopup(CEToolBoxPopup):
     """Popup to show the Injection result """
-    
+
     def show_popup(self, data):
         """ get and show injections results from the store.
         Can add an error message from data.
@@ -95,92 +88,78 @@ class InjectionPopup(CEToolBoxPopup):
         always 0 (no error) or 2 for this kind of popup) and the error message
         @type data: {str: int, str: str}
         """
-        
         store = get_store()
-        
         if data["errcode"] == 2:
             self.ids.inlayout.rows = 12
         else:
             self.ids.inlayout.rows = 11
-            
+        #if there is an error to print
         if data["errcode"] == 2:
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Warning :", "FF0000")))
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(data["errtext"], "FF0000")))
-        
+        #Hydrodynamic injection
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Hydrodynamic injection :", "FFFFFF")))
         value = round(store.get('Hydrodynamicinjection')["value"], 2)
         value = str(value)+" "+store.get('Hydrodynamicinjection')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
+        #Capillary volume
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Capillary volume :", "BFBFBF")))
         value = round(store.get('Capillaryvolume')["value"], 2)
         value = str(value)+" "+store.get('Capillaryvolume')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-        
+        #Capillary volume to window
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Capillary volume to window :", "FFFFFF")))
         value = round(store.get('Capillaryvolumetowin')["value"], 2)
         value = str(value)+" "+store.get('Capillaryvolumetowin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
+        #Injection plug length
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection plug length :", "BFBFBF")))
         value = round(store.get('Injectionpluglen')["value"], 2)
         value = str(value)+" "+store.get('Injectionpluglen')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-                
+        #Plug (% of total length)
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Plug (% of total length) :", "FFFFFF")))
         value = round(store.get('Pluglenpertotallen')["value"], 2)
         value = str(value)+" "+store.get('Pluglenpertotallen')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-                
+        #Plug (% of length to window)
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Plug (% of length to window) :", "BFBFBF")))
         value = round(store.get('Pluglenperlentowin')["value"], 2)
         value = str(value)+" "+store.get('Pluglenperlentowin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-            
-        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Time to replace 1 volume :", "FFFFFF")))
-        #~ value = round(store.get('Timetoreplaces')["value"], 2)
-        #~ value = str(value)+" "+store.get('Timetoreplaces')["unit"]
-        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        #~ 
-        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
-        #~ value = round(store.get('Timetoreplacem')["value"], 2)
-        #~ value = str(value)+" "+store.get('Timetoreplacem')["unit"]
-        #~ self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-                
+        #Injected analyte 
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte :", "FFFFFF")))
         value = round(store.get('Injectedanalyteng')["value"], 2)
         value = str(value)+" "+store.get('Injectedanalyteng')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-    
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=""))
         value = round(store.get('Injectedanalytepmol')["value"], 2)
         value = str(value)+" "+store.get('Injectedanalytepmol')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
+        #Injection pressure
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "BFBFBF")))
         value = round(store.get('Injectionpressure')["value"], 2)
         value = str(value)+" "+store.get('Injectionpressure')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-        
+        #Flow rate
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "FFFFFF")))
         value = round(store.get('Flowrate')["value"], 2)
         value = str(value)+" "+store.get('Flowrate')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
+        #Field strength
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Field strength :", "BFBFBF")))
         value = round(store.get('Fieldstrength')["value"], 2)
         value = str(value)+" "+store.get('Fieldstrength')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-        
+        #open the popup
         self.open()
-        
+
 class ConductivityPopup(CEToolBoxPopup):
     """Popup to show the Conductivity result """
-    
+
     def show_popup(self, data):
         """ get and show the conductivity result from the store. """
         store = get_store()
-        
         self.ids.inlayout.rows = 1
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Conductivity :", "FFFFFF")))
         value = round(store.get('Conductivity')["value"], 2)
@@ -190,68 +169,61 @@ class ConductivityPopup(CEToolBoxPopup):
 
 class FlowPopup(CEToolBoxPopup):
     """Popup to show the Flow results """
-     
     def show_popup(self, data):
         """ get and show Flows results from the store. """
         store = get_store()
-        
         self.ids.inlayout.rows = 4
-        
+        #Field strength
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Field strength :", "FFFFFF")))
         value = round(store.get('Fieldstrength')["value"], 2)
         value = str(value)+" "+store.get('Fieldstrength')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
-        
+        #µEOF
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEOF :","BFBFBF")))
         value = "{:.2E}".format(store.get('MicroEOF')["value"])
         value = value +" "+store.get('MicroEOF')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
-        
+        #Length per min
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Length per min :", "FFFFFF")))
         value = round(store.get('Lengthpermin')["value"], 2)
         value = str(value)+" "+store.get('Lengthpermin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
-        
+        #Flow rate
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "BFBFBF")))
         value = round(store.get('Flowrate')["value"], 2)
         value = str(value)+" "+store.get('Flowrate')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"BFBFBF")))
-        
+        #open the popup
         self.open()
-        
+
 class MobilityPopup(CEToolBoxPopup):
     """Popup to show the Mobility results """
-    
+
     def show_popup(self, data):
         """ get and show Mobility results from the store. """
         store = get_store()
-        
         self.ids.inlayout.rows = 1 + store.get('Nbtimecompound')["value"]
-        
+        #the first µEOF
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEOF :","FFFFFF")))
         value = "{:.2E}".format(store.get('MicroEOF')["value"])
         value = value+" "+store.get('MicroEOF')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,"FFFFFF")))
-        
+        #add all the µEP
         for i in range(1, store.get('Nbtimecompound')["value"]+1):
             if i%2 != 0:
                 color = "BFBFBF"
             else:
                 color = "FFFFFF"
-            
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("µEP"+str(i)+" :", color)))
             value = "{:.2E}".format(store.get('MicroEP'+str(i))["value"])
             value = value +" "+store.get('MicroEP'+str(i))["unit"]
             self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value,color)))
-        
+        #open the popup
         self.open()
-        
-
 
 class InjectionScreen(Screen):
     """ The screen for Injection """
-    
-    
+
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
         on the InjectionScreen 
@@ -276,9 +248,7 @@ class InjectionScreen(Screen):
         self.ids.MolweightUnit.text = store.get('Molweight')["unit"]
         self.ids.Voltage.text = str(store.get('Voltage')["value"])
         self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
-        
-    
-    
+
     def show_injection_results(self):
         """ lauch when clicked on result.
         Compute, store the computation and lauch a popup"""
@@ -311,26 +281,21 @@ class InjectionScreen(Screen):
             self._popup = ErrorPopup()
             self._popup.show_popup(data)
             return
-        
         #add data          
         computation = Capillary()
         errcode, errtext = computation.save_injection_result()
-        
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
-        
         if data["errcode"] == 1:
             self._popup = ErrorPopup()
         else:
             self._popup = InjectionPopup()
         self._popup.show_popup(data)
-    
-        
 
 class ViscosityScreen(Screen):
     """ The screen for Viscosity """
-    
+
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
         on the ViscosityScreen 
@@ -347,8 +312,7 @@ class ViscosityScreen(Screen):
         self.ids.PressureUnit.text = store.get('Pressure')["unit"]
         self.ids.Detectiontime.text = str(store.get('Detectiontime')["value"])
         self.ids.DetectiontimeUnit.text = store.get('Detectiontime')["unit"]
-    
-    
+
     def show_viscosity_results(self):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
@@ -372,24 +336,21 @@ class ViscosityScreen(Screen):
             self._popup = ErrorPopup()
             self._popup.show_popup(data)
             return
-        
+        #get and use error codes
         computation = Capillary()
         errcode, errtext = computation.save_vicosity_result()
-        
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
-        
         if data["errcode"] == 1:
             self._popup = ErrorPopup()
         else:
             self._popup = ViscosityPopup()
         self._popup.show_popup(data)
 
-
 class ConductivityScreen(Screen):
     """The screen for conductivity """
-    
+
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
         on the ConductivityScreen 
@@ -406,7 +367,7 @@ class ConductivityScreen(Screen):
         self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
         self.ids.Electriccurrent.text = str(store.get('Electriccurrent')["value"])
         self.ids.ElectriccurrentUnit.text = store.get('Electriccurrent')["unit"]
-    
+
     def show_conductivity_results(self):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
@@ -429,14 +390,12 @@ class ConductivityScreen(Screen):
             self._popup = ErrorPopup()
             self._popup.show_popup(data)
             return
-        
+        #get and save error code
         computation = Capillary()
         errcode, errtext = computation.save_conductivy_result()
-        
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
-        
         if data["errcode"] == 1:
             self._popup = ErrorPopup()
         else:
@@ -445,7 +404,7 @@ class ConductivityScreen(Screen):
 
 class FlowScreen(Screen):
     """ the screen for the flow"""
-    
+
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
         on the FlowScreen
@@ -462,8 +421,7 @@ class FlowScreen(Screen):
         self.ids.VoltageUnit.text = store.get('Voltage')["unit"]
         self.ids.Electroosmosis.text = str(store.get('Electroosmosis')["value"])
         self.ids.ElectroosmosisUnit.text = store.get('Electroosmosis')["unit"]
-    
-    
+
     def show_flow_results(self):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
@@ -486,24 +444,21 @@ class FlowScreen(Screen):
             self._popup = ErrorPopup()
             self._popup.show_popup(data)
             return
-        
+        #get and save errors and value
         computation = Capillary()
         errcode, errtext = computation.save_flow_result()
-        
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
-        
         if data["errcode"] == 1:
             self._popup = ErrorPopup()
         else:
             self._popup = FlowPopup()
         self._popup.show_popup(data)
 
-
 class MobilityScreen(Screen):
     """ The mobility Screen"""
-    
+
     def show_mobility_results(self):
         """ lauch when clicked on result
         Compute, store the computation and lauch a popup"""
@@ -526,16 +481,13 @@ class MobilityScreen(Screen):
             self._popup = ErrorPopup()
             self._popup.show_popup(data)
             return
-        
-        
         #save all the timecompound
         for sublist in self.timecompoundlist:
             store.put(sublist[1].id, value=float(sublist[1].text),
                       unit=sublist[2].text)
-        
+        #get and save error and values
         computation = Capillary()
         errcode, errtext = computation.save_mobility_result()
-        
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
@@ -545,7 +497,7 @@ class MobilityScreen(Screen):
         else:
             self._popup = MobilityPopup()
         self._popup.show_popup(data)
-    
+
     def on_pre_enter(self):
         """special function lauch at the clic of the button to go
         on the MobilityScreen 
@@ -562,12 +514,10 @@ class MobilityScreen(Screen):
         self.ids.ElectroosmosisUnit.text = store.get('Electroosmosis')["unit"]
         self.ids.Timecompound1.text = str(store.get('Timecompound1')["value"])
         self.ids.Timecompound1Unit.text = store.get('Timecompound1')["unit"]
-        
         #set the number of rows
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
         #force the good size
         self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
-        
         #set the rest of the time compound
         self.timecompoundlist = []
         for i in range(2, store.get('Nbtimecompound')["value"]+1):
@@ -582,13 +532,12 @@ class MobilityScreen(Screen):
             self.ids.inlayout.add_widget(timecompountunit)
             tosave = [timecompount, timecompountvalue, timecompountunit]
             self.timecompoundlist.append(tosave)
-            
         #create the button add and del
         self.add_button = CEToolBoxButton(text="Add", id="addbutton", on_release=self.add_line)
         self.ids.inlayout.add_widget(self.add_button)
         self.del_button = CEToolBoxButton(text="Del", id="delbutton", on_release=self.del_line)
         self.ids.inlayout.add_widget(self.del_button)
-            
+
     def add_line(self, buttoninstance):
         """ add a line of timecompount
         @param buttoninstance: the instance of the button (not used)
@@ -596,13 +545,11 @@ class MobilityScreen(Screen):
         #del and create again to respect the order
         self.ids.inlayout.remove_widget(self.add_button)
         self.ids.inlayout.remove_widget(self.del_button)
-        
         #create the new line
         store = get_store()
         lastval = store.get('Nbtimecompound')["value"]
         store.put('Nbtimecompound', value=1+lastval)
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
-        
         #add the widget
         newval = str(store.get('Nbtimecompound')["value"])
         timecompount = CEToolBoxLabel(text="Time compound "+newval)
@@ -617,41 +564,34 @@ class MobilityScreen(Screen):
         self.ids.inlayout.add_widget(timecompountunit)
         tosave = [timecompount, timecompountvalue, timecompountunit]
         self.timecompoundlist.append(tosave)
-        
         #recreate the button
         self.add_button = CEToolBoxButton(text="Add", id="addbutton", on_release=self.add_line)
         self.ids.inlayout.add_widget(self.add_button)
         self.del_button = CEToolBoxButton(text="Del", id="delbutton", on_release=self.del_line)
         self.ids.inlayout.add_widget(self.del_button)
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
-        
         #force the good size
         self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
-        
-        
+
     def del_line(self, buttoninstance):
         """ delete a line of timecompound (do nothing if there is only
         one timecompound line)
         @param buttoninstance: the instance of the button (not used) """
-        
         try:
             widgets = self.timecompoundlist.pop()
         except IndexError:
             return
         for w in widgets:
             self.ids.inlayout.remove_widget(w)
-        
         #del the line in the jsonfile
         store = get_store()
         lastval = store.get('Nbtimecompound')["value"]
         store.delete('Timecompound'+str(lastval))
         store.put('Nbtimecompound', value=lastval-1)
         self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
-        
         #force the good size
         self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
-            
-        
+
     def on_leave(self):
         """ when the screen is leaved, delete all widget generated from 
         the jsonfile"""
@@ -660,7 +600,7 @@ class MobilityScreen(Screen):
                 self.ids.inlayout.remove_widget(w)
         self.ids.inlayout.remove_widget(self.add_button)
         self.ids.inlayout.remove_widget(self.del_button)
-    
+
     def reset(self):
         """ executed when cliqued on the reset button 
         set the value of nbtimecompound at 1 and delete lines"""
@@ -668,10 +608,10 @@ class MobilityScreen(Screen):
         nbval = store.get('Nbtimecompound')["value"]
         for i in range(1, nbval):
             self.del_line(1) 
-    
+
 class AboutScreen(Screen):
     """ the About screen """
-    
+
     def on_pre_enter(self):
         """ get the version before enter """
         self.ids.alabel.text = """[b][size=20]CEToolBox kivy v"""+ __version__ +"""[/size][/b]\n"""
@@ -680,13 +620,11 @@ class MenuScreen(Screen):
     """ the menu screen"""
     pass
 
-
 class ManagerApp(App):
     """ The app """
     title = "CEToolBox"
     create_store()
-    
-    
+
     def build(self):
         """ add all the screen to the ScreenManager and
         lauch the post_build_init method"""        
@@ -720,7 +658,7 @@ class ManagerApp(App):
         store = get_store()
         store.put("pause", value=self.sm.current)
         return True
-    
+
     def on_resume(self):
         """when the app is recall from sleep get the screen we was on
         and set it """

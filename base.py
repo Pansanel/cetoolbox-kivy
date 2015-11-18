@@ -56,7 +56,6 @@ class CEToolBoxTextInput(TextInput):
 class CEToolBoxSpinner(Spinner):
     pass
 
-    
 class ScrollViewSpe(ScrollView):
     """ Special class made to give it's own value at his layout child
     See the kv file for an exemple of use """
@@ -70,7 +69,6 @@ class ScrollViewSpe(ScrollView):
         for child in self.children:
             child.change_width(wid)
         return wid
-
 
 class CEToolBoxLayout(GridLayout):
     """Special Layout use to choose the minimal size allowed
@@ -103,8 +101,8 @@ class CEToolBoxLayout(GridLayout):
             self.width = wid
         else:
             self.width = self.minimum_width
-    
-    
+
+
 class TopScreenLayout(CEToolBoxLayout):
     """ set the size of the layout from minimals values and the size
     of the scrollviewspe parrent."""
