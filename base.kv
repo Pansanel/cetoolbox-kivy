@@ -5,7 +5,7 @@
 <CEToolBoxButton>:
     font_size: '15sp'
     height: '30sp'
-	#size_hint_y: None
+    #size_hint_y: None
 
 <CalculateButton@CEToolBoxButton>:
     text: "Calculate"
@@ -16,14 +16,14 @@
     on_press: root.on_press
 
 <ResetButton@CEToolBoxButton>:
-	text: 'Reset'
-	
+    text: 'Reset'
+    
 <CloseButton@Button>:
-	font_size: '15sp'
+    font_size: '15sp'
     height: '30sp'
-	text: 'Close'
-	on_press: root.on_press
-	#size_hint_y: None
+    text: 'Close'
+    on_press: root.on_press
+    #size_hint_y: None
 
 <CEToolBoxLabel>:
     font_size: '15sp'
@@ -33,18 +33,18 @@
     markup: True
 
 <AboutLabel@Label>:
-	font_size: '15sp'
-	size_hint_y: None
+    font_size: '15sp'
+    size_hint_y: None
     text_size: self.width, None
-    height: self.texture_size[1]	
-	markup: True
+    height: self.texture_size[1]    
+    markup: True
 
 <CEToolBoxTextInput>:
     font_size: '15sp'
     height: '30sp'
     width: '60sp'
     #centering the text
-	padding: [6,self.height/2-sp(13),6,self.height/2-sp(13)]
+    padding: [6,self.height/2-sp(13),6,self.height/2-sp(13)]
     input_filter: 'float'
     #waiting for a fix (floating point missing)
     input_type: 'tel'
@@ -60,26 +60,26 @@
     #size_hint_y: None
 
 <CEToolBoxSpinnerOption@SpinnerOption>:
-	font_size: '15sp'
-	text_size: self.width-10, self.height
+    font_size: '15sp'
+    text_size: self.width-10, self.height
     halign: 'left'
     valign: 'middle'
    
 <CEToolBoxSpinner>:
     font_size: '15sp'
     height: '30sp'
-	width: '30sp'
-	text_size: self.width-10, self.height
+    width: '30sp'
+    text_size: self.width-10, self.height
     halign: 'left'
     valign: 'middle'
     option_cls: Factory.get("CEToolBoxSpinnerOption")
-	#magic to use if I want a almost fixed size
-	#size_hint_y: None
+    #magic to use if I want a almost fixed size
+    #size_hint_y: None
 
 <CEToolBoxLayout>:
-	padding: 10
+    padding: 10
     spacing: 10
-	
+    
 <TopScreenLayout>:
     size_hint_y: None
     size_hint_x: None
@@ -88,7 +88,7 @@
     cols: 3
     
 <TopPopupLayout>:
-	size_hint_y: None
+    size_hint_y: None
     size_hint_x: None
     spacing: 40
     minimum_height: '350sp'
@@ -96,33 +96,33 @@
     cols: 2
 
 <CEToolBoxFixedLayout@CEToolBoxLayout>:
-	size_hint_y: None
+    size_hint_y: None
     height: '60sp'
 
 <CEToolBoxLabelTitle@Label>:
-	font_size: '18sp'
-	height: '20sp'
-	text_size: self.width, self.height
-	halign: 'left'
-	valign: 'middle'
-	markup: True
+    font_size: '18sp'
+    height: '20sp'
+    text_size: self.width, self.height
+    halign: 'left'
+    valign: 'middle'
+    markup: True
 
 <TitleImage@Image>:
-	source: "data/logo.png"
-	size_hint_x: None
+    source: "data/logo.png"
+    size_hint_x: None
 
 <TopTitleLayout@CEToolBoxFixedLayout>:
-	cols: 2
-	height: '50sp'
-	spacing: 5
-	pading: 5
-	
+    cols: 2
+    height: '50sp'
+    spacing: 5
+    pading: 5
+    
 <DownMenuLayout@CEToolBoxFixedLayout>:
     cols: 3 
 
 <DownMenuClose@CEToolBoxFixedLayout>:
     cols: 1
-	spacing: 0
+    spacing: 0
 
     
 <ScrollViewSpe>:

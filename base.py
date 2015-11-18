@@ -123,8 +123,3 @@ class TopPopupLayout(CEToolBoxLayout):
 
     def set_min_width(self):
         self.minimum_width = sp(290)
-    
-            
-
-
-

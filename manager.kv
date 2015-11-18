@@ -1,30 +1,30 @@
 #:kivy 1.9.0
 
 <CEToolBoxPopup>:
-	title_size: "18sp"
-	title_align: "center"
-	
+    title_size: "18sp"
+    title_align: "center"
+    
 <ErrorPopup>:
-	id: popup
-	title: "Error"
-	title_color: [1, 0, 0, 1]
-	
-	BoxLayout:
+    id: popup
+    title: "Error"
+    title_color: [1, 0, 0, 1]
+    
+    BoxLayout:
         orientation: 'vertical'
         
         ScrollViewSpe:
             
             TopPopupLayout:
-				cols: 1
-				rows: 1
-				
-				AboutLabel:
-					id: errormessage
+                cols: 1
+                rows: 1
+                
+                AboutLabel:
+                    id: errormessage
                     
         DownMenuClose:
-			CloseButton:
-				on_press: popup.dismiss()
-				
+            CloseButton:
+                on_press: popup.dismiss()
+                
 <InjectionPopup>:
     id: popup
     title: "Injection Details"
@@ -34,14 +34,14 @@
         orientation: 'vertical'
         
         ScrollViewSpe:
-			size_hint_y: 1.
+            size_hint_y: 1.
             
             TopPopupLayout:
-				id: inlayout
+                id: inlayout
                     
         DownMenuClose:
-			CloseButton:
-				on_press: popup.dismiss()
+            CloseButton:
+                on_press: popup.dismiss()
 
 <MobilityPopup>:
     id: popup
@@ -53,11 +53,11 @@
         ScrollViewSpe:
             
             TopPopupLayout:
-				id: inlayout
+                id: inlayout
                     
         DownMenuClose:
-			CloseButton:
-				on_press: popup.dismiss()
+            CloseButton:
+                on_press: popup.dismiss()
 
 <ViscosityPopup>:
     id: popup
@@ -69,11 +69,11 @@
         ScrollViewSpe:
             
             TopPopupLayout:
-				id: inlayout
+                id: inlayout
                     
         DownMenuClose:
-			CloseButton:
-				on_press: popup.dismiss()
+            CloseButton:
+                on_press: popup.dismiss()
             
 <ConductivityPopup>:
     id: popup
@@ -85,11 +85,11 @@
         ScrollViewSpe:
             
             TopPopupLayout:
-				id: inlayout
+                id: inlayout
         
         DownMenuClose:
-			CloseButton:
-				on_press: popup.dismiss()
+            CloseButton:
+                on_press: popup.dismiss()
         
 <FlowPopup>:
     id: popup
@@ -101,21 +101,21 @@
         ScrollViewSpe:
             
             TopPopupLayout:
-				id: inlayout
+                id: inlayout
 
         DownMenuClose:
-			CloseButton:
-				on_press: popup.dismiss()
-				
+            CloseButton:
+                on_press: popup.dismiss()
+                
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
         padding: 10
         spacing: 10
-		
-		Image:
-			source: "data/logo_512.png"
-		
+        
+        Image:
+            source: "data/logo_512.png"
+        
         Button:
             text: 'Injection'
             font_size: '18sp'
@@ -127,9 +127,9 @@
             on_press: root.manager.current = 'flow'
         
         Button:
-			text: 'Mobility'
-			font_size: '18sp'
-			on_press: root.manager.current = 'mobility'
+            text: 'Mobility'
+            font_size: '18sp'
+            on_press: root.manager.current = 'mobility'
         
         Button:
             text: 'Viscosity'
@@ -154,11 +154,11 @@
         orientation: 'vertical'
         
         TopTitleLayout:
-			
-			TitleImage:
-			
-			CEToolBoxLabelTitle:
-				text: "Injection"
+            
+            TitleImage:
+            
+            CEToolBoxLabelTitle:
+                text: "Injection"
         
         ScrollViewSpe:
             
@@ -248,10 +248,10 @@
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
       
-		DownMenuLayout:  
+        DownMenuLayout:  
 
-			CalculateButton:
-				on_release: root.show_injection_results()
+            CalculateButton:
+                on_release: root.show_injection_results()
                     
             ResetButton:
                 id: Resetbtn
@@ -286,11 +286,11 @@
         orientation: 'vertical'
         
         TopTitleLayout:
-			
-			TitleImage:
-			
-			CEToolBoxLabelTitle:
-				text: "Viscosity"
+            
+            TitleImage:
+            
+            CEToolBoxLabelTitle:
+                text: "Viscosity"
         
         ScrollViewSpe:
             
@@ -374,11 +374,11 @@
         orientation: 'vertical'
         
         TopTitleLayout:
-			
-			TitleImage:
-			
-			CEToolBoxLabelTitle:
-				text: "Conductivity"
+            
+            TitleImage:
+            
+            CEToolBoxLabelTitle:
+                text: "Conductivity"
         
         ScrollViewSpe:
                     
@@ -411,8 +411,8 @@
                 
                 CEToolBoxUnitLabel:
                     id: IdiameterUnit
-				
-				CEToolBoxLabel:
+                
+                CEToolBoxLabel:
                     text: "Voltage"
                  
                 CEToolBoxTextInput:
@@ -458,11 +458,11 @@
         orientation: 'vertical'
         
         TopTitleLayout:
-			
-			TitleImage:
-			
-			CEToolBoxLabelTitle:
-				text: "Flowrate"
+            
+            TitleImage:
+            
+            CEToolBoxLabelTitle:
+                text: "Flowrate"
         
         ScrollViewSpe:
 
@@ -496,8 +496,8 @@
                 
                 CEToolBoxUnitLabel:
                     id: IdiameterUnit
-				
-				CEToolBoxLabel:
+                
+                CEToolBoxLabel:
                     text: "Voltage"
                  
                 CEToolBoxTextInput:
@@ -544,18 +544,18 @@
     BoxLayout:
         orientation: 'vertical'
         
-		TopTitleLayout:
-			
-			TitleImage:
-			
-			CEToolBoxLabelTitle:
-				text: "Mobility"
+        TopTitleLayout:
+            
+            TitleImage:
+            
+            CEToolBoxLabelTitle:
+                text: "Mobility"
         
         ScrollViewSpe:
             id: tscrollview
             
             TopScreenLayout:
-				id: inlayout
+                id: inlayout
                 rows: 6
                 
                 CEToolBoxLabel:
@@ -575,8 +575,8 @@
                 
                 CEToolBoxUnitLabel:
                     id: TowindowUnit
-				
-				CEToolBoxLabel:
+                
+                CEToolBoxLabel:
                     text: "Voltage"
                  
                 CEToolBoxTextInput:
@@ -596,12 +596,12 @@
                     values: ["s", "min"]
                     
                 CEToolBoxLabel:
-					text: "Time compound 1"
-				
-				CEToolBoxTextInput:
-					id: Timecompound1
-				
-				CEToolBoxSpinner:
+                    text: "Time compound 1"
+                
+                CEToolBoxTextInput:
+                    id: Timecompound1
+                
+                CEToolBoxSpinner:
                     id: Timecompound1Unit
                     values: ["s", "min"]
                         
@@ -631,35 +631,35 @@
 <AboutScreen>:
     
     BoxLayout:
-		orientation: 'vertical'
-			
-		ScrollViewSpe:
-			
-			TopScreenLayout:
-				cols: 1
-				rows: 4
-				
-				AboutLabel:
-					halign: "center"
-					id: alabel
-				
-				AboutLabel:
-					text: "The Capillary Electrophoresis (CE) ToolBox is a software for computing Capillary Electrophoresis parameters."
-				
-				AboutLabel:
-					text: "CEToolBox Kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at [ref=http://www.apache.org/licenses/LICENSE-2.0][color=#08598E]http://www.apache.org/licenses/LICENSE-2.0[/color][/ref]."
-					on_ref_press:
-						import webbrowser
-						webbrowser.open(args[1])
-					
-				AboutLabel:
-					text: "For more information, visit the website: [ref=http://pansanel.github.io/cetoolbox/][color=#08598E]http://pansanel.github.io/cetoolbox/[/color][/ref]"
-					on_ref_press:
-						import webbrowser
-						webbrowser.open(args[1])
+        orientation: 'vertical'
+            
+        ScrollViewSpe:
+            
+            TopScreenLayout:
+                cols: 1
+                rows: 4
+                
+                AboutLabel:
+                    halign: "center"
+                    id: alabel
+                
+                AboutLabel:
+                    text: "The Capillary Electrophoresis (CE) ToolBox is a software for computing Capillary Electrophoresis parameters."
+                
+                AboutLabel:
+                    text: "CEToolBox Kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at [ref=http://www.apache.org/licenses/LICENSE-2.0][color=#08598E]http://www.apache.org/licenses/LICENSE-2.0[/color][/ref]."
+                    on_ref_press:
+                        import webbrowser
+                        webbrowser.open(args[1])
+                    
+                AboutLabel:
+                    text: "For more information, visit the website: [ref=http://pansanel.github.io/cetoolbox/][color=#08598E]http://pansanel.github.io/cetoolbox/[/color][/ref]"
+                    on_ref_press:
+                        import webbrowser
+                        webbrowser.open(args[1])
                     
 
-		DownMenuClose:
-			CloseButton:
-				text: 'Menu'
-				on_press: root.manager.current = 'menu'
+        DownMenuClose:
+            CloseButton:
+                text: 'Menu'
+                on_press: root.manager.current = 'menu'

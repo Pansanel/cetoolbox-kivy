@@ -37,8 +37,8 @@ import math
 
 from store import get_store
 from convertunits import (LengthUnits, PressureUnits, TimeUnits, 
-						  ConcentrationUnits, MolConcentrationUnits,
-						  MolWeightUnits, VoltUnits)
+                          ConcentrationUnits, MolConcentrationUnits,
+                          MolWeightUnits, VoltUnits)
 
 class Capillary:
     '''Capillary class, see module documentation for more information.
@@ -208,7 +208,7 @@ class Capillary:
         
         store.put('Viscosity', value=viscosity, unit="cp")
         return 0, ""
-		
+        
     def save_conductivy_result(self):
         """ compute and save the result for the conductivy screen """  
         store = get_store()
@@ -226,7 +226,7 @@ class Capillary:
         
         store.put('Conductivity', value=conductivity, unit="S/m")
         return 0, ""
-	
+    
     def save_flow_result(self):
         """ compute and save the result for the flow screen """
         store = get_store()
