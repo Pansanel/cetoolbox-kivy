@@ -13,22 +13,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-"""
-convertunits.py
-=========
+'''
+Units
+=====
 
-Contain static class to do convertions of units
+The Units provide a set of classes to manage units and unit conversion.
 
-"""
+'''
 
-from externlib.firkin import UnitManager, SIFamily, Family
+class UnitList:
+    '''A class to manage units and to convert values.
+    '''
+    def __init__(self, baseUnitAbbr, baseUnitName):
+        self.baseUnitAbbr = baseUnitAbbr
+        self.baseUnitName = baseUnitName
+        self.units = {}
+        self.units[baseUnitAbbr] = [baseUnitName, 1]
+
+    def add_unit(self, unitAbbr, unitName, unitFactor = 1):
+        self.units[unitAbbr] = [unitName, unitFactor]
+
+    def get_factor(self, unitAbbr):
+        return self.units[unitAbbr][1]
+
+    def convert_to_unit(self, value, from_unit, to_unit):
+        convertedValue = value * self.get_factor(from_unit) / self.get_factor(to_unit)
+        return float(convertedValue)
 
 class BaseUnits:
-    """ A class use to be herited to convert value"""
+    '''A class use to be herited to convert value
+    '''
 
     @classmethod
-    def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+    def convert_unit(self, value, from_unit, to_unit):
+        """
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -39,17 +57,17 @@ class BaseUnits:
             %s method""" % type(self).__name__)
 
 class LengthUnits(BaseUnits):
-    """ a class use to convert length (only the metric system)
-    all the major type m, mm, km, etc. and the cm
-    """
-    lengths = UnitManager()
-    lengths.add(SIFamily(base='m', name='metter')) 
-    centimeter = Family(name='centimeter', base='cm')
-    lengths.add(centimeter, other="metter", factor=0.01)
+    '''A class use to convert length (only the metric system)
+    It handles µm, mm, cm and m.
+    '''
+    unitList = UnitList('m', 'metter')
+    unitList.add_unit('cm', 'centimetter', 0.01)
+    unitList.add_unit('mm', 'millimetter', 0.001)
+    unitList.add_unit(u'µm', 'micrometter', 0.000001)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -57,23 +75,22 @@ class LengthUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.lengths.convert_to_unit(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
 
 class PressureUnits(BaseUnits):
-    """ a class use to convert pressure.
-    Handle all the bar familly mbar, bar, kbar and the pascal (pa)
-    and the psi """
-    pressures = UnitManager()
-    pressures.add(SIFamily(base='bar', name='bar'))
-    otherpressures = Family(name='pressure', base='pa')
-    otherpressures.add('psi', 6894.8, 'pa')
-    pressures.add(otherpressures, other='bar', factor=0.00001)
+    '''A class use to convert pressure.
+    It handles pa, mbar, bar and psi.
+    '''
+    unitList = UnitList('pa', 'pascal')
+    unitList.add_unit('bar', 'bar',  100000.0)
+    unitList.add_unit('mbar', 'millibar',  100.0)
+    unitList.add_unit('psi', 'psi', 6894.8)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -81,20 +98,21 @@ class PressureUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.pressures.convert_to_unit(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
 
 class TimeUnits(BaseUnits):
-    """ a class use to convert time.
-    Handle s, min, h """
-    times = Family(name='time', base='s')
-    times.add('min', 60, 's')
-    times.add('h', 60, 'min')
+    '''A class use to convert time.
+    It handles s, min and h.
+    '''
+    unitList = UnitList('s','seconde')
+    unitList.add_unit('min','minute', 60.0)
+    unitList.add_unit('h','hour', 3600.0)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -102,19 +120,20 @@ class TimeUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.times.convert(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
 
 class ConcentrationUnits(BaseUnits):
-    """ a class use to convert concentation.
-    Handle all the g/L familly : mg/L, g/L, Kg/L, etc."""
-    concentration = UnitManager()
-    concentration.add(SIFamily(base='g/L', name='gramm per litter'))
+    '''A class use to convert concentration.
+    It handles g/L and mg/L.
+    '''
+    unitList = UnitList('g/L','gramm per litter')
+    unitList.add_unit('mg/L','milligram per litter', 0.001)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -122,19 +141,20 @@ class ConcentrationUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.concentration.convert_to_unit(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
-
+ 
 class MolConcentrationUnits(BaseUnits):
-    """ a class use to convert molar concentation.
-    Handle all the mol/L familly : mmol/L, mol/L, kmol/L, etc."""
-    molconcentration = UnitManager()
-    molconcentration.add(SIFamily(base='mol/L', name='mol per litter'))
+    '''A class use to convert molar concentration.
+    It handles mol/L and mmol/L.
+    '''
+    unitList = UnitList('mol/L','mol per litter')
+    unitList.add_unit('mmol/L','millimol per litter', 0.001)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -142,19 +162,20 @@ class MolConcentrationUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.molconcentration.convert_to_unit(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
 
 class MolWeightUnits(BaseUnits):
-    """ a class use to convert molar weight.
-    Handle all the g/mol familly : mg/mol, g/mol, Kg/mol, etc."""
-    molweight = UnitManager()
-    molweight.add(SIFamily(base='g/mol', name='gramm per mol'))
+    '''A class use to convert molar weight.
+    It handles g/mol and mg/mol.
+    '''
+    unitList = UnitList('g/mol','gramm per mol')
+    unitList.add_unit('mg/mol','milligram per mol', 0.001)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -162,19 +183,21 @@ class MolWeightUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.molweight.convert_to_unit(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
 
 class VoltUnits(BaseUnits):
-    """ a class use to convert the volt familly.
-    Handle all the V familly : mV, V, KV, etc."""
-    voltage = UnitManager()
-    voltage.add(SIFamily(base='V', name='Volt'))
+    '''A class use to convert the volt familly.
+    It handles V, mV and KV.
+    '''
+    unitList = UnitList('V','Volt')
+    unitList.add_unit('mV','millivolt', 0.001)
+    unitList.add_unit('KV','kilovolt', 1000)
 
     @classmethod
     def convert_unit(cls, value, from_unit, to_unit):
-        """ Convert the value from an unit to another unit
+        '''Convert the value from an unit to another unit
         @param value: the value to convert
         @type value: float
         @param from_unit: the unit of the value
@@ -182,14 +205,14 @@ class VoltUnits(BaseUnits):
         @param to_unit: the unit to get
         @type to_unit: unicode
         @return: the value converted
-        @rtype: float"""
-        val = cls.voltage.convert_to_unit(value, from_unit, to_unit)[0]
+        @rtype: float'''
+        val = cls.unitList.convert_to_unit(value, from_unit, to_unit)
         return float(val)
 
 if __name__ == "__main__":
-    print(LengthUnits.convert_unit(1000, 'µm', 'm'))
-    print(LengthUnits.convert_unit(100, 'cm', 'm'))
+    print(LengthUnits.convert_unit(1000, u'µm', 'm'))
+    print(LengthUnits.convert_unit(100, 'cm', u'µm'))
     print(PressureUnits.convert_unit(3, 'psi', 'pa'))
     print(PressureUnits.convert_unit(1, 'bar', 'pa'))
-    print(TimeUnits.convert_unit(30, 's', 'm'))
+    print(TimeUnits.convert_unit(30, 's', 'min'))
     print(ConcentrationUnits.convert_unit(42, 'mg/L', 'g/L'))
