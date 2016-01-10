@@ -1,0 +1,10 @@
+*.pyc
+*/*.pyc
+*/__pycache__/*
+bin
+.buildozer
+values.json
+kivyinstall
+cetoolboxdata.json
+buildozer.spec~
+data/numeric.json
