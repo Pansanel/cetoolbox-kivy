@@ -1,10 +1,13 @@
 # cetoolbox-kivy
-The CEToolbox-Kivy project aims to provide a convenient tool for computing
-Capillary Electrophoresis parameters. It is written using the Kivy
-framework.
 
-For more information, see <http://pansanel.github.io/cetoolbox/>
+The cetoolbox-kivy project is an implementation of the CEToolbox software with the [Kivy framework](https://kivy.org/).
 
+## CEToolbox
+The Capillary Electrophoresis (CE) Toolbox is a software for computing Capillary Electrophoresis parameters. It is developped and maintained by the CEToolbox Team.
+
+For more informations, visit the [official website](http://cetoolbox.github.io).
+
+## License
 CE Toolbox is free software; it is licensed under the Apache License,
 Version 2.0 (the "License"); you may not use this file except in
 compliance with the License. You may obtain a copy of the License at
