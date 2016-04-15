@@ -1,5 +1,5 @@
-The Capillary Electrophoresis (CE) Toolbox is a software for computing Capillary Electrophoresis parameters. It is developped and maintained by the [href=""]CEToolbox Team[/href] (University of Strasbourg / CNRS) and is based on standard functions as decribed on [href=""][/href].
+The Capillary Electrophoresis (CE) Toolbox is a software for computing Capillary Electrophoresis parameters. It is developped and maintained by the [ref="http://cetoolbox.github.io/"]CEToolbox Team[/ref] (University of Strasbourg / CNRS) and is based on standard functions decribed on the [ref="http://cetoolbox.github.io/"]CEToolbox website[/ref].
 
 For more informations, visit the website: [ref="http://cetoolbox.github.io"][color=#08598E]http://cetoolbox.github.io/[/color][/ref]
 
-CEToolbox is licensed under the Apache License, Version 2.0. You may obtain a copy of the License at [ref="http://www.apache.org/licenses/LICENSE-2.0"]http://www.apache.org/licenses/LICENSE-2.0[/href].
+CEToolbox is licensed under the Apache License, Version 2.0. You may obtain a copy of the License at [ref="http://www.apache.org/licenses/LICENSE-2.0"][color=#08598E]http://www.apache.org/licenses/LICENSE-2.0[/color][/ref].
