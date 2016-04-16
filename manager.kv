@@ -417,8 +417,12 @@
                     id: Voltage
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-                CEToolBoxLabel:
-                    text: "EOF time"
+                BoxLayout:
+                    orientation: 'vertical'
+                    CEToolBoxLabel:
+                        text: "EOF time"
+                    CEToolBoxLabel:
+                        text: "[i]If EOF time is not measurable, enter 0.[/i]"
                 CEToolBoxTextInput:
                     id: Electroosmosis
                 CEToolBoxSpinner:

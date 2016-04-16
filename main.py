@@ -518,7 +518,7 @@ class MobilityScreen(Screen):
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
-        
+
         if data["errcode"] == 1:
             self._popup = ErrorPopup()
         else:
