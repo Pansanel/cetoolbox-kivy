@@ -5,9 +5,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #   http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -92,7 +92,7 @@ class InjectionPopup(CEToolBoxPopup):
     def show_popup(self, data):
         '''Get and show injections results from the store.
         Can add an error message from data.
-        @param data: dictionnary with the error type (should be 
+        @param data: dictionnary with the error type (should be
         always 0 (no error) or 2 for this kind of popup) and the error message
         @type data: {str: int, str: str}
         '''
@@ -135,7 +135,7 @@ class InjectionPopup(CEToolBoxPopup):
         value = round(store.get('Pluglenperlentowin')["value"], 2)
         value = str(value)+" "+store.get('Pluglenperlentowin')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
-        #Injected analyte 
+        #Injected analyte
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injected analyte :", "FFFFFF")))
         value = round(store.get('Injectedanalyteng')["value"], 2)
         value = str(value)+" "+store.get('Injectedanalyteng')["unit"]
@@ -145,10 +145,10 @@ class InjectionPopup(CEToolBoxPopup):
         value = str(value)+" "+store.get('Injectedanalytepmol')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         #Injection pressure
-        #self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "BFBFBF")))
-        #value = round(store.get('Injectionpressure')["value"], 2)
-        #value = str(value)+" "+store.get('Injectionpressure')["unit"]
-        #self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "BFBFBF")))
+        value = round(store.get('Injectionpressure')["value"], 2)
+        value = str(value)+" "+store.get('Injectionpressure')["unit"]
+        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         #Flow rate
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "FFFFFF")))
         value = round(store.get('Flowrate')["value"], 2)
@@ -242,7 +242,7 @@ class InjectionScreen(Screen):
 
     def on_pre_enter(self):
         '''Special function lauch at the clic of the button to go
-        on the InjectionScreen 
+        on the InjectionScreen
         this value comes from the json file where we keep it
         '''
         store = get_store()
@@ -284,8 +284,8 @@ class InjectionScreen(Screen):
                       unit=self.ids.TimeUnit.text)
             store.put('Viscosity', value=float(self.ids.Viscosity.text),
                       unit=self.ids.ViscosityUnit.text)
-            store.put('Concentration', 
-                      value=float(self.ids.Concentration.text), 
+            store.put('Concentration',
+                      value=float(self.ids.Concentration.text),
                       unit=self.ids.ConcentrationUnit.text)
             store.put('Molweight', value=float(self.ids.Molweight.text),
                       unit=self.ids.MolweightUnit.text)
@@ -298,7 +298,7 @@ class InjectionScreen(Screen):
             self._popup = ErrorPopup()
             self._popup.show_popup(data)
             return
-        #add data          
+        # Add data
         capillary_manager = capillarymanager.CapillaryManager()
 
         # set default data to capillary
@@ -318,7 +318,7 @@ class ViscosityScreen(Screen):
 
     def on_pre_enter(self):
         '''Special function lauch at the clic of the button to go
-        on the ViscosityScreen 
+        on the ViscosityScreen
         this value comes from the json file where we keep it
         '''
         store = get_store()
@@ -375,7 +375,7 @@ class ConductivityScreen(Screen):
 
     def on_pre_enter(self):
         '''Special function lauch at the clic of the button to go
-        on the ConductivityScreen 
+        on the ConductivityScreen
         this value comes from the json file where we keep it
         '''
         store = get_store()
@@ -518,7 +518,7 @@ class MobilityScreen(Screen):
         data = {}
         data["errcode"] = errcode
         data["errtext"] = errtext
-        
+
         if data["errcode"] == 1:
             self._popup = ErrorPopup()
         else:
@@ -526,10 +526,10 @@ class MobilityScreen(Screen):
         self._popup.show_popup(data)
 
     def on_pre_enter(self):
-        '''Dpecial function lauch at the clic of the button to go
-        on the MobilityScreen 
+        '''Special function lauch at the clic of the button to go
+        on the MobilityScreen
         this value comes from the json file where we keep it
-        '''        
+        '''
         store = get_store()
         self.ids.Capillary.text = str(store.get('Capillary')["value"])
         self.ids.CapillaryUnit.text = store.get('Capillary')["unit"]
@@ -552,7 +552,7 @@ class MobilityScreen(Screen):
             timecompountvalue = CEToolBoxTextInput(text=str(store.get('Timecompound'+str(i))["value"]),
                                                    id='Timecompound'+str(i))
             timecompountunit =  CEToolBoxSpinner(text=store.get('Timecompound'+str(i))["unit"],
-                                                 id='Timecompound'+str(i)+'Unit', 
+                                                 id='Timecompound'+str(i)+'Unit',
                                                  values=["s", "min"])
             self.ids.inlayout.add_widget(timecompount)
             self.ids.inlayout.add_widget(timecompountvalue)
@@ -630,21 +630,23 @@ class MobilityScreen(Screen):
         self.ids.inlayout.remove_widget(self.del_button)
 
     def reset(self):
-        '''Executed when cliqued on the reset button 
+        '''Executed when cliqued on the reset button
         set the value of nbtimecompound at 1 and delete lines
         '''
         store = get_store()
         nbval = store.get('Nbtimecompound')["value"]
         for i in range(1, nbval):
-            self.del_line(1) 
+            self.del_line(1)
 
 class AboutScreen(Screen):
     '''The About screen
     '''
 
     def on_pre_enter(self):
-        ''' get the version before enter '''
-        self.ids.alabel.text = '''[b][size=20]CEToolBox v'''+ __version__ +'''[/size][/b]\n'''
+        '''Get the version before enter
+        '''
+        text = open('data/text/about.txt', 'r')
+        self.ids.aboutlabel.text = '''[b][size=20]CEToolBox v'''+ __version__ +'''[/size][/b]\n\n''' + text.read()
 
 class MenuScreen(Screen):
     '''The menu screen
