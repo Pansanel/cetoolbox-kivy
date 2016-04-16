@@ -343,7 +343,8 @@ class CapillaryManager:
             time = TimeUnits.convert_unit(float(store.get(keystore)["value"]),
                                                 store.get(keystore)["unit"],
                                                 u"s")
-
+            if time == 0:
+                return 1, "The time for compound " + str(i) + " cannot be null"
             microep = self.micro_ep(time)
             store.put("MicroEP"+str(i), value=microep, unit="cm²/V/s")
         return 0, ""
