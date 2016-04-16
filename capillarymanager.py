@@ -68,7 +68,7 @@ class CapillaryManager:
         # The buffer viscosity (cp)
         self.viscosity = float(store.get('Viscosity')["value"])
 
-        #molecular weight (g/mol)
+        # The molecular weight (g/mol)
         self.molweight = float(store.get("Molweight")["value"])
 
         # Analyte concentration (g/L)
@@ -319,12 +319,20 @@ class CapillaryManager:
         '''Compute and save the result for the mobility result
         '''
         store = get_store()
+        if self.electro_osmosis_time == 0:
+            self.electro_osmosis_time = 1000000
+            self.capillary = Capillary(self.total_length, self.to_window_length,
+                                       self.diameter, self.pressure,
+                                       self.duration, self.viscosity, self.molweight,
+                                       self.concentration, self.voltage,
+                                       self.electric_current,
+                                       self.detection_time,
+                                       self.electro_osmosis_time)
+            self.electro_osmosis_time = 0.0
         try :
             microeof = self.micro_eof()
         except ZeroDivisionError:
-            if self.electro_osmosis_time == 0:
-                return 1, "The EOF Time cannot be null"
-            else:
+            if self.voltage == 0:
                 return 1, "The voltage cannot be null"
         if self.to_window_length > self.total_length:
             return 1, "The length to window cannot be greater than the capillary length"
@@ -335,7 +343,8 @@ class CapillaryManager:
             time = TimeUnits.convert_unit(float(store.get(keystore)["value"]),
                                                 store.get(keystore)["unit"],
                                                 u"s")
-
+            if time == 0:
+                return 1, "The time for compound " + str(i) + " cannot be null"
             microep = self.micro_ep(time)
             store.put("MicroEP"+str(i), value=microep, unit="cm²/V/s")
         return 0, ""
