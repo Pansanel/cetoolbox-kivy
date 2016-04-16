@@ -145,10 +145,10 @@ class InjectionPopup(CEToolBoxPopup):
         value = str(value)+" "+store.get('Injectedanalytepmol')["unit"]
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "FFFFFF")))
         #Injection pressure
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "BFBFBF")))
-        value = round(store.get('Injectionpressure')["value"], 2)
-        value = str(value)+" "+store.get('Injectionpressure')["unit"]
-        self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
+        #self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Injection pressure :", "BFBFBF")))
+        #value = round(store.get('Injectionpressure')["value"], 2)
+        #value = str(value)+" "+store.get('Injectionpressure')["unit"]
+        #self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color(value, "BFBFBF")))
         #Flow rate
         self.ids.inlayout.add_widget(CEToolBoxLabel(text=add_color("Flow rate :", "FFFFFF")))
         value = round(store.get('Flowrate')["value"], 2)
