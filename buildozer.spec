@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = CEToolBox Kivy
+title = CEToolBox
 
 # (str) Package name
 package.name = cetoolbox
@@ -43,10 +43,10 @@ requirements = kivy
 #garden_requirements =
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/data/image_256_125.png
+presplash.filename = %(source.dir)s/data/images/image_256_125.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/logo.png
+icon.filename = %(source.dir)s/data/icons/logo.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = all

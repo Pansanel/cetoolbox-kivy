@@ -87,7 +87,7 @@
         padding: 10
         spacing: 10
         Image:
-            source: "data/logo_512.png"
+            source: "data/icons/logo_512.png"
         Button:
             text: 'Injection'
             font_size: '18sp'
@@ -463,19 +463,7 @@
                 rows: 4
                 AboutLabel:
                     halign: "center"
-                    id: alabel
-                AboutLabel:
-                    text: "The Capillary Electrophoresis (CE) ToolBox is a software for computing Capillary Electrophoresis parameters."
-                AboutLabel:
-                    text: "CEToolBox Kivy is licensed under the Apache License Version 2.0. You may obtain a copy of the License at [ref=http://www.apache.org/licenses/LICENSE-2.0][color=#08598E]http://www.apache.org/licenses/LICENSE-2.0[/color][/ref]."
-                    on_ref_press:
-                        import webbrowser
-                        webbrowser.open(args[1])
-                AboutLabel:
-                    text: "For more information, visit the website: [ref=http://pansanel.github.io/cetoolbox/][color=#08598E]http://pansanel.github.io/cetoolbox/[/color][/ref]"
-                    on_ref_press:
-                        import webbrowser
-                        webbrowser.open(args[1])
+                    id: aboutlabel
         DownMenuClose:
             CloseButton:
                 text: 'Menu'
