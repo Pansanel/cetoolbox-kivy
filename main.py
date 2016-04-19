@@ -542,7 +542,7 @@ class MobilityScreen(Screen):
         self.ids.Timecompound1.text = str(store.get('Timecompound1')["value"])
         self.ids.Timecompound1Unit.text = store.get('Timecompound1')["unit"]
         #set the number of rows
-        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        self.ids.inlayout.rows = 6 + store.get('Nbtimecompound')["value"]
         #force the good size
         self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
         #set the rest of the time compound
@@ -596,7 +596,7 @@ class MobilityScreen(Screen):
         self.ids.inlayout.add_widget(self.add_button)
         self.del_button = CEToolBoxButton(text="Del", id="delbutton", on_release=self.del_line)
         self.ids.inlayout.add_widget(self.del_button)
-        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        self.ids.inlayout.rows = 6 + store.get('Nbtimecompound')["value"]
         #force the good size
         self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
 
@@ -616,7 +616,7 @@ class MobilityScreen(Screen):
         lastval = store.get('Nbtimecompound')["value"]
         store.delete('Timecompound'+str(lastval))
         store.put('Nbtimecompound', value=lastval-1)
-        self.ids.inlayout.rows = 5 + store.get('Nbtimecompound')["value"]
+        self.ids.inlayout.rows = 6 + store.get('Nbtimecompound')["value"]
         #force the good size
         self.ids.tscrollview.change_child_height(self.ids.tscrollview.height)
 
