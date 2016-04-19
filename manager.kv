@@ -398,7 +398,7 @@
             id: tscrollview
             TopScreenLayout:
                 id: inlayout
-                rows: 6
+                rows: 7 
                 CEToolBoxLabel:
                     text: "Capillary Length"
                 CEToolBoxTextInput:
@@ -417,17 +417,19 @@
                     id: Voltage
                 CEToolBoxUnitLabel:
                     id: VoltageUnit
-                BoxLayout:
-                    orientation: 'vertical'
-                    CEToolBoxLabel:
-                        text: "EOF time"
-                    CEToolBoxLabel:
-                        text: "[i]If EOF time is not measurable, enter 0.[/i]"
+                CEToolBoxLabel:
+                    text: "EOF time"
                 CEToolBoxTextInput:
                     id: Electroosmosis
                 CEToolBoxSpinner:
                     id: ElectroosmosisUnit
                     values: ["s", "min"]
+                CEToolBoxLabel:
+                    text: ""
+                CEToolBoxLabel:
+                    text: "[i]Enter 0 if not measurable[/i]"
+                CEToolBoxLabel:
+                    text: ""
                 CEToolBoxLabel:
                     text: "Time compound 1"
                 CEToolBoxTextInput:
