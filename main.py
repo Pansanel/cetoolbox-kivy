@@ -47,7 +47,7 @@ from base import *
 import capillarymanager
 
 # When the keyboard is open resize the window
-Window.softinput_mode = 'resize'
+Window.softinput_mode = 'below_target'
 
 __version__ = '2.0.1'
 
